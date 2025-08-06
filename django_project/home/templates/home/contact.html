@@ -1,0 +1,294 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section bg-gradient-primary text-white py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4">Get In Touch</h1>
+                <p class="lead mb-4">Ready to transform your operations? Let's discuss how Tecosoft can help you achieve your digital transformation goals.</p>
+                <p class="mb-4">Our team of experts is here to answer your questions and provide personalized solutions for your business needs.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="hero-icon">
+                    <i class="fas fa-envelope fa-5x text-light"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Information -->
+<div class="container mb-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="display-5 fw-bold mb-3">Contact Information</h2>
+            <p class="lead text-muted">Multiple ways to reach our team</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="text-primary mb-3">
+                        <i class="fas fa-map-marker-alt fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">Visit Our Office</h5>
+                    <p class="card-text text-muted">
+                        Tecosoft Headquarters<br>
+                        Vijaynagar, Bangalore<br>
+                        Karnataka, India<br>
+                        PIN: 560040
+                    </p>
+                    <!-- Company Location Map -->
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="text-success mb-3">
+                        <i class="fas fa-phone fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">Call Us</h5>
+                    <p class="card-text text-muted">
+                        Main: +91 9611851196<br>
+                        Sales: +91 9611851188<br>
+                        Support: +91 9611851122<br>
+                        Fax: +91 80409 04040
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="text-info mb-3">
+                        <i class="fas fa-envelope fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">Email Us</h5>
+                    <p class="card-text text-muted">
+                        General: info@tecosoft.com<br>
+                        Sales: sales@tecosoft.com<br>
+                        Support: support@tecosoft.com<br>
+                        Careers: careers@tecosoft.com
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Form -->
+<div class="py-5 mb-5">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card border-2 border-primary shadow-lg bg-gradient-primary text-white">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4">Send Us a Message</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name *</label>
+<input type="text" class="form-control" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name *</label>
+<input type="text" class="form-control" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+<input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+<input type="tel" class="form-control" id="phone" name="phone">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="company" class="form-label">Company Name</label>
+<input type="text" class="form-control" id="company" name="company">
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject *</label>
+<select class="form-select" id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="sales">Sales & Pricing</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="demo">Request Demo</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message *</label>
+<textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell us about your project or inquiry..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+<input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                    <label class="form-check-label" for="newsletter">
+                                        Subscribe to our newsletter for updates and insights
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Business Hours & Support -->
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">Business Hours</h3>
+                    <div class="row mb-3">
+                        <div class="col-6"><strong>Monday - Friday</strong></div>
+                        <div class="col-6">9:00 AM - 6:00 PM PST</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6"><strong>Saturday</strong></div>
+                        <div class="col-6">10:00 AM - 4:00 PM PST</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6"><strong>Sunday</strong></div>
+                        <div class="col-6">Closed</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6"><strong>24/7 Support</strong></div>
+                        <div class="col-6">Available for critical issues</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">Support Channels</h3>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-headset text-primary me-3 fa-2x"></i>
+                        <div>
+                            <h6 class="mb-1">Phone Support</h6>
+                            <p class="text-muted mb-0">Available during business hours</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-comments text-success me-3 fa-2x"></i>
+                        <div>
+                            <h6 class="mb-1">Live Chat</h6>
+                            <p class="text-muted mb-0">Instant support on our website</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-ticket-alt text-info me-3 fa-2x"></i>
+                        <div>
+                            <h6 class="mb-1">Support Tickets</h6>
+                            <p class="text-muted mb-0">Track and manage your requests</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-book text-warning me-3 fa-2x"></i>
+                        <div>
+                            <h6 class="mb-1">Knowledge Base</h6>
+                            <p class="text-muted mb-0">Self-service documentation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Map Section -->
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <div class="bg-gradient-primary p-4 text-white text-center">
+                        <h3 class="mb-3">Visit Our Office</h3>
+                        <p class="text-muted mb-4">Located in Vijaynagar, Bangalore</p>
+                        <div class="mt-4">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d995304.5109194762!2d76.17333691624411!3d12.977720141845353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3fe238f6f3c1%3A0xc359f2e0504bdeca!2sLoginware%20EdTech%20Pvt.%20Ltd.%2C!5e0!3m2!1sen!2sin!4v1754113174996!5m2!1sen!2sin" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="py-5 mb-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-3">Frequently Asked Questions</h2>
+                <p class="lead text-muted">Quick answers to common questions</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                How quickly can you start a project?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We typically begin projects within 2-4 weeks after initial consultation and requirements gathering. The timeline depends on project complexity and current capacity.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                Do you provide ongoing support?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, we offer comprehensive support packages including 24/7 monitoring, regular maintenance, and technical support to ensure your systems run smoothly.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                Can you work with existing systems?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Absolutely! We specialize in integrating with existing infrastructure and can work with most legacy systems to create seamless digital twin solutions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- Bootstrap JS for accordion functionality -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %} 

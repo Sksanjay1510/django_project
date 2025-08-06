@@ -1,0 +1,189 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Admin Header -->
+<div class="bg-gradient-primary text-white py-4 mb-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-cogs me-2"></i>
+                    {% block admin_title %}Admin Panel{% endblock %}
+                </h1>
+                <p class="mb-0 opacity-75">Manage your website content and data</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="d-flex justify-content-md-end gap-2">
+                        <i class="fas fa-home me-1"></i>View Site
+                    </a>
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-light btn-sm">
+                        <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Navigation -->
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow-sm">
+                <div class="container-fluid">
+                    <span class="navbar-brand fw-bold text-primary">
+                        <i class="fas fa-shield-alt me-2"></i>Admin Panel
+                    </span>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="adminNavbar">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'admin_dashboard' %}">
+                                    <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="contentDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-file-alt me-1"></i>Content
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'admin_products' %}"><i class="fas fa-microchip me-2"></i>Products</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admin_testimonials' %}"><i class="fas fa-quote-right me-2"></i>Testimonials</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admin_faqs' %}"><i class="fas fa-question-circle me-2"></i>FAQs</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{% url 'admin_settings' %}"><i class="fas fa-cog me-2"></i>Site Settings</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="usersDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-users me-1"></i>Users & Contacts
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'admin_users' %}"><i class="fas fa-user me-2"></i>Users</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admin_contacts' %}"><i class="fas fa-envelope me-2"></i>Contact Messages</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="careersDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-briefcase me-1"></i>Careers
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'admin_careers' %}"><i class="fas fa-briefcase me-2"></i>Job Listings</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admin_applications' %}"><i class="fas fa-file-alt me-2"></i>Applications</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-shield me-1"></i>{{ user.username }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'index' %}"><i class="fas fa-home me-2"></i>View Website</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/admin/"><i class="fas fa-cogs me-2"></i>Django Admin</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Main Admin Content -->
+{% comment %} <div class="container">
+    {% block admin_content %}{% endblock %}
+</div> {% endcomment %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .admin-card {
+        transition: transform 0.2s ease-in-out;
+    }
+    .admin-card:hover {
+        transform: translateY(-2px);
+    }
+    .stats-card {
+        background: linear-gradient(135deg, #20c997 0%, #fd7e14 100%);
+        color: white;
+    }
+    .stats-card.users {
+        background: linear-gradient(135deg, #38b2ac 0%, #fd7e14 100%);
+    }
+    .stats-card.products {
+        background: linear-gradient(135deg, #ffb347 0%, #20c997 100%);
+    }
+    .stats-card.contacts {
+        background: linear-gradient(135deg, #ff6f61 0%, #20c997 100%);
+    }
+    .stats-card.applications {
+        background: linear-gradient(135deg, #fd7e14 0%, #38b2ac 100%);
+    }
+</style>
+{% block extra_css %}
+<style>
+    /* Existing styles */
+    .admin-card {
+        transition: transform 0.2s ease-in-out;
+    }
+    .admin-card:hover {
+        transform: translateY(-2px);
+    }
+    .stats-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    .stats-card.users {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    .stats-card.products {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    .stats-card.contacts {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+    .stats-card.applications {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    }
+
+    /* New styles for admin page */
+    .navbar-admin {
+        box-shadow: 0 2px 8px rgba(32,201,151,0.08);
+        border-radius: 8px;
+    }
+    .navbar-admin .nav-link {
+        font-weight: 500;
+        color: #fd7e14;
+        transition: color 0.2s;
+    }
+    .navbar-admin .nav-link:hover,
+    .navbar-admin .nav-link.active {
+        color: #20c997;
+        background: #fff3e0;
+        border-radius: 4px;
+    }
+    .bg-gradient-primary {
+        background: linear-gradient(90deg, #20c997 0%, #fd7e14 100%) !important;
+    }
+    .admin-header h1 {
+        letter-spacing: 1px;
+        font-size: 2rem;
+    }
+    .admin-header p {
+        font-size: 1.1rem;
+        opacity: 0.8;
+    }
+    .dropdown-menu .dropdown-item:hover {
+        background: #fff3e0;
+        color: #20c997;
+    }
+</style>
+{% endblock %}
+{% endblock %} 

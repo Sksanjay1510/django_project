@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecosoft - Industry 4.0 Solutions</title>
+    <link rel="stylesheet" href="{% static 'home/styles.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gradient-primary" style="min-height: 100vh;">
+    <!-- Special Authentication Header removed as requested -->
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary shadow-lg sticky-top py-2">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{% url 'index' %}" style="font-size: 2rem; letter-spacing: 1px;">
+                <span class="d-flex align-items-center justify-content-center bg-white text-gradient-primary rounded-circle me-2" style="width: 44px; height: 44px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <i class="fas fa-industry fa-lg"></i>
+                </span>
+                Tecosoft
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'index' %}">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'about' %}">
+                            <i class="fas fa-info-circle me-1"></i>About Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'products' %}">
+                            <i class="fas fa-microchip me-1"></i>Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'career' %}">
+                            <i class="fas fa-briefcase me-1"></i>Career
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'contact' %}">
+                            <i class="fas fa-envelope me-1"></i>Contact Us
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav gap-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle px-3 rounded-pill fw-semibold text-white nav-anim" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>Account
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow rounded-4">
+                            <li><a class="dropdown-item" href="{% url 'signin' %}"><i class="fas fa-sign-in-alt me-2"></i>Sign In</a></li>
+                            <li><a class="dropdown-item" href="{% url 'signup' %}"><i class="fas fa-user-plus me-2"></i>Sign Up</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle me-2"></i>Help</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-primary text-white py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">
+                        <i class="fas fa-industry text-primary me-2"></i>
+                        Tecosoft
+                    </h5>
+                    <p class="text-muted">Leading the Industry 4.0 revolution with cutting-edge digital twin technology and intelligent automation solutions.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="mb-3">Products</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">Eagle Pro</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Eagle Mini</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Sparrow</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Cloud Platform</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'about' %}" class="text-muted text-decoration-none">About Us</a></li>
+                        <li><a href="{% url 'career' %}" class="text-muted text-decoration-none">Careers</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">News</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">Documentation</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Help Center</a></li>
+                        <li><a href="{% url 'contact' %}" class="text-muted text-decoration-none">Contact</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Status</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="mb-3">Account</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'signin' %}" class="text-muted text-decoration-none">Sign In</a></li>
+                        <li><a href="{% url 'signup' %}" class="text-muted text-decoration-none">Sign Up</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">&copy; 2024 Tecosoft. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">Made with <i class="fas fa-heart text-danger"></i> for Industry 4.0</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom CSS for gradient and navbar -->
+    <style>
+        body, .text-dark, .text-black, .text-body {
+            color: #fff !important;
+            background: #141414 !important;
+        }
+        .text-muted {
+            color: #b3b3b3 !important;
+        }
+        .text-dark-primary {
+            color: #e50914 !important;
+        }
+        /* --- Netflix-Inspired Palette --- */
+        .bg-gradient-primary {
+            background: #141414 !important;
+        }
+        .bg-gradient-primary:hover {
+            background: #181818 !important;
+        }
+        .text-gradient-primary {
+            background: linear-gradient(90deg, #e50914 0%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #fff;
+        }
+        .btn-gradient-primary {
+            color: #fff;
+            background: #e50914;
+            border: none;
+        }
+        .btn-gradient-primary:hover, .btn-outline-gradient-primary:hover {
+            background: #b0060f;
+            color: #fff;
+        }
+        .btn-outline-gradient-primary {
+            color: #e50914;
+            background: transparent;
+            border: 2px solid #e50914;
+        }
+        .btn-outline-gradient-primary:hover {
+            background: #e50914;
+            color: #fff;
+            border: 2px solid #e50914;
+        }
+        /* Netflix-Style Navbar */
+        .navbar.bg-gradient-primary {
+            background: #141414 !important;
+            box-shadow: 0 4px 24px 0 rgba(20, 20, 20, 0.13), 0 1.5px 0 0 #fff1 inset;
+            border-radius: 0.75rem;
+            margin-top: 0.7rem;
+            margin-bottom: 0.7rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        .navbar .navbar-brand {
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #e50914 !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+            font-size: 2.2rem;
+        }
+        .navbar .navbar-brand .bg-white {
+            background: #fff !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .navbar .nav-link.nav-anim {
+            transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+            font-size: 1rem;
+            padding-top: 0.6rem !important;
+            padding-bottom: 0.6rem !important;
+            border-radius: 1.5rem !important;
+        }
+        .navbar .nav-link.nav-anim:hover, .navbar .nav-link.nav-anim.active {
+            background: rgba(229,9,20,0.13);
+            color: #e50914 !important;
+            box-shadow: 0 2px 8px 0 rgba(20,20,20,0.08);
+        }
+        .navbar .dropdown-menu {
+            border-radius: 1rem;
+            min-width: 200px;
+            background: #181818;
+            box-shadow: 0 4px 24px 0 rgba(20, 20, 20, 0.10);
+            border: 1px solid #222;
+        }
+        /* Force dropdown text to white with maximum specificity */
+        .navbar .dropdown-menu, .navbar .dropdown-item,
+        .dropdown-menu, .dropdown-item,
+        .navbar .dropdown-menu.show, .dropdown-menu.show,
+        .navbar .dropdown-menu[aria-expanded="true"], .dropdown-menu[aria-expanded="true"],
+        .navbar .dropdown-item[role="menuitem"], .dropdown-item[role="menuitem"] {
+            color: #fff !important;
+        }
+        .navbar .dropdown-item:active, .navbar .dropdown-item:hover,
+        .dropdown-item:active, .dropdown-item:hover,
+        .navbar .dropdown-item:focus, .dropdown-item:focus {
+            background: #e50914 !important;
+            color: #fff !important;
+        }
+        }
+    </style>
+</body>
+</html>

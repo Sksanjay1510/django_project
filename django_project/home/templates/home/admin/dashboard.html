@@ -1,0 +1,245 @@
+{% extends "home/admin/base.html" %}
+{% load static %}
+
+{% block admin_title %}Dashboard{% endblock %}
+
+{% block admin_content %}
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card admin-card stats-card users h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title text-white-50 mb-1">Total Users</h6>
+                        <h2 class="mb-0 text-white">{{ users_count }}</h2>
+                    </div>
+                    <div class="text-white-50">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card admin-card stats-card products h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title text-white-50 mb-1">Products</h6>
+                        <h2 class="mb-0 text-white">{{ products_count }}</h2>
+                    </div>
+                    <div class="text-white-50">
+                        <i class="fas fa-microchip fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card admin-card stats-card contacts h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title text-white-50 mb-1">Contact Messages</h6>
+                        <h2 class="mb-0 text-white">{{ contacts_count }}</h2>
+                    </div>
+                    <div class="text-white-50">
+                        <i class="fas fa-envelope fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card admin-card stats-card applications h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title text-white-50 mb-1">Job Applications</h6>
+                        <h2 class="mb-0 text-white">{{ applications_count }}</h2>
+                    </div>
+                    <div class="text-white-50">
+                        <i class="fas fa-file-alt fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card admin-card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'admin_contacts' %}" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-envelope me-2"></i>View Messages
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'admin_applications' %}" class="btn btn-outline-success w-100">
+                            <i class="fas fa-file-alt me-2"></i>Review Applications
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'admin_products' %}" class="btn btn-outline-info w-100">
+                            <i class="fas fa-microchip me-2"></i>Manage Products
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'admin_settings' %}" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-cog me-2"></i>Site Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Data -->
+<div class="row">
+    <!-- Recent Users -->
+    <div class="col-lg-4 mb-4">
+        <div class="card admin-card h-100">
+            <div class="card-header bg-light">
+                <h6 class="mb-0"><i class="fas fa-users me-2"></i>Recent Users</h6>
+            </div>
+            <div class="card-body">
+                {% if recent_users %}
+                    <div class="list-group list-group-flush">
+                        {% for user in recent_users %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">{{ user.username }}</h6>
+                                <small class="text-muted">{{ user.email }}</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">{{ user.date_joined|date:"M d" }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center">No users yet</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Contacts -->
+    <div class="col-lg-4 mb-4">
+        <div class="card admin-card h-100">
+            <div class="card-header bg-light">
+                <h6 class="mb-0"><i class="fas fa-envelope me-2"></i>Recent Messages</h6>
+            </div>
+            <div class="card-body">
+                {% if recent_contacts %}
+                    <div class="list-group list-group-flush">
+                        {% for contact in recent_contacts %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">{{ contact.first_name }} {{ contact.last_name }}</h6>
+                                <small class="text-muted">{{ contact.subject }}</small>
+                            </div>
+                            <span class="badge bg-info rounded-pill">{{ contact.created_at|date:"M d" }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center">No messages yet</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Applications -->
+    <div class="col-lg-4 mb-4">
+        <div class="card admin-card h-100">
+            <div class="card-header bg-light">
+                <h6 class="mb-0"><i class="fas fa-file-alt me-2"></i>Recent Applications</h6>
+            </div>
+            <div class="card-body">
+                {% if recent_applications %}
+                    <div class="list-group list-group-flush">
+                        {% for application in recent_applications %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">{{ application.first_name }} {{ application.last_name }}</h6>
+                                <small class="text-muted">{{ application.career.title }}</small>
+                            </div>
+                            <span class="badge bg-success rounded-pill">{{ application.created_at|date:"M d" }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center">No applications yet</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- System Status -->
+<div class="row">
+    <div class="col-12">
+        <div class="card admin-card">
+            <div class="card-header bg-light">
+                <h6 class="mb-0"><i class="fas fa-server me-2"></i>System Status</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Database</h6>
+                                <small class="text-muted">Connected</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Admin Panel</h6>
+                                <small class="text-muted">Active</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Website</h6>
+                                <small class="text-muted">Online</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Security</h6>
+                                <small class="text-muted">Protected</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

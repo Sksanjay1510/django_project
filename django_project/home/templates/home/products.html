@@ -1,0 +1,263 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+<section class="hero-section bg-gradient-primary text-white py-5 mb-5 shadow-lg">
+    <div class="container text-center">
+        <h1 class="display-2 fw-bold mb-3" style="letter-spacing:2px; text-shadow: 2px 2px 8px #000;">
+            Our Products
+        </h1>
+        <p class="lead mb-4" style="font-size:1.5rem;">
+            Explore our range of innovative products designed for the digital era.
+        </p>
+        <p class="mb-4" style="font-size:1.1rem; color:#fff; opacity:0.85;">
+            <strong>From IIOT gateways to smart sensors, our solutions empower industries to embrace Industry 4.0 and achieve operational excellence.</strong>
+        </p>
+    </div>
+</section>
+
+<!-- Products Section -->
+<div class="bg-gradient-primary text-white py-5 mb-5">
+    <div class="container">
+        <!-- Eagle Pro -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 mb-4">
+                <div class="card border-0 shadow-lg h-100 product-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+<h3 class="text-gradient-primary mb-0 me-3">Eagle Pro</h3>
+                            <span class="badge bg-success">Flagship</span>
+                        </div>
+                        <p class="lead mb-4">A robust IIOT gateway for large-scale industrial automation, real-time monitoring, and advanced analytics.</p>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-2">Key Features:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i>High-performance processing</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Multi-protocol support</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Real-time analytics</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Edge AI capabilities</li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-muted mb-2">Specifications:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-microchip me-2"></i>Quad-core ARM processor</li>
+                                    <li><i class="fas fa-memory me-2"></i>8GB RAM, 64GB storage</li>
+                                    <li><i class="fas fa-wifi me-2"></i>WiFi 6, 5G ready</li>
+                                    <li><i class="fas fa-shield-alt me-2"></i>Enterprise security</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+<a href="{% url 'contact' %}" class="btn btn-gradient-primary">Request Demo</a>
+<a href="{% url 'product_eagle_pro' %}" class="btn btn-outline-gradient-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="{% static 'home/Eagle_pro.png' %}" alt="Eagle Pro" class="img-fluid mb-3" style="max-height:300px;">
+                <img src="{% static 'home/Eagle_pro_features.png' %}" alt="Eagle Pro Features" class="img-fluid" style="max-height:150px;">
+            </div>
+        </div>
+
+        <!-- Eagle Mini -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 text-center mb-4">
+                <div class="bg-gradient-primary text-white p-4 rounded">
+<i class="fas fa-microchip fa-5x text-gradient-primary mb-3"></i>
+                    <h4>Eagle Mini</h4>
+                    <p class="text-muted">Compact design for space-constrained environments</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-lg h-100 product-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+<h3 class="text-gradient-primary mb-0 me-3">Eagle Mini</h3>
+                            <span class="badge bg-info">Compact</span>
+                        </div>
+                        <p class="lead mb-4">A compact IIOT device for small to medium enterprises, enabling seamless device connectivity and data collection.</p>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-2">Key Features:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i>Compact form factor</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Low power consumption</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Easy installation</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Cost-effective</li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-muted mb-2">Specifications:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-microchip me-2"></i>Dual-core processor</li>
+                                    <li><i class="fas fa-memory me-2"></i>2GB RAM, 16GB storage</li>
+                                    <li><i class="fas fa-wifi me-2"></i>WiFi 5, 4G LTE</li>
+                                    <li><i class="fas fa-battery-half me-2"></i>PoE powered</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+<a href="{% url 'contact' %}" class="btn btn-gradient-primary">Request Demo</a>
+<a href="{% url 'product_eagle_mini' %}" class="btn btn-outline-gradient-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Sparrow -->
+    <div class="row align-items-center mb-5">
+            <div class="col-lg-6 mb-4">
+                <div class="card border-0 shadow-lg h-100 product-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+<h3 class="text-gradient-primary mb-0 me-3">Sparrow</h3>
+                            <span class="badge bg-warning">Wireless</span>
+                        </div>
+                        <p class="lead mb-4">An agile IIOT sensor node for edge data acquisition, wireless communication, and smart integration.</p>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-2">Key Features:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i>Wireless connectivity</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Battery powered</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Multiple sensors</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Mesh networking</li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-muted mb-2">Specifications:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-microchip me-2"></i>ARM Cortex-M4</li>
+                                    <li><i class="fas fa-memory me-2"></i>512KB RAM, 4MB flash</li>
+                                    <li><i class="fas fa-wifi me-2"></i>LoRaWAN, BLE</li>
+                                    <li><i class="fas fa-battery-full me-2"></i>5+ year battery</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+<a href="{% url 'contact' %}" class="btn btn-gradient-primary">Request Demo</a>
+<a href="{% url 'product_sparrow' %}" class="btn btn-outline-gradient-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="bg-gradient-primary text-white p-4 rounded">
+                    <i class="fas fa-satellite fa-5x text-warning mb-3"></i>
+                    <h4>Sparrow</h4>
+                    <p class="text-muted">Wireless sensor node for distributed monitoring</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Comparison -->
+<div class="container mb-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="display-5 fw-bold mb-3">Product Comparison</h2>
+            <p class="lead text-muted">Choose the right solution for your needs</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 product-card">
+<div class="card-header bg-gradient-primary text-white text-center py-3">
+                    <h4 class="mb-0">Eagle Pro</h4>
+                    <small>Enterprise Solution</small>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+<h2 class="text-gradient-primary">$2,999</h2>
+                        <small class="text-muted">One-time purchase</small>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>High-performance processing</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Advanced analytics</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Multi-protocol support</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>24/7 support</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Custom integrations</li>
+                    </ul>
+                    <div class="text-center mt-4">
+<a href="{% url 'get_started' %}" class="btn btn-gradient-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-lg h-100 product-card" style="transform: scale(1.05);">
+                <div class="card-header bg-success text-white text-center py-3">
+                    <h4 class="mb-0">Eagle Mini</h4>
+                    <small>Most Popular</small>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="text-success">$1,299</h2>
+                        <small class="text-muted">One-time purchase</small>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Compact design</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Easy installation</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Standard protocols</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Email support</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Basic integrations</li>
+                    </ul>
+                    <div class="text-center mt-4">
+<a href="{% url 'get_started' %}" class="btn btn-success">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 product-card">
+                <div class="card-header bg-warning text-white text-center py-3">
+                    <h4 class="mb-0">Sparrow</h4>
+                    <small>Wireless Solution</small>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="text-warning">$299</h2>
+                        <small class="text-muted">Per sensor</small>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Wireless connectivity</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Long battery life</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Easy deployment</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Community support</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Open source</li>
+                    </ul>
+                    <div class="text-center mt-4">
+<a href="{% url 'get_started' %}" class="btn btn-warning">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+                    <h2 class="display-6 fw-bold mb-4">Ready to Transform Your Operations?</h2>
+                    <p class="lead mb-4">Join hundreds of organizations that have already embraced the future with Tecosoft's innovative IIOT solutions.</p>
+                    <div class="d-flex justify-content-center gap-3">
+<a href="{% url 'contact' %}" class="btn btn-gradient-primary btn-lg">Request Demo</a>
+<a href="{% url 'about' %}" class="btn btn-outline-gradient-primary btn-lg">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+{% endblock %}

@@ -1,0 +1,386 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section bg-gradient-primary text-white py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4">Join Tecosoft</h1>
+                <p class="lead mb-4">Create your account and start your journey towards Industry 4.0 transformation.</p>
+                <p class="mb-4">Get access to powerful tools for monitoring, analytics, and optimizing your industrial operations.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="hero-icon">
+                    <i class="fas fa-user-plus fa-5x text-light"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sign Up Form -->
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold mb-2">Create Your Account</h2>
+                        <p class="text-muted">Start your Industry 4.0 journey with Tecosoft</p>
+                    </div>
+                    
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="company" class="form-label">Company Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-building"></i>
+                                </span>
+                                <input type="text" class="form-control" id="company" placeholder="Enter your company name">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password *</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" id="password" placeholder="Create a strong password" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="mt-2">
+                                <div class="progress" style="height: 5px;">
+                                    <div class="progress-bar" id="passwordStrength" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <small class="text-muted" id="passwordStrengthText">Password strength: Weak</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password *</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted" id="passwordMatch">Passwords must match</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="accountType" class="form-label">Account Type *</label>
+                            <select class="form-select" id="accountType" required>
+                                <option value="">Select account type</option>
+                                <option value="individual">Individual</option>
+                                <option value="business">Business</option>
+                                <option value="enterprise">Enterprise</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="termsAccepted" required>
+                                <label class="form-check-label" for="termsAccepted">
+                                    I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a> *
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletter">
+                                <label class="form-check-label" for="newsletter">
+                                    Subscribe to our newsletter for updates and insights
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>Create Account
+                            </button>
+                        </div>
+                        
+                        <div class="text-center mb-4">
+                            <p class="text-muted mb-0">Or sign up with</p>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-outline-dark w-100">
+                                    <i class="fab fa-google me-2"></i>Google
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-outline-primary w-100">
+                                    <i class="fab fa-linkedin me-2"></i>LinkedIn
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p class="mb-0">Already have an account? 
+                                <a href="{% url 'signin' %}" class="text-primary text-decoration-none fw-bold">Sign In</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Benefits Section -->
+<div class="bg-light py-5 mb-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-3">Why Join Tecosoft?</h2>
+                <p class="lead text-muted">Discover the benefits of being part of the Industry 4.0 revolution</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+<div class="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="fas fa-rocket fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Quick Setup</h5>
+                    <p class="text-muted">Get started in minutes with our intuitive platform and guided setup process.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Instant Insights</h5>
+                    <p class="text-muted">Access real-time analytics and predictive insights from day one.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="fas fa-headset fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">24/7 Support</h5>
+                    <p class="text-muted">Get expert support whenever you need it, with dedicated customer success.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="fas fa-graduation-cap fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Free Training</h5>
+                    <p class="text-muted">Access comprehensive training materials and webinars to maximize value.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pricing Plans -->
+<div class="container mb-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="display-5 fw-bold mb-3">Choose Your Plan</h2>
+            <p class="lead text-muted">Start with a free trial and scale as you grow</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-light text-center py-3">
+                    <h4 class="mb-0">Starter</h4>
+                    <small class="text-muted">Perfect for small teams</small>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="text-primary">Free</h2>
+                        <small class="text-muted">Forever</small>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Up to 5 devices</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Basic analytics</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Email support</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Community forum</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-lg h-100" style="transform: scale(1.05);">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0">Professional</h4>
+                    <small>Most Popular</small>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="text-primary">$99</h2>
+                        <small class="text-muted">per month</small>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Up to 50 devices</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Advanced analytics</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Priority support</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Custom integrations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h4 class="mb-0">Enterprise</h4>
+                    <small>For large organizations</small>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="text-primary">Custom</h2>
+                        <small class="text-muted">Contact sales</small>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Unlimited devices</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Custom solutions</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Dedicated support</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>SLA guarantee</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- JavaScript for password strength and toggle -->
+<script>
+// Password toggle functionality
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordInput = document.getElementById('password');
+    const icon = this.querySelector('i');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+});
+
+// Password strength checker
+document.getElementById('password').addEventListener('input', function() {
+    const password = this.value;
+    const strengthBar = document.getElementById('passwordStrength');
+    const strengthText = document.getElementById('passwordStrengthText');
+    
+    let strength = 0;
+    let color = '';
+    let text = '';
+    
+    if (password.length >= 8) strength++;
+    if (password.match(/[a-z]/)) strength++;
+    if (password.match(/[A-Z]/)) strength++;
+    if (password.match(/[0-9]/)) strength++;
+    if (password.match(/[^a-zA-Z0-9]/)) strength++;
+    
+    switch(strength) {
+        case 0:
+        case 1:
+            color = 'bg-danger';
+            text = 'Very Weak';
+            break;
+        case 2:
+            color = 'bg-warning';
+            text = 'Weak';
+            break;
+        case 3:
+            color = 'bg-info';
+            text = 'Medium';
+            break;
+        case 4:
+            color = 'bg-primary';
+            text = 'Strong';
+            break;
+        case 5:
+            color = 'bg-success';
+            text = 'Very Strong';
+            break;
+    }
+    
+    strengthBar.className = `progress-bar ${color}`;
+    strengthBar.style.width = (strength * 20) + '%';
+    strengthText.textContent = `Password strength: ${text}`;
+});
+
+// Password confirmation checker
+document.getElementById('confirmPassword').addEventListener('input', function() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = this.value;
+    const matchText = document.getElementById('passwordMatch');
+    
+    if (confirmPassword === '') {
+        matchText.textContent = 'Passwords must match';
+        matchText.className = 'text-muted';
+    } else if (password === confirmPassword) {
+        matchText.textContent = 'Passwords match!';
+        matchText.className = 'text-success';
+    } else {
+        matchText.textContent = 'Passwords do not match';
+        matchText.className = 'text-danger';
+    }
+});
+</script>
+{% endblock %} 

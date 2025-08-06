@@ -1,0 +1,196 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section bg-primary text-white py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4">Welcome Back</h1>
+                <p class="lead mb-4">Sign in to access your Tecosoft dashboard and manage your Industry 4.0 solutions.</p>
+                <p class="mb-4">Get back to monitoring your operations, analyzing data, and optimizing your industrial processes.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="hero-icon">
+                    <i class="fas fa-user-circle fa-5x text-light"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sign In Form -->
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold mb-2">Sign In</h2>
+                        <p class="text-muted">Access your Tecosoft account</p>
+                    </div>
+                    
+                    <form>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password *</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="#" class="text-primary text-decoration-none">Forgot Password?</a>
+                        </div>
+                        
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </button>
+                        </div>
+                        
+                        <div class="text-center mb-4">
+                            <p class="text-muted mb-0">Or sign in with</p>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-outline-dark w-100">
+                                    <i class="fab fa-google me-2"></i>Google
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-outline-primary w-100">
+                                    <i class="fab fa-linkedin me-2"></i>LinkedIn
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p class="mb-0">Don't have an account? 
+                                <a href="{% url 'signup' %}" class="text-primary text-decoration-none fw-bold">Sign Up</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="bg-light py-5 mb-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-3">Why Sign In?</h2>
+                <p class="lead text-muted">Access powerful features to manage your industrial operations</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="text-center">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Real-time Analytics</h5>
+                    <p class="text-muted">Monitor your operations with live dashboards and predictive insights.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="text-center">
+                    <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="fas fa-cogs fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Device Management</h5>
+                    <p class="text-muted">Control and configure your IoT devices from a centralized platform.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="text-center">
+                    <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Team Collaboration</h5>
+                    <p class="text-muted">Work together with your team to optimize industrial processes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Security Features -->
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h3 class="mb-3">Enterprise Security</h3>
+                            <p class="text-muted mb-4">Your data is protected with industry-leading security measures including:</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>End-to-end encryption</li>
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>Two-factor authentication</li>
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>Regular security audits</li>
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>GDPR compliance</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <i class="fas fa-shield-alt fa-5x text-primary mb-3"></i>
+                            <h5>Your Security is Our Priority</h5>
+                            <p class="text-muted
+">We take your security seriously, ensuring that your data is safe and secure at all times.</p>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+<!-- JavaScript for password toggle -->
+<script>
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordInput = document.getElementById('password');
+    const icon = this.querySelector('i');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+});
+</script>
+{% endblock %} 
