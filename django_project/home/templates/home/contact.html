@@ -2,15 +2,15 @@
 {% load static %}
 {% block content %}
 <!-- Hero Section -->
-<div class="hero-section bg-gradient-primary text-white py-5 mb-5">
+<div class="hero-section py-5 mb-5" style="background-color: #ffffff;">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h1 class="display-4 fw-bold mb-4">Get In Touch</h1>
-                <p class="lead mb-4">Ready to transform your operations? Let's discuss how Tecosoft can help you achieve your digital transformation goals.</p>
-                <p class="mb-4">Our team of experts is here to answer your questions and provide personalized solutions for your business needs.</p>
+            <div class="col-lg-8" data-aos="fade-right">
+                <h1 class="display-4 fw-bold mb-4" data-aos="fade-up" data-aos-delay="200">Get In Touch</h1>
+                <p class="lead mb-4" data-aos="fade-up" data-aos-delay="400">Ready to transform your operations? Let's discuss how Tecosoft can help you achieve your digital transformation goals.</p>
+                <p class="mb-4" data-aos="fade-up" data-aos-delay="600">Our team of experts is here to answer your questions and provide personalized solutions for your business needs.</p>
             </div>
-            <div class="col-lg-4 text-center">
+            <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-delay="300">
                 <div class="hero-icon">
                     <i class="fas fa-envelope fa-5x text-light"></i>
                 </div>
@@ -22,13 +22,13 @@
 <!-- Contact Information -->
 <div class="container mb-5">
     <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
+        <div class="col-lg-8 mx-auto" data-aos="fade-up">
             <h2 class="display-5 fw-bold mb-3">Contact Information</h2>
             <p class="lead text-muted">Multiple ways to reach our team</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body text-center p-4">
                     <div class="text-primary mb-3">
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body text-center p-4">
                     <div class="text-success mb-3">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body text-center p-4">
                     <div class="text-info mb-3">
@@ -85,10 +85,10 @@
 <div class="py-5 mb-5">
     <div class="container">
         <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <div class="card border-2 border-primary shadow-lg bg-gradient-primary text-white">
+        <div class="col-lg-8 mx-auto" data-aos="zoom-in">
+            <div class="card border shadow-lg" style="background-color: #ffffff;">
                     <div class="card-body p-5">
-                        <h2 class="text-center mb-4">Send Us a Message</h2>
+                        <h2 class="text-center mb-4" data-aos="fade-up" data-aos-delay="200">Send Us a Message</h2>
                         <form method="post">
                             {% csrf_token %}
                             <div class="row">
@@ -220,7 +220,7 @@
         <div class="col-12">
             <div class="card border-0 shadow-sm">
                 <div class="card-body p-0">
-                    <div class="bg-gradient-primary p-4 text-white text-center">
+                    <div class="p-4 text-center" style="background-color: #000000; color: #ffffff;">
                         <h3 class="mb-3">Visit Our Office</h3>
                         <p class="text-muted mb-4">Located in Vijaynagar, Bangalore</p>
                         <div class="mt-4">

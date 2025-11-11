@@ -1,0 +1,180 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2">
+            <div class="card">
+                <div class="card-header" style="background-color: #000000; color: #ffffff;">
+                    <h5 class="mb-0"><i class="fas fa-tachometer-alt me-2"></i>Admin Panel</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'admin_dashboard' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-home me-2"></i>Dashboard
+                    </a>
+                    <a href="{% url 'admin_applications' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-briefcase me-2"></i>Job Applications
+                    </a>
+                    <a href="{% url 'admin_contacts' %}" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-envelope me-2"></i>Contact Forms
+                    </a>
+                    <a href="{% url 'admin_replies' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-reply me-2"></i>Replies
+                    </a>
+                    <a href="{% url 'admin_users' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users me-2"></i>Users
+                    </a>
+                    <a href="{% url 'admin_careers' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-clipboard-list me-2"></i>Job Openings
+                    </a>
+                    <a href="{% url 'admin_products' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-box me-2"></i>Products
+                    </a>
+                    <a href="{% url 'admin_settings' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cog me-2"></i>Settings
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Contact Details</h2>
+                <a href="{% url 'admin_contacts' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Back to Contacts
+                </a>
+            </div>
+
+            <div class="row">
+                <!-- Contact Info -->
+                <div class="col-md-8 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Contact Information</h5>
+                            {% if not contact.is_read %}
+                            <span class="badge bg-warning">Unread</span>
+                            {% else %}
+                            <span class="badge bg-success">Read</span>
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Name:</strong> {{ contact.first_name }} {{ contact.last_name }}</p>
+                                    <p><strong>Email:</strong> {{ contact.email }}</p>
+                                    <p><strong>Phone:</strong> {{ contact.phone|default:"Not provided" }}</p>
+                                    <p><strong>Company:</strong> {{ contact.company|default:"Not provided" }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Subject:</strong> {{ contact.get_subject_display }}</p>
+                                    <p><strong>Submitted:</strong> {{ contact.created_at|date:"F d, Y H:i" }}</p>
+                                    <p><strong>Newsletter:</strong> 
+                                        {% if contact.is_subscribed %}
+                                            <span class="badge bg-success">Subscribed</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Not subscribed</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            <h6>Message:</h6>
+                            <div class="bg-light p-3 rounded">
+                                {{ contact.message|linebreaks }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reply History -->
+                    {% if replies %}
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Reply History</h5>
+                        </div>
+                        <div class="card-body">
+                            {% for reply in replies %}
+                            <div class="border-start border-3 ps-3 mb-3 {% if reply.is_sent %}border-success{% else %}border-warning{% endif %}">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <strong>{{ reply.subject }}</strong>
+                                        {% if reply.is_sent %}
+                                            <span class="badge bg-success ms-2">
+                                                <i class="fas fa-check me-1"></i>Sent
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-warning">
+                                                <i class="fas fa-exclamation-triangle me-1"></i>Failed to Send
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    <small class="text-muted">{{ reply.created_at|date:"M d, Y H:i" }}</small>
+                                </div>
+                                <p class="mb-1">{{ reply.message|linebreaks }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">By: {{ reply.admin_user.first_name|default:reply.admin_user.username }}</small>
+                                    {% if reply.is_sent and reply.sent_at %}
+                                        <small class="text-success">
+                                            <i class="fas fa-envelope me-1"></i>Sent to {{ contact.email }} on {{ reply.sent_at|date:"M d, Y H:i" }}
+                                        </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Actions Panel -->
+                <div class="col-md-4">
+                    <!-- Mark as Read -->
+                    {% if not contact.is_read %}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0">Mark as Read</h6>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="mark_read">
+                                <button type="submit" class="btn btn-info w-100">
+                                    <i class="fas fa-check me-1"></i>Mark as Read
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Send Reply -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Send Reply</h6>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="send_reply">
+                                <div class="mb-3">
+                                    <label class="form-label">Subject</label>
+                                    <input type="text" name="subject" class="form-control" value="Re: {{ contact.get_subject_display }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Message</label>
+                                    <textarea name="message" class="form-control" rows="8" placeholder="Dear {{ contact.first_name }},&#10;&#10;Thank you for contacting Tecosoft..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="fas fa-paper-plane me-1"></i>Send Reply
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

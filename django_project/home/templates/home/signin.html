@@ -5,12 +5,12 @@
 <div class="hero-section bg-primary text-white py-5 mb-5">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h1 class="display-4 fw-bold mb-4">Welcome Back</h1>
-                <p class="lead mb-4">Sign in to access your Tecosoft dashboard and manage your Industry 4.0 solutions.</p>
-                <p class="mb-4">Get back to monitoring your operations, analyzing data, and optimizing your industrial processes.</p>
+            <div class="col-lg-8" data-aos="fade-right">
+                <h1 class="display-4 fw-bold mb-4" data-aos="fade-up" data-aos-delay="200">Welcome Back</h1>
+                <p class="lead mb-4" data-aos="fade-up" data-aos-delay="400">Sign in to access your Tecosoft dashboard and manage your Industry 4.0 solutions.</p>
+                <p class="mb-4" data-aos="fade-up" data-aos-delay="600">Get back to monitoring your operations, analyzing data, and optimizing your industrial processes.</p>
             </div>
-            <div class="col-lg-4 text-center">
+            <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-delay="300">
                 <div class="hero-icon">
                     <i class="fas fa-user-circle fa-5x text-light"></i>
                 </div>
@@ -22,22 +22,37 @@
 <!-- Sign In Form -->
 <div class="container mb-5">
     <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
+        <div class="col-lg-6 col-md-8" data-aos="zoom-in">
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-5">
-                    <div class="text-center mb-4">
+                    <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="200">
                         <h2 class="fw-bold mb-2">Sign In</h2>
                         <p class="text-muted">Access your Tecosoft account</p>
+                        <div class="alert alert-info">
+                            <strong>Test Credentials:</strong><br>
+                            Admin: <code>admin@gmail.com</code> / <code>admin</code><br>
+                            Admin1: <code>admin@tecosoft.com</code> / <code>admin</code>
+                        </div>
                     </div>
                     
-                    <form>
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <form method="post">
+                        {% csrf_token %}
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address *</label>
                             <div class="input-group">
                                 <span class="input-group-text">
                                     <i class="fas fa-envelope"></i>
                                 </span>
-                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required>
                             </div>
                         </div>
                         
@@ -47,7 +62,7 @@
                                 <span class="input-group-text">
                                     <i class="fas fa-lock"></i>
                                 </span>
-                                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                                 <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                     <i class="fas fa-eye"></i>
                                 </button>
@@ -70,18 +85,20 @@
                             </button>
                         </div>
                         
+
+                        
                         <div class="text-center mb-4">
                             <p class="text-muted mb-0">Or sign in with</p>
                         </div>
                         
                         <div class="row mb-4">
                             <div class="col-6">
-                                <button type="button" class="btn btn-outline-dark w-100">
+                                <button type="button" class="btn btn-outline-dark w-100" onclick="showComingSoon('Google')">
                                     <i class="fab fa-google me-2"></i>Google
                                 </button>
                             </div>
                             <div class="col-6">
-                                <button type="button" class="btn btn-outline-primary w-100">
+                                <button type="button" class="btn btn-outline-primary w-100" onclick="showComingSoon('LinkedIn')">
                                     <i class="fab fa-linkedin me-2"></i>LinkedIn
                                 </button>
                             </div>
@@ -176,7 +193,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 
-<!-- JavaScript for password toggle -->
+<!-- JavaScript for password toggle and social login -->
 <script>
 document.getElementById('togglePassword').addEventListener('click', function() {
     const passwordInput = document.getElementById('password');
@@ -192,5 +209,9 @@ document.getElementById('togglePassword').addEventListener('click', function() {
         icon.classList.add('fa-eye');
     }
 });
+
+function showComingSoon(provider) {
+    alert(`${provider} sign-in is coming soon! For now, please use email and password to sign in.`);
+}
 </script>
 {% endblock %} 

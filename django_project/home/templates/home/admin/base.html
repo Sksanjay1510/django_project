@@ -97,39 +97,13 @@
 </div>
 
 <!-- Main Admin Content -->
-{% comment %} <div class="container">
+<div class="container">
     {% block admin_content %}{% endblock %}
-</div> {% endcomment %}
+</div>
 {% endblock %}
 
 {% block extra_css %}
 <style>
-    .admin-card {
-        transition: transform 0.2s ease-in-out;
-    }
-    .admin-card:hover {
-        transform: translateY(-2px);
-    }
-    .stats-card {
-        background: linear-gradient(135deg, #20c997 0%, #fd7e14 100%);
-        color: white;
-    }
-    .stats-card.users {
-        background: linear-gradient(135deg, #38b2ac 0%, #fd7e14 100%);
-    }
-    .stats-card.products {
-        background: linear-gradient(135deg, #ffb347 0%, #20c997 100%);
-    }
-    .stats-card.contacts {
-        background: linear-gradient(135deg, #ff6f61 0%, #20c997 100%);
-    }
-    .stats-card.applications {
-        background: linear-gradient(135deg, #fd7e14 0%, #38b2ac 100%);
-    }
-</style>
-{% block extra_css %}
-<style>
-    /* Existing styles */
     .admin-card {
         transition: transform 0.2s ease-in-out;
     }
@@ -153,7 +127,7 @@
         background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     }
 
-    /* New styles for admin page */
+    /* Admin page styles */
     .navbar-admin {
         box-shadow: 0 2px 8px rgba(32,201,151,0.08);
         border-radius: 8px;
@@ -185,5 +159,4 @@
         color: #20c997;
     }
 </style>
-{% endblock %}
 {% endblock %} 

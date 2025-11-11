@@ -1,0 +1,206 @@
+{% extends 'home/admin/base.html' %}
+{% load static %}
+
+{% block admin_title %}Site Settings{% endblock %}
+
+{% block admin_content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="mb-1"><i class="fas fa-cog me-2"></i>Site Settings</h2>
+                <p class="text-muted mb-0">Manage global website settings and configuration</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Settings Form -->
+<div class="row">
+    <div class="col-12">
+        <div class="card admin-card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-sliders-h me-2"></i>Website Configuration</h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <!-- Basic Information -->
+                        <div class="col-lg-6">
+                            <h6 class="text-muted mb-3">Basic Information</h6>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Site Name</label>
+                                <input type="text" class="form-control" name="site_name" value="{{ settings.site_name }}" required>
+                                <div class="form-text">Current: {{ settings.site_name }}</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Site Description</label>
+                                <textarea class="form-control" name="site_description" rows="3">{{ settings.site_description|default:'Industry 4.0 IoT Solutions' }}</textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Contact Email</label>
+                                <input type="email" class="form-control" name="contact_email" value="{{ settings.contact_email|default:'info@tecosoft.com' }}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Contact Phone</label>
+                                <input type="text" class="form-control" name="contact_phone" value="{{ settings.contact_phone|default:'+91 9611851196' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Contact Address</label>
+                                <textarea class="form-control" name="contact_address" rows="2">{{ settings.contact_address|default:'Vijaynagar, Bangalore, Karnataka, India' }}</textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Media & Technical -->
+                        <div class="col-lg-6">
+                            <h6 class="text-muted mb-3">Social Media Links</h6>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Facebook URL</label>
+                                <input type="url" class="form-control" name="social_facebook" value="{{ settings.social_facebook }}" placeholder="https://facebook.com/tecosoft">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Twitter URL</label>
+                                <input type="url" class="form-control" name="social_twitter" value="{{ settings.social_twitter }}" placeholder="https://twitter.com/tecosoft">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">LinkedIn URL</label>
+                                <input type="url" class="form-control" name="social_linkedin" value="{{ settings.social_linkedin }}" placeholder="https://linkedin.com/company/tecosoft">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">YouTube URL</label>
+                                <input type="url" class="form-control" name="social_youtube" value="{{ settings.social_youtube }}" placeholder="https://youtube.com/tecosoft">
+                            </div>
+                            
+                            <h6 class="text-muted mb-3 mt-4">Technical Settings</h6>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Google Analytics ID</label>
+                                <input type="text" class="form-control" name="google_analytics_id" value="{{ settings.google_analytics_id }}" placeholder="GA-XXXXXXXXX">
+                                <div class="form-text">Enter your Google Analytics tracking ID</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="maintenance_mode" id="maintenance_mode" {% if settings.maintenance_mode %}checked{% endif %}>
+                                    <label class="form-check-label" for="maintenance_mode">
+                                        Maintenance Mode
+                                    </label>
+                                    <div class="form-text">Enable to show maintenance page to visitors</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-muted">
+                            <small>
+                                <i class="fas fa-info-circle me-1"></i>
+                                Last updated: {{ settings.updated_at|date:"M d, Y H:i" }}
+                            </small>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary me-2" onclick="window.location.reload()">Reset</button>
+                            <button type="submit" name="action" value="update_settings" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Save Settings
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mt-4">
+    <div class="col-lg-4 mb-3">
+        <div class="card admin-card bg-primary text-white">
+            <div class="card-body text-center">
+                <i class="fas fa-database fa-2x mb-2"></i>
+                <h6>Database Status</h6>
+                <p class="mb-2">All systems operational</p>
+                <small>Last backup: Today</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mb-3">
+        <div class="card admin-card bg-success text-white">
+            <div class="card-body text-center">
+                <i class="fas fa-server fa-2x mb-2"></i>
+                <h6>Server Status</h6>
+                <p class="mb-2">Running smoothly</p>
+                <small>Uptime: 99.9%</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mb-3">
+        <div class="card admin-card bg-info text-white">
+            <div class="card-body text-center">
+                <i class="fas fa-shield-alt fa-2x mb-2"></i>
+                <h6>Security Status</h6>
+                <p class="mb-2">All secure</p>
+                <small>SSL active</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- System Information -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card admin-card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>System Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Django Version:</strong></td>
+                                <td>5.2.4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Python Version:</strong></td>
+                                <td>3.12.6</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Database:</strong></td>
+                                <td>SQLite</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Debug Mode:</strong></td>
+                                <td><span class="badge bg-warning">Enabled</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Static Files:</strong></td>
+                                <td><span class="badge bg-success">Configured</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Media Files:</strong></td>
+                                <td><span class="badge bg-success">Configured</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

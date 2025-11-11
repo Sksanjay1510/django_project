@@ -1,243 +1,214 @@
 {% extends "home/base.html" %}
 {% load static %}
 {% block content %}
-<section class="hero-section bg-gradient-primary text-white py-5 mb-5 shadow-lg">
+<section class="hero-section py-5 mb-5 shadow-lg" style="background-color: #ffffff;">
     <div class="container text-center">
-        <h1 class="display-2 fw-bold mb-3" style="letter-spacing:2px; text-shadow: 2px 2px 8px #000;">
+        <h1 class="display-2 fw-bold mb-3" style="letter-spacing:2px; text-shadow: 2px 2px 8px #000;" data-aos="fade-down">
             Our Products
         </h1>
-        <p class="lead mb-4" style="font-size:1.5rem;">
+        <p class="lead mb-4" style="font-size:1.5rem;" data-aos="fade-up" data-aos-delay="200">
             Explore our range of innovative products designed for the digital era.
         </p>
-        <p class="mb-4" style="font-size:1.1rem; color:#fff; opacity:0.85;">
+        <p class="mb-4" style="font-size:1.1rem; color:#fff; opacity:0.85;" data-aos="fade-up" data-aos-delay="400">
             <strong>From IIOT gateways to smart sensors, our solutions empower industries to embrace Industry 4.0 and achieve operational excellence.</strong>
         </p>
     </div>
 </section>
 
-<!-- Products Section -->
-<div class="bg-gradient-primary text-white py-5 mb-5">
+<!-- Detailed Products Section -->
+<div class="py-5 mb-5" style="background-color: #f8f9fa;">
     <div class="container">
-        <!-- Eagle Pro -->
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-6 mb-4">
-                <div class="card border-0 shadow-lg h-100 product-card">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-<h3 class="text-gradient-primary mb-0 me-3">Eagle Pro</h3>
-                            <span class="badge bg-success">Flagship</span>
-                        </div>
-                        <p class="lead mb-4">A robust IIOT gateway for large-scale industrial automation, real-time monitoring, and advanced analytics.</p>
-                        <div class="row mb-4">
-                            <div class="col-6">
-                                <h6 class="text-muted mb-2">Key Features:</h6>
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-check text-success me-2"></i>High-performance processing</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Multi-protocol support</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Real-time analytics</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Edge AI capabilities</li>
-                                </ul>
+        {% if products %}
+            {% for product in products %}
+            <div class="row align-items-center mb-5" data-aos="{% cycle 'fade-right' 'fade-left' %}">
+                <div class="col-lg-6 {% if forloop.counter|divisibleby:2 %}order-lg-2{% endif %} mb-4">
+                    <div class="card border-0 shadow-lg h-100 product-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <h3 class="text-gradient-primary mb-0 me-3">{{ product.name }}</h3>
+                                {% if product.is_featured %}
+                                    <span class="badge bg-success">Featured</span>
+                                {% endif %}
+                                <span class="badge bg-info ms-2">{{ product.get_product_type_display }}</span>
                             </div>
-                            <div class="col-6">
-                                <h6 class="text-muted mb-2">Specifications:</h6>
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-microchip me-2"></i>Quad-core ARM processor</li>
-                                    <li><i class="fas fa-memory me-2"></i>8GB RAM, 64GB storage</li>
-                                    <li><i class="fas fa-wifi me-2"></i>WiFi 6, 5G ready</li>
-                                    <li><i class="fas fa-shield-alt me-2"></i>Enterprise security</li>
-                                </ul>
+                            <p class="lead mb-4">{{ product.short_description }}</p>
+                            
+                            <div class="mb-4">
+                                <p>{{ product.description|truncatewords:30 }}</p>
                             </div>
-                        </div>
-                        <div class="d-flex gap-2">
-<a href="{% url 'contact' %}" class="btn btn-gradient-primary">Request Demo</a>
-<a href="{% url 'product_eagle_pro' %}" class="btn btn-outline-gradient-primary">Learn More</a>
+                            
+                            {% if product.features %}
+                            <div class="row mb-4">
+                                <div class="col-6">
+                                    <h6 class="text-muted mb-2">Key Features:</h6>
+                                    <ul class="list-unstyled">
+                                        {% for feature in product.features|slice:":4" %}
+                                            <li><i class="fas fa-check text-success me-2"></i>{{ feature }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% if product.features|length > 4 %}
+                                <div class="col-6">
+                                    <h6 class="text-muted mb-2">Specifications:</h6>
+                                    <ul class="list-unstyled">
+                                        {% for feature in product.features|slice:"4:8" %}
+                                            <li><i class="fas fa-microchip me-2"></i>{{ feature }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            
+                            <div class="d-flex gap-2 align-items-center">
+                                {% if product.price %}
+                                    <span class="h4 text-success mb-0">${{ product.price }}</span>
+                                {% endif %}
+                                <div class="ms-auto">
+                                    <a href="{% url 'contact' %}" class="btn btn-gradient-primary btn-anim">Request Demo</a>
+                                    <a href="{% url 'get_started' %}" class="btn btn-outline-gradient-primary btn-anim">Learn More</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 text-center">
-                <img src="{% static 'home/Eagle_pro.png' %}" alt="Eagle Pro" class="img-fluid mb-3" style="max-height:300px;">
-                <img src="{% static 'home/Eagle_pro_features.png' %}" alt="Eagle Pro Features" class="img-fluid" style="max-height:150px;">
-            </div>
-        </div>
-
-        <!-- Eagle Mini -->
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-6 text-center mb-4">
-                <div class="bg-gradient-primary text-white p-4 rounded">
-<i class="fas fa-microchip fa-5x text-gradient-primary mb-3"></i>
-                    <h4>Eagle Mini</h4>
-                    <p class="text-muted">Compact design for space-constrained environments</p>
+                <div class="col-lg-6 {% if forloop.counter|divisibleby:2 %}order-lg-1{% endif %} text-center" data-aos="{% cycle 'fade-left' 'fade-right' %}" data-aos-delay="200">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-3 hover-scale" style="max-height:300px;" data-aos="zoom-in" data-aos-delay="300">
+                    {% else %}
+                        <!-- Default images for known products -->
+                        {% if product.name == "Eagle Pro" %}
+                            <img src="{% static 'home/Eagle_pro.png' %}" alt="Eagle Pro" class="img-fluid mb-3 hover-scale" style="max-height:300px;" data-aos="zoom-in" data-aos-delay="300">
+                            <img src="{% static 'home/Eagle_pro_features.png' %}" alt="Eagle Pro Features" class="img-fluid hover-scale" style="max-height:150px;" data-aos="zoom-in" data-aos-delay="500">
+                        {% elif product.name == "Eagle Mini" %}
+                            <div class="p-4 rounded" style="background-color: #000000; color: #ffffff;">
+                                <i class="fas fa-microchip fa-5x text-gradient-primary mb-3" data-aos="zoom-in" data-aos-delay="200"></i>
+                                <h4 data-aos="fade-up" data-aos-delay="300">{{ product.name }}</h4>
+                                <p class="text-muted" data-aos="fade-up" data-aos-delay="400">Compact design for space-constrained environments</p>
+                            </div>
+                        {% elif product.name == "Sparrow" %}
+                            <img src="{% static 'home/industry4.png' %}" alt="Sparrow" class="img-fluid mb-3 hover-scale" style="max-height:300px;">
+                        {% else %}
+                            <div class="p-4 rounded" style="background-color: #000000; color: #ffffff;">
+                                <i class="fas fa-microchip fa-5x text-gradient-primary mb-3" data-aos="zoom-in" data-aos-delay="200"></i>
+                                <h4 data-aos="fade-up" data-aos-delay="300">{{ product.name }}</h4>
+                                <p class="text-muted" data-aos="fade-up" data-aos-delay="400">{{ product.get_product_type_display }}</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-lg h-100 product-card">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-<h3 class="text-gradient-primary mb-0 me-3">Eagle Mini</h3>
-                            <span class="badge bg-info">Compact</span>
-                        </div>
-                        <p class="lead mb-4">A compact IIOT device for small to medium enterprises, enabling seamless device connectivity and data collection.</p>
-                        <div class="row mb-4">
-                            <div class="col-6">
-                                <h6 class="text-muted mb-2">Key Features:</h6>
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-check text-success me-2"></i>Compact form factor</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Low power consumption</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Easy installation</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Cost-effective</li>
-                                </ul>
-                            </div>
-                            <div class="col-6">
-                                <h6 class="text-muted mb-2">Specifications:</h6>
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-microchip me-2"></i>Dual-core processor</li>
-                                    <li><i class="fas fa-memory me-2"></i>2GB RAM, 16GB storage</li>
-                                    <li><i class="fas fa-wifi me-2"></i>WiFi 5, 4G LTE</li>
-                                    <li><i class="fas fa-battery-half me-2"></i>PoE powered</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-<a href="{% url 'contact' %}" class="btn btn-gradient-primary">Request Demo</a>
-<a href="{% url 'product_eagle_mini' %}" class="btn btn-outline-gradient-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-microchip fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No Products Available</h4>
+                <p class="text-muted">We're working on adding new products. Please check back soon!</p>
             </div>
-        </div>
-
-    <!-- Sparrow -->
-    <div class="row align-items-center mb-5">
-            <div class="col-lg-6 mb-4">
-                <div class="card border-0 shadow-lg h-100 product-card">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-<h3 class="text-gradient-primary mb-0 me-3">Sparrow</h3>
-                            <span class="badge bg-warning">Wireless</span>
-                        </div>
-                        <p class="lead mb-4">An agile IIOT sensor node for edge data acquisition, wireless communication, and smart integration.</p>
-                        <div class="row mb-4">
-                            <div class="col-6">
-                                <h6 class="text-muted mb-2">Key Features:</h6>
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-check text-success me-2"></i>Wireless connectivity</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Battery powered</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Multiple sensors</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Mesh networking</li>
-                                </ul>
-                            </div>
-                            <div class="col-6">
-                                <h6 class="text-muted mb-2">Specifications:</h6>
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-microchip me-2"></i>ARM Cortex-M4</li>
-                                    <li><i class="fas fa-memory me-2"></i>512KB RAM, 4MB flash</li>
-                                    <li><i class="fas fa-wifi me-2"></i>LoRaWAN, BLE</li>
-                                    <li><i class="fas fa-battery-full me-2"></i>5+ year battery</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-<a href="{% url 'contact' %}" class="btn btn-gradient-primary">Request Demo</a>
-<a href="{% url 'product_sparrow' %}" class="btn btn-outline-gradient-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center">
-                <div class="bg-gradient-primary text-white p-4 rounded">
-                    <i class="fas fa-satellite fa-5x text-warning mb-3"></i>
-                    <h4>Sparrow</h4>
-                    <p class="text-muted">Wireless sensor node for distributed monitoring</p>
-                </div>
-            </div>
-        </div>
+        {% endif %}
     </div>
 </div>
 
-<!-- Features Comparison -->
+<!-- Product Cards -->
+{% if products %}
 <div class="container mb-5">
     <div class="row text-center mb-5">
         <div class="col-lg-8 mx-auto">
-            <h2 class="display-5 fw-bold mb-3">Product Comparison</h2>
+            <h2 class="display-5 fw-bold mb-3">Our Products</h2>
             <p class="lead text-muted">Choose the right solution for your needs</p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-            <div class="card border-0 shadow-sm h-100 product-card">
-<div class="card-header bg-gradient-primary text-white text-center py-3">
-                    <h4 class="mb-0">Eagle Pro</h4>
-                    <small>Enterprise Solution</small>
+    <div class="row justify-content-center">
+        {% for product in products %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card border-0 shadow h-100 product-comparison-card">
+                <!-- Product Header -->
+                <div class="card-header text-center py-4 {% if product.name == 'Eagle Mini' or product.name == 'Eagle Pro' %}bg-success{% else %}bg-dark{% endif %} text-white position-relative">
+                    <h4 class="mb-1 fw-bold">{{ product.name }}</h4>
+                    <small class="text-white-50">{{ product.get_product_type_display }}</small>
+                    {% if product.is_featured %}
+                        <span class="badge bg-warning text-dark position-absolute top-0 start-50 translate-middle px-3 py-1" style="margin-top: 10px;">
+                            Most Popular
+                        </span>
+                    {% endif %}
                 </div>
-                <div class="card-body p-4">
+                
+                <!-- Product Body -->
+                <div class="card-body p-4 d-flex flex-column">
+                    <!-- Price -->
                     <div class="text-center mb-4">
-<h2 class="text-gradient-primary">$2,999</h2>
-                        <small class="text-muted">One-time purchase</small>
+                        {% if product.price %}
+                            <h2 class="{% if product.name == 'Eagle Mini' or product.name == 'Eagle Pro' %}text-success{% else %}text-dark{% endif %} mb-1">${{ product.price }}</h2>
+                            <small class="text-muted">One-time purchase</small>
+                        {% else %}
+                            <h2 class="text-muted mb-1">Contact for Price</h2>
+                            <small class="text-muted">Custom pricing</small>
+                        {% endif %}
                     </div>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>High-performance processing</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Advanced analytics</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Multi-protocol support</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>24/7 support</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Custom integrations</li>
-                    </ul>
-                    <div class="text-center mt-4">
-<a href="{% url 'get_started' %}" class="btn btn-gradient-primary">Get Started</a>
+                    
+                    <!-- Features -->
+                    {% if product.features %}
+                    <div class="flex-grow-1">
+                        <ul class="list-unstyled mb-4">
+                            {% for feature in product.features|slice:":6" %}
+                                <li class="mb-2 d-flex align-items-center">
+                                    <i class="fas fa-check text-success me-2 flex-shrink-0"></i>
+                                    <span>{{ feature }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Button -->
+                    <div class="text-center mt-auto">
+                        <a href="{% url 'get_started' %}" class="btn {% if product.name == 'Eagle Mini' or product.name == 'Eagle Pro' %}btn-success{% else %}btn-dark{% endif %} px-4 py-2">
+                            Get Started
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 mb-4">
-            <div class="card border-0 shadow-lg h-100 product-card" style="transform: scale(1.05);">
-                <div class="card-header bg-success text-white text-center py-3">
-                    <h4 class="mb-0">Eagle Mini</h4>
-                    <small>Most Popular</small>
-                </div>
-                <div class="card-body p-4">
-                    <div class="text-center mb-4">
-                        <h2 class="text-success">$1,299</h2>
-                        <small class="text-muted">One-time purchase</small>
-                    </div>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Compact design</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Easy installation</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Standard protocols</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Email support</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Basic integrations</li>
-                    </ul>
-                    <div class="text-center mt-4">
-<a href="{% url 'get_started' %}" class="btn btn-success">Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-            <div class="card border-0 shadow-sm h-100 product-card">
-                <div class="card-header bg-warning text-white text-center py-3">
-                    <h4 class="mb-0">Sparrow</h4>
-                    <small>Wireless Solution</small>
-                </div>
-                <div class="card-body p-4">
-                    <div class="text-center mb-4">
-                        <h2 class="text-warning">$299</h2>
-                        <small class="text-muted">Per sensor</small>
-                    </div>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Wireless connectivity</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Long battery life</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Easy deployment</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Community support</li>
-                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Open source</li>
-                    </ul>
-                    <div class="text-center mt-4">
-<a href="{% url 'get_started' %}" class="btn btn-warning">Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
+
+<style>
+.product-comparison-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.product-comparison-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+
+.product-comparison-card .card-header {
+    border-radius: 15px 15px 0 0;
+    border: none;
+}
+
+.product-comparison-card .list-unstyled li {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.product-comparison-card .btn {
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.product-comparison-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+</style>
+{% endif %}
 
 <!-- Call to Action -->
 <div class="container mb-5">

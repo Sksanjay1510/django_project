@@ -1,251 +1,1218 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tecosoft - Industry 4.0 Solutions</title>
-    <link rel="stylesheet" href="{% static 'home/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'home/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'home/mobile-responsive.css' %}" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body class="bg-gradient-primary" style="min-height: 100vh;">
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome Backup CDN -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Font Awesome 6 Latest -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body style="background-color: #f8fafc">
     <!-- Special Authentication Header removed as requested -->
 
     <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary shadow-lg sticky-top py-2">
-        <div class="container">
-            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{% url 'index' %}" style="font-size: 2rem; letter-spacing: 1px;">
-                <span class="d-flex align-items-center justify-content-center bg-white text-gradient-primary rounded-circle me-2" style="width: 44px; height: 44px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                    <i class="fas fa-industry fa-lg"></i>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-professional py-3">
+      <div class="container">
+        <a
+          class="navbar-brand fw-bold d-flex align-items-center gap-2"
+          href="{% url 'index' %}"
+          style="font-size: 2rem; letter-spacing: 1px"
+        >
+          <span
+            class="d-flex align-items-center justify-content-center bg-white text-dark rounded-circle me-2"
+            style="width: 44px; height: 44px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);"
+          >
+            <img 
+              src="https://img.icons8.com/?size=32&id=gShesypkbo1o&format=png&color=000000" 
+              alt="Tecosoft Logo" 
+              style="width: 28px; height: 28px;"
+            />
+          </span>
+          Tecosoft
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto gap-1">
+            <li class="nav-item">
+              <a
+                class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim"
+                href="{% url 'index' %}"
+              >
+                <i class="fas fa-home me-1"></i>Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim"
+                href="{% url 'about' %}"
+              >
+                <i class="fas fa-info-circle me-1"></i>About Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim"
+                href="{% url 'products' %}"
+              >
+                <i class="fas fa-microchip me-1"></i>Products
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim"
+                href="{% url 'career' %}"
+              >
+                <i class="fas fa-briefcase me-1"></i>Career
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim"
+                href="{% url 'contact' %}"
+              >
+                <i class="fas fa-envelope me-1"></i>Contact Us
+              </a>
+            </li>
+          </ul>
+          <ul class="navbar-nav gap-1">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim position-relative" href="{% url 'notifications' %}">
+                <i class="fas fa-bell"></i>
+                {% if unread_notification_count > 0 %}
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ unread_notification_count }}
+                  <span class="visually-hidden">unread notifications</span>
                 </span>
-                Tecosoft
-            </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto gap-1">
-                    <li class="nav-item">
-                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'index' %}">
-                            <i class="fas fa-home me-1"></i>Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'about' %}">
-                            <i class="fas fa-info-circle me-1"></i>About Us
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'products' %}">
-                            <i class="fas fa-microchip me-1"></i>Products
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'career' %}">
-                            <i class="fas fa-briefcase me-1"></i>Career
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3 rounded-pill fw-semibold text-white nav-anim" href="{% url 'contact' %}">
-                            <i class="fas fa-envelope me-1"></i>Contact Us
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav gap-1">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle px-3 rounded-pill fw-semibold text-white nav-anim" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-circle me-1"></i>Account
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow rounded-4">
-                            <li><a class="dropdown-item" href="{% url 'signin' %}"><i class="fas fa-sign-in-alt me-2"></i>Sign In</a></li>
-                            <li><a class="dropdown-item" href="{% url 'signup' %}"><i class="fas fa-user-plus me-2"></i>Sign Up</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle me-2"></i>Help</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                {% endif %}
+              </a>
+            </li>
+            {% endif %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle px-3 rounded-pill fw-semibold text-white nav-anim"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-user-circle me-1"></i>Account
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow rounded-4">
+                {% if user.is_authenticated %}
+                  {% if user.is_staff %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'admin_dashboard' %}">
+                      <i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard
+                    </a>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  {% endif %}
+                  <li>
+                    <span class="dropdown-item-text">
+                      <i class="fas fa-user me-2"></i>{{ user.first_name|default:user.username }}
+                    </span>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'notifications' %}">
+                      <i class="fas fa-bell me-2"></i>Notifications
+                      {% if unread_notification_count > 0 %}
+                        <span class="badge bg-danger ms-1">{{ unread_notification_count }}</span>
+                      {% endif %}
+                    </a>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'signout' %}">
+                      <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+                    </a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'signin' %}">
+                      <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'signup' %}">
+                      <i class="fas fa-user-plus me-2"></i>Sign Up</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href=""
+                    ><i class="fas fa-cog me-2"></i>Settings</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'help_center' %}"
+                    ><i class="fas fa-question-circle me-2"></i>Help</a
+                  >
+                </li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
     <!-- Main Content -->
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+    <main>{% block content %}{% endblock %}</main>
 
     <!-- Footer -->
-    <footer class="bg-gradient-primary text-white py-5 mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5 class="mb-3">
-                        <i class="fas fa-industry text-primary me-2"></i>
-                        Tecosoft
-                    </h5>
-                    <p class="text-muted">Leading the Industry 4.0 revolution with cutting-edge digital twin technology and intelligent automation solutions.</p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-facebook fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="mb-3">Products</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-muted text-decoration-none">Eagle Pro</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Eagle Mini</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Sparrow</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Cloud Platform</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="mb-3">Company</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'about' %}" class="text-muted text-decoration-none">About Us</a></li>
-                        <li><a href="{% url 'career' %}" class="text-muted text-decoration-none">Careers</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">News</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Partners</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="mb-3">Support</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-muted text-decoration-none">Documentation</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Help Center</a></li>
-                        <li><a href="{% url 'contact' %}" class="text-muted text-decoration-none">Contact</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Status</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="mb-3">Account</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'signin' %}" class="text-muted text-decoration-none">Sign In</a></li>
-                        <li><a href="{% url 'signup' %}" class="text-muted text-decoration-none">Sign Up</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Terms of Service</a></li>
-                    </ul>
-                </div>
+    <footer class="footer-professional text-white py-3 position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <h5 class="mb-3">
+              <i class="fas fa-industry text-primary me-2"></i>
+              Tecosoft
+            </h5>
+            <p class="text-muted">
+              Leading the Industry 4.0 revolution with cutting-edge digital twin
+              technology and intelligent automation solutions.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white"
+                ><i class="fab fa-linkedin fa-lg"></i
+              ></a>
+              <a href="#" class="text-white"
+                ><i class="fab fa-twitter fa-lg"></i
+              ></a>
+              <a href="#" class="text-white"
+                ><i class="fab fa-facebook fa-lg"></i
+              ></a>
+              <a href="#" class="text-white"
+                ><i class="fab fa-youtube fa-lg"></i
+              ></a>
             </div>
-            <hr class="my-4">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="text-muted mb-0">&copy; 2024 Tecosoft. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="text-muted mb-0">Made with <i class="fas fa-heart text-danger"></i> for Industry 4.0</p>
-                </div>
-            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="mb-3">Products</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="{% url 'product_eagle_pro' %}"
+                  class="text-muted text-decoration-none"
+                  >Eagle Pro</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'product_eagle_mini' %}"
+                  class="text-muted text-decoration-none"
+                  >Eagle Mini</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'product_sparrow' %}"
+                  class="text-muted text-decoration-none"
+                  >Sparrow</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="mb-3">Company</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="{% url 'about' %}"
+                  class="text-muted text-decoration-none"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'career' %}"
+                  class="text-muted text-decoration-none"
+                  >Careers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'news' %}"
+                  class="text-muted text-decoration-none"
+                  >News</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'partners' %}"
+                  class="text-muted text-decoration-none"
+                  >Partners</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="mb-3">Support</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="{% url 'documentation' %}"
+                  class="text-muted text-decoration-none"
+                  >Documentation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'help_center' %}"
+                  class="text-muted text-decoration-none"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'contact' %}"
+                  class="text-muted text-decoration-none"
+                  >Contact</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'status' %}"
+                  class="text-muted text-decoration-none"
+                  >Status</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="mb-3">Account</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="{% url 'signin' %}"
+                  class="text-muted text-decoration-none"
+                  >Sign In</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'signup' %}"
+                  class="text-muted text-decoration-none"
+                  >Sign Up</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-muted text-decoration-none"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-muted text-decoration-none"
+                  >Terms of Service</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
+        <hr class="my-4" />
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="text-muted mb-0">
+              &copy; 2024 Tecosoft. All rights reserved.
+            </p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="text-muted mb-0">
+              Made with <i class="fas fa-heart text-danger"></i> for Industry
+              4.0
+            </p>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Initialize AOS with enhanced settings
+      AOS.init({
+        duration: 1000,
+        easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        once: true,
+        mirror: false,
+        offset: 100,
+        delay: 100,
+      });
 
-    <!-- Custom CSS for gradient and navbar -->
+      // Fixed Navbar Effects
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        const scrolled = window.scrollY > 50;
+
+        navbar.classList.toggle("scrolled", scrolled);
+
+        // Remove parallax effect - keep navbar fixed
+        navbar.style.transform = "";
+      });
+
+      // Enhanced Button and Icon Animations
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add magnetic effect to buttons
+        const buttons = document.querySelectorAll(".btn");
+        buttons.forEach((btn) => {
+          btn.classList.add("btn-magnetic", "btn-liquid");
+
+          // Magnetic mouse follow effect
+          btn.addEventListener("mousemove", function (e) {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+          });
+
+          btn.addEventListener("mouseleave", function () {
+            btn.style.transform = "";
+          });
+        });
+
+        // Enhanced icon animations
+        const icons = document.querySelectorAll(".fas, .fab");
+        icons.forEach((icon) => {
+          icon.classList.add("icon-morph");
+
+          // Random delay for staggered animations
+          const delay = Math.random() * 2000;
+          setTimeout(() => {
+            icon.style.animationDelay = `${delay}ms`;
+          }, delay);
+        });
+
+        // Particle system
+        createParticleSystem();
+
+        // Text reveal animations
+        initTextReveal();
+
+        // Typewriter effect for hero text
+        initTypewriter();
+      });
+
+      // Particle System
+      function createParticleSystem() {
+        const particleContainer = document.body;
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+          setTimeout(() => {
+            createParticle(particleContainer);
+          }, i * 200);
+        }
+
+        // Continuously create particles
+        setInterval(() => {
+          createParticle(particleContainer);
+        }, 3000);
+      }
+
+      function createParticle(container) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * 100 + "vw";
+        particle.style.animationDuration = Math.random() * 10 + 10 + "s";
+        particle.style.opacity = Math.random() * 0.5 + 0.2;
+
+        container.appendChild(particle);
+
+        // Remove particle after animation
+        setTimeout(() => {
+          if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+          }
+        }, 20000);
+      }
+
+      // Text Reveal Animation
+      function initTextReveal() {
+        const textElements = document.querySelectorAll("h1, h2, h3");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("text-reveal");
+                setTimeout(() => {
+                  entry.target.classList.add("animate");
+                }, 200);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        textElements.forEach((el) => observer.observe(el));
+      }
+
+      // Typewriter Effect
+      function initTypewriter() {
+        const typewriterElements =
+          document.querySelectorAll(".typewriter-text");
+
+        typewriterElements.forEach((element) => {
+          const text = element.textContent;
+          element.textContent = "";
+          element.classList.add("typewriter");
+
+          let i = 0;
+          const timer = setInterval(() => {
+            if (i < text.length) {
+              element.textContent += text.charAt(i);
+              i++;
+            } else {
+              clearInterval(timer);
+              element.classList.remove("typewriter");
+            }
+          }, 100);
+        });
+      }
+
+      // Mouse Trail Effect
+      let mouseTrail = [];
+      document.addEventListener("mousemove", function (e) {
+        mouseTrail.push({
+          x: e.clientX,
+          y: e.clientY,
+          time: Date.now(),
+        });
+
+        // Keep only recent trail points
+        mouseTrail = mouseTrail.filter(
+          (point) => Date.now() - point.time < 1000
+        );
+
+        // Create trail effect
+        if (mouseTrail.length > 1) {
+          createTrailEffect(e.clientX, e.clientY);
+        }
+      });
+
+      function createTrailEffect(x, y) {
+        const trail = document.createElement("div");
+        trail.style.position = "fixed";
+        trail.style.left = x + "px";
+        trail.style.top = y + "px";
+        trail.style.width = "6px";
+        trail.style.height = "6px";
+        trail.style.background =
+          "radial-gradient(circle, rgba(102, 126, 234, 0.6) 0%, transparent 70%)";
+        trail.style.borderRadius = "50%";
+        trail.style.pointerEvents = "none";
+        trail.style.zIndex = "9999";
+        trail.style.animation = "trailFade 0.8s ease-out forwards";
+
+        document.body.appendChild(trail);
+
+        setTimeout(() => {
+          if (trail.parentNode) {
+            trail.parentNode.removeChild(trail);
+          }
+        }, 800);
+      }
+
+      // Add trail fade animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes trailFade {
+                0% { 
+                    transform: scale(1); 
+                    opacity: 1; 
+                }
+                100% { 
+                    transform: scale(0); 
+                    opacity: 0; 
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Performance optimization
+      let ticking = false;
+      function requestTick() {
+        if (!ticking) {
+          requestAnimationFrame(updateAnimations);
+          ticking = true;
+        }
+      }
+
+      function updateAnimations() {
+        // Update any continuous animations here
+        ticking = false;
+      }
+
+      // Intersection Observer for performance
+      const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = "running";
+          } else {
+            entry.target.style.animationPlayState = "paused";
+          }
+        });
+      });
+
+      // Observe animated elements
+      document.querySelectorAll('[class*="animate"]').forEach((el) => {
+        animationObserver.observe(el);
+      });
+    </script>
+
+    <!-- Modern Tech Color Scheme & Advanced Animations -->
     <style>
-        body, .text-dark, .text-black, .text-body {
-            color: #fff !important;
-            background: #141414 !important;
+      :root {
+        /* Professional Corporate Color Palette */
+        --primary-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        --secondary-gradient: linear-gradient(135deg, #475569 0%, #334155 100%);
+        --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        --success-gradient: linear-gradient(135deg, #059669 0%, #047857 100%);
+        --warning-gradient: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+        --dark-gradient: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+        --card-gradient: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.98) 0%,
+          rgba(248, 250, 252, 0.95) 100%
+        );
+        --text-gradient: linear-gradient(
+          135deg,
+          #1e293b 0%,
+          #475569 50%,
+          #3b82f6 100%
+        );
+        --glow-primary: 0 0 25px rgba(30, 41, 59, 0.2);
+        --glow-secondary: 0 0 25px rgba(71, 85, 105, 0.2);
+        --glow-accent: 0 0 25px rgba(59, 130, 246, 0.3);
+
+        /* Professional Text Colors */
+        --text-primary: #1e293b;
+        --text-secondary: #475569;
+        --text-muted: #64748b;
+        --text-light: #f8fafc;
+        --text-white: #ffffff;
+        --text-dark: #0f172a;
+
+        /* Background Colors */
+        --bg-primary: #1e293b;
+        --bg-secondary: #475569;
+        --bg-tertiary: #3b82f6;
+        --bg-card: rgba(255, 255, 255, 0.98);
+
+        /* Border Colors */
+        --border-primary: rgba(30, 41, 59, 0.2);
+        --border-secondary: rgba(71, 85, 105, 0.15);
+      }
+
+      /* Font Awesome Fallback */
+      .fas, .fab, .far, .fal, .fad, .fa {
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "Font Awesome 6 Pro" !important;
+        font-weight: 900;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Ensure icons are visible */
+      .fas::before, .fab::before, .far::before, .fal::before, .fad::before, .fa::before {
+        display: inline-block;
+        text-decoration: inherit;
+        width: 1em;
+        text-align: center;
+      }
+
+      /* Base Styles */
+      html,
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+        height: auto !important;
+        min-height: auto !important;
+        font-family: 'Times New Roman', Times, serif !important;
+      }
+
+      body {
+        padding-top: 80px !important; /* Account for fixed navbar */
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+      }
+
+      /* Remove any default margins/padding from all elements */
+      * {
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif !important;
+      }
+
+      /* Ensure footer has no extra space */
+      footer {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+
+      /* Remove any space after footer */
+      footer:after {
+        content: none !important;
+      }
+
+      /* Ensure page ends at footer */
+      html {
+        height: auto !important;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 0 !important;
+      }
+
+      main {
+        flex: 1;
+      }
+
+      /* Override Bootstrap margins */
+      .container,
+      .container-fluid {
+        margin-bottom: 0 !important;
+      }
+
+      /* Remove any trailing space */
+      body > *:last-child {
+        margin-bottom: 0 !important;
+      }
+
+      /* Universal Black Text Override */
+      *,
+      *::before,
+      *::after {
+        color: #000000 !important;
+      }
+
+      /* Specific Element Text Colors */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: #000000 !important;
+        font-family: 'Times New Roman', Times, serif !important;
+      }
+
+      p,
+      span,
+      div,
+      a,
+      li,
+      td,
+      th,
+      label,
+      input,
+      textarea,
+      select {
+        color: #000000 !important;
+        font-family: 'Times New Roman', Times, serif !important;
+      }
+
+      /* Button Text Colors */
+      .btn,
+      .btn-primary,
+      .btn-secondary,
+      .btn-success,
+      .btn-danger,
+      .btn-warning,
+      .btn-info,
+      .btn-light,
+      .btn-dark {
+        color: #000000 !important;
+      }
+
+      /* Card Text Colors */
+      .card,
+      .card-body,
+      .card-title,
+      .card-text,
+      .card-header,
+      .card-footer {
+        color: #000000 !important;
+      }
+
+      /* Form Text Colors */
+      .form-control,
+      .form-label,
+      .form-text,
+      .form-check-label {
+        color: #000000 !important;
+      }
+
+      /* Navigation Text Colors */
+      .nav-link,
+      .navbar-nav .nav-link,
+      .navbar-brand {
+        color: #000000 !important;
+      }
+
+      /* Footer Text Colors */
+      footer,
+      footer * {
+        color: #000000 !important;
+      }
+
+      /* Modern Animated Background - Removed */
+
+      /* Enhanced Gradients */
+      .bg-gradient-primary {
+        background: var(--primary-gradient) !important;
+        position: relative;
+      }
+
+      .bg-gradient-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%
+        );
+        animation: shimmer 3s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
         }
-        .text-muted {
-            color: #b3b3b3 !important;
+        100% {
+          transform: translateX(100%);
         }
-        .text-dark-primary {
-            color: #e50914 !important;
+      }
+
+      .text-gradient-primary {
+        background: var(--text-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: subtleGradientShift 8s ease infinite;
+      }
+
+      @keyframes subtleGradientShift {
+        0%,
+        100% {
+          filter: hue-rotate(0deg) brightness(1);
         }
-        /* --- Netflix-Inspired Palette --- */
-        .bg-gradient-primary {
-            background: #141414 !important;
+        50% {
+          filter: hue-rotate(15deg) brightness(1.1);
         }
-        .bg-gradient-primary:hover {
-            background: #181818 !important;
+      }
+
+      /* Modern Button Styles */
+      .btn-gradient-primary {
+        background: var(--primary-gradient);
+        border: none;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: var(--glow-primary);
+      }
+
+      .btn-gradient-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .btn-gradient-primary:hover::before {
+        left: 100%;
+      }
+
+      .btn-gradient-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--glow-primary), 0 10px 25px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-outline-gradient-primary {
+        background: transparent;
+        border: 2px solid;
+        border-image: var(--primary-gradient) 1;
+        color: #1e293b;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .btn-outline-gradient-primary:hover {
+        background: var(--primary-gradient);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: var(--glow-primary);
+      }
+
+      /* Modern Professional Navbar */
+      .navbar-professional {
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(20px);
+        border: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 1030 !important;
+      }
+
+      .navbar-professional.scrolled {
+        background: rgba(255, 255, 255, 0.98) !important;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand {
+        color: var(--text-primary) !important;
+        font-weight: 700;
+        font-size: 1.8rem !important;
+        text-shadow: none;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand:hover {
+        color: #333333 !important;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .navbar-brand .bg-white {
+        background: linear-gradient(
+          135deg,
+          #000000 0%,
+          #333333 100%
+        ) !important;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand:hover .bg-white {
+        background: linear-gradient(
+          135deg,
+          #333333 0%,
+          #666666 100%
+        ) !important;
+        border-color: #000000;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-link.nav-anim {
+        position: relative;
+        transition: all 0.3s ease;
+        border-radius: 25px !important;
+      }
+
+      .nav-link.nav-anim {
+        color: rgba(0, 0, 0, 0.8) !important;
+        font-weight: 600;
+      }
+
+      .nav-link.nav-anim::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #000000, #333333);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-link.nav-anim:hover::before {
+        width: 80%;
+      }
+
+      .nav-link.nav-anim:hover {
+        background: rgba(0, 0, 0, 0.05) !important;
+        color: #000000 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Enhanced Cards */
+      .card {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: blur(20px);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        color: #000000 !important;
+        border-radius: 15px !important;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.05) 0%,
+          rgba(0, 0, 0, 0.02) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+
+      .card:hover::before {
+        opacity: 0.1;
+      }
+
+      .card:hover {
+        transform: translateY(-15px) rotateX(5deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+          0 0 0 1px rgba(0, 0, 0, 0.1);
+        border-color: rgba(0, 0, 0, 0.2) !important;
+      }
+
+      /* Glowing Icons */
+      .fas,
+      .fab {
+        transition: all 0.3s ease;
+      }
+
+      .fas:hover,
+      .fab:hover {
+        transform: rotate(360deg) scale(1.2);
+        filter: drop-shadow(0 0 10px currentColor);
+      }
+
+      /* Professional Text Colors */
+      .text-muted {
+        color: #64748b !important;
+      }
+
+      .text-primary {
+        color: #1e293b !important;
+      }
+
+      .text-success {
+        color: #27ae60 !important;
+      }
+
+      .text-info {
+        color: #3b82f6 !important;
+      }
+
+      .text-warning {
+        color: #f39c12 !important;
+      }
+
+      .text-danger {
+        color: #e74c3c !important;
+      }
+
+      .text-secondary {
+        color: #475569 !important;
+      }
+
+      .text-light {
+        color: var(--text-light) !important;
+      }
+
+      /* Professional Dropdown */
+      .dropdown-menu {
+        background: rgba(255, 255, 255, 0.98) !important;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .dropdown-item {
+        color: rgba(0, 0, 0, 0.8) !important;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        margin: 2px 5px;
+      }
+
+      .dropdown-item:hover {
+        background: linear-gradient(
+          135deg,
+          #f8f9fa 0%,
+          #e9ecef 100%
+        ) !important;
+        color: #000000 !important;
+        transform: translateX(3px);
+      }
+
+      /* Footer Enhancements */
+      footer {
+        background: #ffffff !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        position: relative;
+        color: #000000 !important;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 0, 0, 0.1),
+          transparent
+        );
+      }
+
+      footer a:hover {
+        color: #333333 !important;
+        transform: translateY(-1px);
+        text-shadow: none;
+      }
+
+      /* Pulse Animation for CTAs */
+      .btn-pulse {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(30, 60, 114, 0.6);
         }
-        .text-gradient-primary {
-            background: linear-gradient(90deg, #e50914 0%, #fff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: #fff;
+        70% {
+          box-shadow: 0 0 0 8px rgba(30, 60, 114, 0);
         }
-        .btn-gradient-primary {
-            color: #fff;
-            background: #e50914;
-            border: none;
+        100% {
+          box-shadow: 0 0 0 0 rgba(30, 60, 114, 0);
         }
-        .btn-gradient-primary:hover, .btn-outline-gradient-primary:hover {
-            background: #b0060f;
-            color: #fff;
+      }
+
+      /* Loading Animation */
+      .loading-dots {
+        display: inline-block;
+      }
+
+      .loading-dots::after {
+        content: "";
+        animation: dots 1.5s steps(5, end) infinite;
+      }
+
+      @keyframes dots {
+        0%,
+        20% {
+          content: "";
         }
-        .btn-outline-gradient-primary {
-            color: #e50914;
-            background: transparent;
-            border: 2px solid #e50914;
+        40% {
+          content: ".";
         }
-        .btn-outline-gradient-primary:hover {
-            background: #e50914;
-            color: #fff;
-            border: 2px solid #e50914;
+        60% {
+          content: "..";
         }
-        /* Netflix-Style Navbar */
-        .navbar.bg-gradient-primary {
-            background: #141414 !important;
-            box-shadow: 0 4px 24px 0 rgba(20, 20, 20, 0.13), 0 1.5px 0 0 #fff1 inset;
-            border-radius: 0.75rem;
-            margin-top: 0.7rem;
-            margin-bottom: 0.7rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
+        80%,
+        100% {
+          content: "...";
         }
-        .navbar .navbar-brand {
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #e50914 !important;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
-            font-size: 2.2rem;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .navbar {
+          margin: 0.5rem;
+          border-radius: 15px;
         }
-        .navbar .navbar-brand .bg-white {
-            background: #fff !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+        .card:hover {
+          transform: translateY(-8px);
         }
-        .navbar .nav-link.nav-anim {
-            transition: background 0.18s, color 0.18s, box-shadow 0.18s;
-            font-size: 1rem;
-            padding-top: 0.6rem !important;
-            padding-bottom: 0.6rem !important;
-            border-radius: 1.5rem !important;
-        }
-        .navbar .nav-link.nav-anim:hover, .navbar .nav-link.nav-anim.active {
-            background: rgba(229,9,20,0.13);
-            color: #e50914 !important;
-            box-shadow: 0 2px 8px 0 rgba(20,20,20,0.08);
-        }
-        .navbar .dropdown-menu {
-            border-radius: 1rem;
-            min-width: 200px;
-            background: #181818;
-            box-shadow: 0 4px 24px 0 rgba(20, 20, 20, 0.10);
-            border: 1px solid #222;
-        }
-        /* Force dropdown text to white with maximum specificity */
-        .navbar .dropdown-menu, .navbar .dropdown-item,
-        .dropdown-menu, .dropdown-item,
-        .navbar .dropdown-menu.show, .dropdown-menu.show,
-        .navbar .dropdown-menu[aria-expanded="true"], .dropdown-menu[aria-expanded="true"],
-        .navbar .dropdown-item[role="menuitem"], .dropdown-item[role="menuitem"] {
-            color: #fff !important;
-        }
-        .navbar .dropdown-item:active, .navbar .dropdown-item:hover,
-        .dropdown-item:active, .dropdown-item:hover,
-        .navbar .dropdown-item:focus, .dropdown-item:focus {
-            background: #e50914 !important;
-            color: #fff !important;
-        }
-        }
+      }
     </style>
-</body>
+    
+    <!-- Mobile Interactions JavaScript -->
+    <script src="{% static 'home/mobile-interactions.js' %}"></script>
+    
+    <!-- Session Handler JavaScript -->
+    <script src="{% static 'home/session-handler.js' %}"></script>
+  </body>
 </html>

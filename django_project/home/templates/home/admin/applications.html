@@ -14,10 +14,10 @@
                     <a href="{% url 'admin_dashboard' %}" class="list-group-item list-group-item-action">
                         <i class="fas fa-home me-2"></i>Dashboard
                     </a>
-                    <a href="{% url 'admin_applications' %}" class="list-group-item list-group-item-action">
+                    <a href="{% url 'admin_applications' %}" class="list-group-item list-group-item-action active">
                         <i class="fas fa-briefcase me-2"></i>Job Applications
                     </a>
-                    <a href="{% url 'admin_contacts' %}" class="list-group-item list-group-item-action active">
+                    <a href="{% url 'admin_contacts' %}" class="list-group-item list-group-item-action">
                         <i class="fas fa-envelope me-2"></i>Contact Forms
                     </a>
                     <a href="{% url 'admin_replies' %}" class="list-group-item list-group-item-action">
@@ -42,7 +42,7 @@
         <!-- Main Content -->
         <div class="col-md-9 col-lg-10">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Contact Forms</h2>
+                <h2>Job Applications</h2>
                 <div>
                     <button class="btn btn-outline-primary" onclick="toggleBulkActions()">
                         <i class="fas fa-tasks me-1"></i>Bulk Actions
@@ -55,17 +55,29 @@
                 <div class="card-body">
                     <form method="post" action="{% url 'admin_bulk_actions' %}">
                         {% csrf_token %}
-                        <input type="hidden" name="model_type" value="contacts">
+                        <input type="hidden" name="model_type" value="applications">
                         <div class="row align-items-end">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Action</label>
                                 <select name="action" class="form-select" required>
                                     <option value="">Select Action</option>
-                                    <option value="mark_read">Mark as Read</option>
+                                    <option value="update_status">Update Status</option>
                                     <option value="delete">Delete Selected</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label class="form-label">New Status (if updating)</label>
+                                <select name="bulk_status" class="form-select">
+                                    <option value="">Select Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="reviewed">Reviewed</option>
+                                    <option value="shortlisted">Shortlisted</option>
+                                    <option value="interviewed">Interviewed</option>
+                                    <option value="hired">Hired</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">Apply to Selected</button>
                                 <button type="button" class="btn btn-secondary" onclick="toggleBulkActions()">Cancel</button>
                             </div>
@@ -74,47 +86,41 @@
                 </div>
             </div>
 
-            <!-- Contacts Table -->
+            <!-- Applications Table -->
             <div class="card">
                 <div class="card-body">
-                    {% if contacts %}
+                    {% if applications %}
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" id="selectAll"></th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Subject</th>
-                                        <th>Company</th>
+                                        <th>Applicant</th>
+                                        <th>Position</th>
+                                        <th>Experience</th>
                                         <th>Status</th>
-                                        <th>Date</th>
+                                        <th>Applied Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for contact in contacts %}
-                                    <tr class="{% if not contact.is_read %}table-warning{% endif %}">
-                                        <td><input type="checkbox" name="selected_items" value="{{ contact.id }}" class="contact-checkbox"></td>
+                                    {% for application in applications %}
+                                    <tr>
+                                        <td><input type="checkbox" name="selected_items" value="{{ application.id }}" class="application-checkbox"></td>
                                         <td>
-                                            <strong>{{ contact.first_name }} {{ contact.last_name }}</strong>
-                                            {% if not contact.is_read %}
-                                                <i class="fas fa-circle text-warning ms-1" style="font-size: 0.5rem;" title="Unread"></i>
-                                            {% endif %}
+                                            <strong>{{ application.first_name }} {{ application.last_name }}</strong><br>
+                                            <small class="text-muted">{{ application.email }}</small>
                                         </td>
-                                        <td>{{ contact.email }}</td>
-                                        <td>{{ contact.get_subject_display }}</td>
-                                        <td>{{ contact.company|default:"-" }}</td>
+                                        <td>{{ application.career.title }}</td>
+                                        <td>{{ application.get_experience_years_display }}</td>
                                         <td>
-                                            {% if contact.is_read %}
-                                                <span class="badge bg-success">Read</span>
-                                            {% else %}
-                                                <span class="badge bg-warning">Unread</span>
-                                            {% endif %}
+                                            <span class="badge bg-{% if application.status == 'pending' %}warning{% elif application.status == 'hired' %}success{% elif application.status == 'rejected' %}danger{% else %}info{% endif %}">
+                                                {{ application.get_status_display }}
+                                            </span>
                                         </td>
-                                        <td>{{ contact.created_at|date:"M d, Y H:i" }}</td>
+                                        <td>{{ application.created_at|date:"M d, Y H:i" }}</td>
                                         <td>
-                                            <a href="{% url 'admin_contact_detail' contact.id %}" class="btn btn-sm btn-outline-primary">
+                                            <a href="{% url 'admin_application_detail' application.id %}" class="btn btn-sm btn-outline-primary">
                                                 <i class="fas fa-eye"></i> View
                                             </a>
                                         </td>
@@ -125,9 +131,9 @@
                         </div>
                     {% else %}
                         <div class="text-center py-5">
-                            <i class="fas fa-envelope fa-3x text-muted mb-3"></i>
-                            <h5 class="text-muted">No contact forms yet</h5>
-                            <p class="text-muted">Contact form submissions will appear here.</p>
+                            <i class="fas fa-briefcase fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No job applications yet</h5>
+                            <p class="text-muted">Applications will appear here when candidates apply for positions.</p>
                         </div>
                     {% endif %}
                 </div>
@@ -144,7 +150,7 @@ function toggleBulkActions() {
 
 // Select all functionality
 document.getElementById('selectAll').addEventListener('change', function() {
-    const checkboxes = document.querySelectorAll('.contact-checkbox');
+    const checkboxes = document.querySelectorAll('.application-checkbox');
     checkboxes.forEach(checkbox => {
         checkbox.checked = this.checked;
     });
@@ -152,10 +158,10 @@ document.getElementById('selectAll').addEventListener('change', function() {
 
 // Add selected items to bulk form
 document.querySelector('form[action="{% url 'admin_bulk_actions' %}"]').addEventListener('submit', function(e) {
-    const selectedCheckboxes = document.querySelectorAll('.contact-checkbox:checked');
+    const selectedCheckboxes = document.querySelectorAll('.application-checkbox:checked');
     if (selectedCheckboxes.length === 0) {
         e.preventDefault();
-        alert('Please select at least one contact.');
+        alert('Please select at least one application.');
         return;
     }
     

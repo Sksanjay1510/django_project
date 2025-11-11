@@ -1,231 +1,348 @@
 {% extends "home/base.html" %}
 {% load static %}
 {% block content %}
+
 <!-- Hero Section -->
-<div class="hero-section bg-gradient-primary text-white py-5 mb-5">
+<div class="hero-section py-5 mb-5" style="background-color: #ffffff;">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h1 class="display-4 fw-bold mb-4">Join Our Team</h1>
-                <p class="lead mb-4">Help shape the future of digital transformation and Industry 4.0 solutions!</p>
-                <p class="mb-4">We're looking for passionate individuals who want to make a difference in the world of industrial automation and smart manufacturing.</p>
+            <div class="col-lg-8" data-aos="fade-right">
+                <h1 class="display-4 fw-bold mb-4" style="color: #000000;" data-aos="fade-up" data-aos-delay="200">Build Your Career with Tecosoft</h1>
+                <p class="lead mb-4" style="color: #333333;" data-aos="fade-up" data-aos-delay="400">Join our innovative team and help revolutionize Industry 4.0 solutions worldwide</p>
+                <div class="d-flex gap-3 mb-4 flex-column flex-md-row" data-aos="fade-up" data-aos-delay="600">
+                    <a href="#openings" class="btn btn-dark btn-lg">View Open Positions</a>
+                    <a href="#culture" class="btn btn-outline-dark btn-lg">Our Culture</a>
+                </div>
             </div>
-            <div class="col-lg-4 text-center">
+            <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-delay="300">
                 <div class="hero-icon">
-                    <i class="fas fa-users fa-5x text-light"></i>
+                    <i class="fas fa-briefcase fa-5x" style="color: #000000;"></i>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Why Work With Us -->
-<div class="container mb-5">
+<!-- Company Culture -->
+<div class="container mb-5" id="culture">
     <div class="row text-center mb-5">
         <div class="col-lg-8 mx-auto">
-            <h2 class="display-5 fw-bold mb-3">Why Work With Us?</h2>
-            <p class="lead text-muted">Discover what makes Tecosoft an amazing place to grow your career</p>
+            <h2 class="display-5 fw-bold mb-3">Why Choose Tecosoft?</h2>
+            <p class="lead">Join a team that's revolutionizing industrial automation and shaping the future of manufacturing</p>
         </div>
     </div>
+    
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6 mb-4">
+            <h3 class="mb-4">Innovation at Our Core</h3>
+            <p class="mb-3">At Tecosoft, you'll work on cutting-edge Industry 4.0 solutions that transform how manufacturers operate. From IoT gateways like Eagle Pro to advanced digital twin platforms, your work directly impacts global industrial efficiency.</p>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Work with latest IoT and AI technologies</li>
+                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Collaborate with industry-leading engineers</li>
+                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Shape the future of smart manufacturing</li>
+                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Access to continuous learning resources</li>
+            </ul>
+        </div>
+        <div class="col-lg-6 text-center">
+            <div class="rounded p-4" style="background-color: #f8f9fa;">
+                <i class="fas fa-cogs fa-5x text-primary mb-3"></i>
+                <h5>Industry 4.0 Leaders</h5>
+                <p class="text-muted">Pioneering the next generation of industrial automation</p>
+            </div>
+        </div>
+    </div>
+    
     <div class="row">
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-<div class="text-gradient-primary mb-3">
-                        <i class="fas fa-rocket fa-3x"></i>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body p-4">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                        <i class="fas fa-users fa-2x"></i>
                     </div>
-                    <h5 class="card-title">Innovation Culture</h5>
-                    <p class="card-text text-muted">Work on cutting-edge technologies and be part of the Industry 4.0 revolution.</p>
+                    <h5 class="card-title">Collaborative Environment</h5>
+                    <p class="card-text">Work with cross-functional teams of engineers, data scientists, and product managers in an open, collaborative culture.</p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-success mb-3">
-                        <i class="fas fa-graduation-cap fa-3x"></i>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body p-4">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                        <i class="fas fa-chart-line fa-2x"></i>
                     </div>
-                    <h5 class="card-title">Learning & Growth</h5>
-                    <p class="card-text text-muted">Continuous learning opportunities and career development programs.</p>
+                    <h5 class="card-title">Career Growth</h5>
+                    <p class="card-text">Clear career progression paths, mentorship programs, and opportunities to lead innovative projects and teams.</p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-info mb-3">
-                        <i class="fas fa-heart fa-3x"></i>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body p-4">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                        <i class="fas fa-balance-scale fa-2x"></i>
                     </div>
                     <h5 class="card-title">Work-Life Balance</h5>
-                    <p class="card-text text-muted">Flexible working hours and remote work options to maintain your well-being.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-warning mb-3">
-                        <i class="fas fa-globe fa-3x"></i>
-                    </div>
-                    <h5 class="card-title">Global Impact</h5>
-                    <p class="card-text text-muted">Your work will impact industries worldwide and drive sustainable change.</p>
+                    <p class="card-text">Flexible working arrangements, remote options, and a culture that values both professional excellence and personal well-being.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Current Openings -->
-<div class="bg-gradient-primary text-white py-5 mb-5">
-    <div class="container">
-        <div class="row text-center mb-5">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="display-5 fw-bold mb-3">Current Openings</h2>
-                <p class="lead text-muted">Explore exciting opportunities to join our dynamic team</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-<h5 class="card-title text-gradient-primary mb-0">Senior Software Engineer</h5>
-                            <span class="badge bg-success">Full-time</span>
-                        </div>
-                        <p class="text-muted mb-3">Join our core development team to build scalable IoT solutions and digital twin platforms.</p>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Remote/Hybrid</small>
-                            </div>
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-clock me-1"></i>5+ years exp.</small>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <span class="badge bg-gradient-primary text-white me-1">Python</span>
-                            <span class="badge bg-gradient-primary text-white me-1">IoT</span>
-                            <span class="badge bg-gradient-primary text-white me-1">Cloud</span>
-                        </div>
-<a href="#apply" class="btn btn-gradient-primary">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-<h5 class="card-title text-gradient-primary mb-0">Data Scientist</h5>
-                            <span class="badge bg-success">Full-time</span>
-                        </div>
-                        <p class="text-muted mb-3">Develop machine learning models for predictive analytics and industrial automation.</p>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Remote/Hybrid</small>
-                            </div>
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-clock me-1"></i>3+ years exp.</small>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <span class="badge bg-gradient-primary text-white me-1">ML</span>
-                            <span class="badge bg-gradient-primary text-white me-1">Python</span>
-                            <span class="badge bg-gradient-primary text-white me-1">TensorFlow</span>
-                        </div>
-<a href="#apply" class="btn btn-gradient-primary">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-<h5 class="card-title text-gradient-primary mb-0">IoT Hardware Engineer</h5>
-                            <span class="badge bg-success">Full-time</span>
-                        </div>
-                        <p class="text-muted mb-3">Design and develop IoT devices and sensors for industrial applications.</p>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>On-site</small>
-                            </div>
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-clock me-1"></i>4+ years exp.</small>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <span class="badge bg-gradient-primary text-white me-1">Embedded</span>
-                            <span class="badge bg-gradient-primary text-white me-1">C/C++</span>
-                            <span class="badge bg-gradient-primary text-white me-1">PCB Design</span>
-                            <span class="badge bg-gradient-primary text-white me-1">Python Developers</span>
-                        </div>
-<a href="#apply" class="btn btn-gradient-primary">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-<h5 class="card-title text-gradient-primary mb-0">Product Manager</h5>
-                            <span class="badge bg-success">Full-time</span>
-                        </div>
-                        <p class="text-muted mb-3">Lead product strategy and roadmap for our Industry 4.0 solutions.</p>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Remote/Hybrid</small>
-                            </div>
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-clock me-1"></i>6+ years exp.</small>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <span class="badge bg-gradient-primary text-white me-1">Product</span>
-                            <span class="badge bg-gradient-primary text-white me-1">Strategy</span>
-                            <span class="badge bg-gradient-primary text-white me-1">IoT</span>
-                        </div>
-<a href="#apply" class="btn btn-gradient-primary">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Application Form -->
-<div class="container mb-5" id="apply">
-    <div class="row">
+<!-- Open Positions -->
+<div class="container mb-5" id="openings">
+    <div class="row text-center mb-5">
         <div class="col-lg-8 mx-auto">
-            <div class="card border-0 shadow-lg">
-                <div class="card-body p-5">
-                    <h2 class="text-center mb-4">Apply for a Position</h2>
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" required>
+            <h2 class="display-5 fw-bold mb-3">Open Positions</h2>
+            <p class="lead">Join our team and help build the future of industrial automation</p>
+        </div>
+    </div>
+    
+    <!-- Job Listings -->
+    <div class="row">
+        {% if careers %}
+            {% for career in careers %}
+            <div class="col-12 mb-4">
+                <div class="card border-0 shadow-sm job-card">
+                    <div class="card-body p-4">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h4 class="mb-1">{{ career.title }}</h4>
+                                        <p class="text-muted mb-2">{{ career.get_experience_level_display }} • {{ career.get_job_type_display|title }} • {{ career.location }}</p>
+                                        <p class="mb-3">{{ career.description|truncatechars:120 }}</p>
+                                    </div>
+                                    {% if career.is_featured %}
+                                        <span class="badge bg-success fs-6">Featured</span>
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3">
+                                    <span class="badge bg-secondary me-1">{{ career.get_experience_level_display }}</span>
+                                    <span class="badge bg-info me-1">{{ career.get_job_type_display|title }}</span>
+                                    {% if career.salary_range %}
+                                        <span class="badge bg-success me-1">{{ career.salary_range }}</span>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" required>
+                            <div class="col-lg-4 text-end">
+                                <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#jobModal{{ career.id }}">View Details</button>
+                                <br>
+                                <button class="btn btn-primary apply-btn" data-bs-toggle="modal" data-bs-target="#applyModal" data-position="{{ career.title }}">Apply Now</button>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" required>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-briefcase fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No Open Positions</h5>
+                    <p class="text-muted">We don't have any open positions at the moment, but we're always looking for talented individuals. Please check back soon!</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div><!
+-- Job Detail Modals -->
+<!-- Dynamic Job Detail Modals -->
+{% for career in careers %}
+<div class="modal fade" id="jobModal{{ career.id }}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ career.title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <p><strong>Location:</strong> {{ career.location }}</p>
+                        <p><strong>Type:</strong> {{ career.get_job_type_display|title }}</p>
+                        <p><strong>Experience Level:</strong> {{ career.get_experience_level_display }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        {% if career.salary_range %}
+                            <p><strong>Salary:</strong> {{ career.salary_range }}</p>
+                        {% else %}
+                            <p><strong>Salary:</strong> Competitive</p>
+                        {% endif %}
+                        <p><strong>Posted:</strong> {{ career.created_at|timesince }} ago</p>
+                        <p><strong>Status:</strong> 
+                            {% if career.is_active %}
+                                <span class="badge bg-success">Active</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Inactive</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                
+                <h6>About the Role</h6>
+                <p>{{ career.description|linebreaks }}</p>
+                
+                <h6>Requirements</h6>
+                <div>{{ career.requirements|linebreaks }}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary apply-btn" data-bs-toggle="modal" data-bs-target="#applyModal" data-position="{{ career.title }}" data-bs-dismiss="modal">Apply for this Position</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!-- Data Scientist Modal -->
+<div class="modal fade" id="jobModal2" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Data Scientist</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <p><strong>Department:</strong> Data & Analytics</p>
+                        <p><strong>Location:</strong> Remote/Hybrid</p>
+                        <p><strong>Type:</strong> Full-time</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Experience:</strong> 3+ years</p>
+                        <p><strong>Salary:</strong> Competitive</p>
+                        <p><strong>Posted:</strong> 1 week ago</p>
+                    </div>
+                </div>
+                
+                <h6>About the Role</h6>
+                <p>Develop cutting-edge machine learning models for predictive analytics in industrial environments. Drive data-driven insights that help our clients optimize their manufacturing operations.</p>
+                
+                <h6>Key Responsibilities</h6>
+                <ul>
+                    <li>Build predictive models for equipment maintenance and failure prediction</li>
+                    <li>Analyze industrial sensor data to identify optimization opportunities</li>
+                    <li>Develop anomaly detection systems for manufacturing processes</li>
+                    <li>Create data visualization dashboards for client reporting</li>
+                    <li>Collaborate with engineering teams on model deployment</li>
+                </ul>
+                
+                <h6>Required Skills</h6>
+                <ul>
+                    <li>3+ years of data science experience</li>
+                    <li>Strong Python skills (pandas, scikit-learn, TensorFlow/PyTorch)</li>
+                    <li>Experience with time series analysis and forecasting</li>
+                    <li>Knowledge of statistical modeling and machine learning</li>
+                    <li>SQL and database querying skills</li>
+                    <li>Experience with industrial data is a plus</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary apply-btn" data-bs-toggle="modal" data-bs-target="#applyModal" data-position="Data Scientist" data-bs-dismiss="modal">Apply for this Position</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- IoT Hardware Engineer Modal -->
+<div class="modal fade" id="jobModal3" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">IoT Hardware Engineer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <p><strong>Department:</strong> Hardware Engineering</p>
+                        <p><strong>Location:</strong> On-site</p>
+                        <p><strong>Type:</strong> Full-time</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Experience:</strong> 4+ years</p>
+                        <p><strong>Salary:</strong> Competitive</p>
+                        <p><strong>Posted:</strong> 3 days ago</p>
+                    </div>
+                </div>
+                
+                <h6>About the Role</h6>
+                <p>Design and develop innovative IoT devices including our Eagle Pro and Eagle Mini gateways. Work on next-generation sensors and industrial-grade hardware solutions.</p>
+                
+                <h6>Key Responsibilities</h6>
+                <ul>
+                    <li>Design PCB layouts for IoT gateway devices</li>
+                    <li>Develop embedded firmware for industrial sensors</li>
+                    <li>Test and validate hardware prototypes</li>
+                    <li>Collaborate with software teams on device integration</li>
+                    <li>Ensure compliance with industrial standards and certifications</li>
+                </ul>
+                
+                <h6>Required Skills</h6>
+                <ul>
+                    <li>4+ years of embedded systems development</li>
+                    <li>Strong C/C++ programming skills</li>
+                    <li>PCB design experience (Altium Designer, KiCad)</li>
+                    <li>Knowledge of IoT communication protocols</li>
+                    <li>Experience with microcontrollers (ARM, ESP32)</li>
+                    <li>Understanding of industrial environments and requirements</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary apply-btn" data-bs-toggle="modal" data-bs-target="#applyModal" data-position="IoT Hardware Engineer" data-bs-dismiss="modal">Apply for this Position</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Application Modal -->
+<div class="modal fade" id="applyModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Apply for Position</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="applicationForm" method="post" enctype="multipart/form-data" action="{% url 'career' %}">
+                    {% csrf_token %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Position:</strong> <span id="selectedPosition">Please select a position</span>
+                    </div>
+                    
+                    <input type="hidden" name="selectedPosition" id="hiddenSelectedPosition" value="">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">First Name *</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="position" class="form-label">Position of Interest</label>
-                            <select class="form-select" id="position" required>
-                                <option value="">Select a position</option>
-                                <option value="senior-software-engineer">Senior Software Engineer</option>
-                                <option value="data-scientist">Data Scientist</option>
-                                <option value="iot-hardware-engineer">IoT Hardware Engineer</option>
-                                <option value="product-manager">Product Manager</option>
-                                <option value="other">Other</option>
-                            </select>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Last Name *</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="experience" class="form-label">Years of Experience</label>
-                            <select class="form-select" id="experience" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="experience" class="form-label">Years of Experience *</label>
+                            <select class="form-select" id="experience" name="experience" required>
                                 <option value="">Select experience level</option>
                                 <option value="0-2">0-2 years</option>
                                 <option value="3-5">3-5 years</option>
@@ -233,18 +350,91 @@
                                 <option value="10+">10+ years</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Why would you like to join Tecosoft?</label>
-                            <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your interest in our company and the role..."></textarea>
+                        <div class="col-md-6 mb-3">
+                            <label for="location" class="form-label">Current Location</label>
+                            <input type="text" class="form-control" id="location" name="location" placeholder="City, Country">
                         </div>
-                        <div class="mb-3">
-                            <label for="resume" class="form-label">Resume/CV</label>
-                            <input type="file" class="form-control" id="resume" accept=".pdf,.doc,.docx">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="resume" class="form-label">Resume/CV *</label>
+                        <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                        <div class="form-text">Please upload your resume in PDF, DOC, or DOCX format (max 5MB)</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="coverLetter" class="form-label">Cover Letter</label>
+                        <textarea class="form-control" id="coverLetter" name="coverLetter" rows="4" placeholder="Tell us why you're interested in this position and what makes you a great fit for Tecosoft..."></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="portfolio" class="form-label">Portfolio/LinkedIn URL</label>
+                        <input type="url" class="form-control" id="portfolio" name="portfolio" placeholder="https://linkedin.com/in/yourprofile">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="consent" name="consent" required>
+                            <label class="form-check-label" for="consent">
+                                I consent to Tecosoft processing my personal data for recruitment purposes *
+                            </label>
                         </div>
-                        <div class="text-center">
-<button type="submit" class="btn btn-gradient-primary btn-lg">Submit Application</button>
-                        </div>
-                    </form>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="applicationForm" class="btn btn-primary">Submit Application</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Application Process -->
+<div class="py-5 mb-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-3">Our Hiring Process</h2>
+                <p class="lead">A transparent, efficient process designed to find the best fit for both you and our team</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4 text-center">
+                <div class="position-relative">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background-color: #000000; color: #ffffff;">
+                        <span class="fs-3 fw-bold">1</span>
+                    </div>
+                    <h5 class="mb-3">Application Review</h5>
+                    <p class="text-muted">Submit your application and we'll review your qualifications within 3-5 business days.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 text-center">
+                <div class="position-relative">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background-color: #000000; color: #ffffff;">
+                        <span class="fs-3 fw-bold">2</span>
+                    </div>
+                    <h5 class="mb-3">Initial Interview</h5>
+                    <p class="text-muted">Phone or video call with our HR team to discuss your background and interest in the role.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 text-center">
+                <div class="position-relative">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background-color: #000000; color: #ffffff;">
+                        <span class="fs-3 fw-bold">3</span>
+                    </div>
+                    <h5 class="mb-3">Technical Assessment</h5>
+                    <p class="text-muted">Technical interview or coding challenge relevant to the position and our technology stack.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 text-center">
+                <div class="position-relative">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background-color: #000000; color: #ffffff;">
+                        <span class="fs-3 fw-bold">4</span>
+                    </div>
+                    <h5 class="mb-3">Final Interview</h5>
+                    <p class="text-muted">Meet with the team lead and discuss how you'll contribute to our mission and culture.</p>
                 </div>
             </div>
         </div>
@@ -256,13 +446,13 @@
     <div class="row text-center mb-5">
         <div class="col-lg-8 mx-auto">
             <h2 class="display-5 fw-bold mb-3">Employee Benefits</h2>
-            <p class="lead text-muted">We take care of our team with comprehensive benefits</p>
+            <p class="lead">We take care of our team with comprehensive benefits</p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="text-center">
-<div class="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background-color: #000000; color: #ffffff;">
                     <i class="fas fa-medkit fa-2x"></i>
                 </div>
                 <h5 class="mb-3">Health & Wellness</h5>
@@ -271,7 +461,7 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="text-center">
-                <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background-color: #000000; color: #ffffff;">
                     <i class="fas fa-coins fa-2x"></i>
                 </div>
                 <h5 class="mb-3">Competitive Salary</h5>
@@ -280,7 +470,7 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="text-center">
-                <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background-color: #000000; color: #ffffff;">
                     <i class="fas fa-calendar-alt fa-2x"></i>
                 </div>
                 <h5 class="mb-3">Flexible Time Off</h5>
@@ -290,6 +480,137 @@
     </div>
 </div>
 
+<!-- Call to Action -->
+<div class="container text-center mb-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="mb-4">Ready to Join Our Team?</h2>
+            <p class="lead mb-4">Don't see a position that matches your skills? We're always looking for talented individuals to join our growing team.</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="#openings" class="btn btn-primary btn-lg">View Open Positions</a>
+                <a href="mailto:careers@tecosoft.com" class="btn btn-outline-primary btn-lg">Send Us Your Resume</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Modal Functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle Apply Now button clicks
+    const applyButtons = document.querySelectorAll('.apply-btn');
+    const selectedPositionSpan = document.getElementById('selectedPosition');
+    
+    applyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const position = this.getAttribute('data-position');
+            if (position && selectedPositionSpan) {
+                selectedPositionSpan.textContent = position;
+                // Also set the hidden field value
+                const hiddenField = document.getElementById('hiddenSelectedPosition');
+                if (hiddenField) {
+                    hiddenField.value = position;
+                }
+            }
+        });
+    });
+    
+    // Handle form submission
+    const applicationForm = document.getElementById('applicationForm');
+    if (applicationForm) {
+        applicationForm.addEventListener('submit', function(e) {
+            // Basic form validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+            
+            // Check if position is selected
+            const hiddenPosition = document.getElementById('hiddenSelectedPosition');
+            if (!hiddenPosition || !hiddenPosition.value) {
+                alert('Please select a position first by clicking "Apply Now" on one of the job listings.');
+                e.preventDefault();
+                return;
+            }
+            
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                e.preventDefault();
+                return;
+            }
+            
+            // If validation passes, let the form submit normally
+            // The success message will be shown after page reload via Django messages
+        });
+    }
+    
+    // File upload validation
+    const resumeInput = document.getElementById('resume');
+    if (resumeInput) {
+        resumeInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const maxSize = 5 * 1024 * 1024; // 5MB
+                const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+                
+                if (file.size > maxSize) {
+                    alert('File size must be less than 5MB');
+                    this.value = '';
+                    return;
+                }
+                
+                if (!allowedTypes.includes(file.type)) {
+                    alert('Please upload a PDF, DOC, or DOCX file');
+                    this.value = '';
+                    return;
+                }
+            }
+        });
+    }
+});
+</script>
+
+<!-- Custom CSS for job cards -->
+<style>
+.job-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.job-card:hover {
+    border-left-color: #0d6efd;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.modal-body h6 {
+    color: #0d6efd;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-body ul {
+    padding-left: 1.2rem;
+}
+
+.modal-body ul li {
+    margin-bottom: 0.3rem;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+</style>
+
 <!-- Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-{% endblock %} 
+
+{% endblock %}

@@ -94,3 +94,587 @@
     z-index: 2;
     border-color: #e50914;
 }
+
+/* Animations for individual product pages */
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.btn-anim {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-anim:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+/* Advanced Animation System */
+
+/* Hero Icon Animations */
+.hero-icon {
+    animation: heroFloat 4s ease-in-out infinite;
+    position: relative;
+}
+
+.hero-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: heroPulse 3s ease-in-out infinite;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+@keyframes heroFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(5deg); }
+    50% { transform: translateY(-25px) rotate(0deg); }
+    75% { transform: translateY(-15px) rotate(-5deg); }
+}
+
+@keyframes heroPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.1; }
+}
+
+/* Advanced Card Animations */
+.card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.6s;
+}
+
+.card:hover::after {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-15px) rotateX(10deg) rotateY(5deg);
+    box-shadow: 
+        0 25px 50px rgba(102, 126, 234, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Magnetic Button Effect */
+.btn-magnetic {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+}
+
+.btn-magnetic:hover {
+    transform: translateY(-3px);
+}
+
+.btn-magnetic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: inherit;
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+.btn-magnetic:hover::before {
+    transform: scale(1.1);
+    opacity: 0.7;
+    filter: blur(10px);
+}
+
+/* Morphing Icons */
+.icon-morph {
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: inline-block;
+}
+
+.icon-morph:hover {
+    transform: rotate(360deg) scale(1.3);
+    filter: drop-shadow(0 0 15px currentColor) hue-rotate(90deg);
+}
+
+/* Text Reveal Animation */
+.text-reveal {
+    position: relative;
+    overflow: hidden;
+}
+
+.text-reveal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.text-reveal.animate::before {
+    transform: translateX(100%);
+}
+
+/* Professional Particle System */
+.particle-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: radial-gradient(circle, rgba(30, 60, 114, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: particleMove 18s linear infinite;
+}
+
+@keyframes particleMove {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Glitch Effect */
+.glitch {
+    position: relative;
+    animation: glitch 2s linear infinite;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    animation: glitchTop 1s linear infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+.glitch::after {
+    animation: glitchBottom 1.5s linear infinite;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch {
+    2%, 64% { transform: translate(2px, 0) skew(0deg); }
+    4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+    62% { transform: translate(0, 0) skew(5deg); }
+}
+
+@keyframes glitchTop {
+    2%, 64% { transform: translate(2px, -2px); }
+    4%, 60% { transform: translate(-2px, 2px); }
+    62% { transform: translate(13px, -1px) skew(-13deg); }
+}
+
+@keyframes glitchBottom {
+    2%, 64% { transform: translate(-2px, 0); }
+    4%, 60% { transform: translate(-2px, 0); }
+    62% { transform: translate(-22px, 5px) skew(21deg); }
+}
+
+/* Professional Subtle Glow */
+.professional-glow {
+    text-shadow: 
+        0 0 3px rgba(50, 130, 184, 0.3),
+        0 0 6px rgba(50, 130, 184, 0.2),
+        0 0 9px rgba(50, 130, 184, 0.1);
+    transition: text-shadow 0.3s ease;
+}
+
+.professional-glow:hover {
+    text-shadow: 
+        0 0 5px rgba(50, 130, 184, 0.5),
+        0 0 10px rgba(50, 130, 184, 0.3),
+        0 0 15px rgba(50, 130, 184, 0.2);
+}
+
+/* Liquid Button Effect */
+.btn-liquid {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-liquid::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    transition: all 0.5s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-liquid:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Typewriter Effect */
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid rgba(102, 126, 234, 0.75);
+    white-space: nowrap;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: rgba(102, 126, 234, 0.75); }
+}
+
+/* 3D Flip Cards */
+.flip-card {
+    background-color: transparent;
+    perspective: 1000px;
+    height: 300px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced Mobile Animations */
+@media (max-width: 768px) {
+    .card:hover {
+        transform: translateY(-8px) rotateX(5deg);
+    }
+    
+    .hero-icon {
+        animation-duration: 5s;
+    }
+    
+    .btn-magnetic:hover {
+        transform: translateY(-2px);
+    }
+    
+    .icon-morph:hover {
+        transform: rotate(180deg) scale(1.2);
+    }
+}
+
+/* Performance Optimizations */
+.card, .btn, .icon-morph, .hero-icon {
+    will-change: transform;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}/* Profe
+ssional Card Enhancements */
+.professional-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(50, 130, 184, 0.15);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.professional-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(50, 130, 184, 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.professional-card:hover::before {
+    opacity: 1;
+}
+
+.professional-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(50, 130, 184, 0.3);
+    box-shadow: 
+        0 15px 35px rgba(30, 60, 114, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Professional Button Styles */
+.btn-professional {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border: 1px solid rgba(50, 130, 184, 0.3);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-professional::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-professional:hover::before {
+    left: 100%;
+}
+
+.btn-professional:hover {
+    background: linear-gradient(135deg, #2a5298 0%, #3282b8 100%);
+    border-color: rgba(50, 130, 184, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 60, 114, 0.3);
+    color: white;
+}
+
+.btn-professional-outline {
+    background: transparent;
+    border: 2px solid rgba(50, 130, 184, 0.6);
+    color: #3282b8;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-professional-outline:hover {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border-color: #3282b8;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 60, 114, 0.2);
+}
+
+/* Professional Icon Styles */
+.professional-icon {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border: 2px solid rgba(50, 130, 184, 0.2);
+    transition: all 0.3s ease;
+}
+
+.professional-icon:hover {
+    background: linear-gradient(135deg, #2a5298 0%, #3282b8 100%);
+    border-color: rgba(50, 130, 184, 0.4);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(30, 60, 114, 0.3);
+}
+
+/* Professional Typography */
+.professional-heading {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.professional-subheading {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #5a6c7d;
+}
+
+.professional-text {
+    line-height: 1.6;
+    color: #8b9dc3;
+}
+
+/* Professional Navbar Enhancement - Moved to base.html */
+
+/* Professional Footer */
+.footer-professional {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 100%);
+    border-top: 1px solid rgba(50, 130, 184, 0.1);
+}
+
+.footer-professional::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(50, 130, 184, 0.3), transparent);
+}/*
+ Universal Black Text Override for Entire Website */
+*, *::before, *::after {
+    color: #000000 !important;
+}
+
+/* Ensure all text elements are black */
+body, html {
+    color: #000000 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
+}
+
+p, span, div, a, li, ul, ol, td, th, label, input, textarea, select, option {
+    color: #000000 !important;
+}
+
+/* Button text colors */
+.btn, .btn-primary, .btn-secondary, .btn-success, .btn-danger, .btn-warning, .btn-info, .btn-light, .btn-dark,
+.btn-outline-primary, .btn-outline-secondary, .btn-outline-success, .btn-outline-danger, .btn-outline-warning, .btn-outline-info {
+    color: #000000 !important;
+}
+
+/* Card text colors */
+.card, .card-body, .card-title, .card-text, .card-header, .card-footer, .card-subtitle {
+    color: #000000 !important;
+}
+
+/* Form text colors */
+.form-control, .form-label, .form-text, .form-check-label, .form-select, .form-floating label {
+    color: #000000 !important;
+}
+
+/* Navigation text colors */
+.nav-link, .navbar-nav .nav-link, .navbar-brand, .nav-item, .dropdown-item {
+    color: #000000 !important;
+}
+
+/* Footer text colors */
+footer, footer *, .footer-professional, .footer-professional * {
+    color: #000000 !important;
+}
+
+/* Table text colors */
+.table, .table td, .table th, .table-striped, .table-bordered {
+    color: #000000 !important;
+}
+
+/* Alert text colors */
+.alert, .alert-primary, .alert-secondary, .alert-success, .alert-danger, .alert-warning, .alert-info {
+    color: #000000 !important;
+}
+
+/* Modal text colors */
+.modal, .modal-body, .modal-header, .modal-footer, .modal-title {
+    color: #000000 !important;
+}
+
+/* Badge text colors */
+.badge, .badge-primary, .badge-secondary, .badge-success, .badge-danger, .badge-warning, .badge-info {
+    color: #000000 !important;
+}
+
+/* Breadcrumb text colors */
+.breadcrumb, .breadcrumb-item {
+    color: #000000 !important;
+}
+
+/* Pagination text colors */
+.pagination, .page-link, .page-item {
+    color: #000000 !important;
+}
+
+/* List group text colors */
+.list-group, .list-group-item {
+    color: #000000 !important;
+}
+
+/* Override any remaining text colors */
+.text-primary, .text-secondary, .text-success, .text-danger, .text-warning, .text-info, .text-light, .text-dark, .text-muted {
+    color: #000000 !important;
+}
+
+/* Ensure placeholder text is visible */
+::placeholder {
+    color: #666666 !important;
+    opacity: 1;
+}
+
+/* Ensure focus states maintain black text */
+:focus, :active, :hover {
+    color: #000000 !important;
+}

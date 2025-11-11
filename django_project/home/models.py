@@ -79,7 +79,7 @@ class Contact(models.Model):
         choices=[
             ('general', 'General Inquiry'),
             ('sales', 'Sales & Pricing'),
-            ('support', 'Technical Support'),
+            ('support', 'Technical Support'), 
             ('demo', 'Request Demo'),
             ('partnership', 'Partnership'),
             ('other', 'Other'),
@@ -137,7 +137,7 @@ class Career(models.Model):
         verbose_name = "Career"
         verbose_name_plural = "Careers"
         ordering = ['-created_at']
-    
+  
     def __str__(self):
         return f"{self.title} - {self.location}"
 
@@ -183,6 +183,40 @@ class JobApplication(models.Model):
     
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.career.title}"
+    
+    def save(self, *args, **kwargs):
+        # Check if status is being updated
+        if self.pk:
+            old_instance = JobApplication.objects.get(pk=self.pk)
+            if old_instance.status != self.status:
+                self.create_status_notification(old_instance.status, self.status)
+        
+        super().save(*args, **kwargs)
+    
+    def create_status_notification(self, old_status, new_status):
+        """Create notification when application status changes"""
+        try:
+            user = User.objects.get(email=self.email)
+        except User.DoesNotExist:
+            user = None
+        
+        status_messages = {
+            'pending': 'Your application is being reviewed',
+            'reviewed': 'Your application has been reviewed',
+            'shortlisted': 'Congratulations! You have been shortlisted',
+            'interviewed': 'Thank you for the interview',
+            'hired': 'Congratulations! You have been selected for the position',
+            'rejected': 'Thank you for your interest. We have decided to move forward with other candidates'
+        }
+        
+        Notification.objects.create(
+            user=user,
+            email=self.email,
+            notification_type='status_update',
+            title=f'Application Status Update: {self.career.title}',
+            message=f'Your application status has been updated to "{self.get_status_display()}". {status_messages.get(new_status, "")}',
+            job_application=self
+        )
 
 class Newsletter(models.Model):
     """Newsletter subscriptions"""
@@ -248,6 +282,110 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question
 
+class Notification(models.Model):
+    """User notifications for admin replies and updates"""
+    NOTIFICATION_TYPES = [
+        ('job_reply', 'Job Application Reply'),
+        ('contact_reply', 'Contact Form Reply'),
+        ('status_update', 'Application Status Update'),
+        ('general', 'General Notification'),
+    ]
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications', null=True, blank=True)
+    email = models.EmailField(help_text="For non-registered users")
+    notification_type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES)
+    title = models.CharField(max_length=200)
+    message = models.TextField()
+    is_read = models.BooleanField(default=False)
+    job_application = models.ForeignKey('JobApplication', on_delete=models.CASCADE, null=True, blank=True)
+    contact = models.ForeignKey('Contact', on_delete=models.CASCADE, null=True, blank=True)
+    admin_reply = models.ForeignKey('AdminReply', on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Notification"
+        verbose_name_plural = "Notifications"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        if self.user:
+            return f"Notification for {self.user.username}: {self.title}"
+        else:
+            return f"Notification for {self.email}: {self.title}"
+
+class AdminReply(models.Model):
+    """Admin replies to job applications and contact forms"""
+    REPLY_TYPE_CHOICES = [
+        ('job_application', 'Job Application'),
+        ('contact', 'Contact Form'),
+    ]
+    
+    reply_type = models.CharField(max_length=20, choices=REPLY_TYPE_CHOICES)
+    job_application = models.ForeignKey(JobApplication, on_delete=models.CASCADE, null=True, blank=True, related_name='admin_replies')
+    contact = models.ForeignKey(Contact, on_delete=models.CASCADE, null=True, blank=True, related_name='admin_replies')
+    admin_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin_replies')
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    is_sent = models.BooleanField(default=False)
+    sent_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Admin Reply"
+        verbose_name_plural = "Admin Replies"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        if self.job_application:
+            return f"Reply to {self.job_application.first_name} {self.job_application.last_name}"
+        elif self.contact:
+            return f"Reply to {self.contact.first_name} {self.contact.last_name}"
+        return f"Admin Reply - {self.subject}"
+    
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        super().save(*args, **kwargs)
+        
+        # Create notification when reply is sent
+        if is_new and self.is_sent:
+            self.create_notification()
+    
+    def create_notification(self):
+        """Create a notification for the user when admin replies"""
+        if self.job_application:
+            # Try to find user by email
+            try:
+                user = User.objects.get(email=self.job_application.email)
+            except User.DoesNotExist:
+                user = None
+            
+            Notification.objects.create(
+                user=user,
+                email=self.job_application.email,
+                notification_type='job_reply',
+                title=f'Reply to your application for {self.job_application.career.title}',
+                message=f'We have sent you a reply regarding your application. Subject: {self.subject}',
+                job_application=self.job_application,
+                admin_reply=self
+            )
+        
+        elif self.contact:
+            # Try to find user by email
+            try:
+                user = User.objects.get(email=self.contact.email)
+            except User.DoesNotExist:
+                user = None
+            
+            Notification.objects.create(
+                user=user,
+                email=self.contact.email,
+                notification_type='contact_reply',
+                title=f'Reply to your contact inquiry',
+                message=f'We have responded to your inquiry about {self.contact.get_subject_display()}. Subject: {self.subject}',
+                contact=self.contact,
+                admin_reply=self
+            )
+
 class SiteSettings(models.Model):
     """Site-wide settings and configuration"""
     site_name = models.CharField(max_length=100, default="Tecosoft")
@@ -276,3 +414,9 @@ class SiteSettings(models.Model):
         if not self.pk and SiteSettings.objects.exists():
             return
         super().save(*args, **kwargs)
+    
+    @classmethod
+    def get_settings(cls):
+        """Get or create the single settings instance"""
+        settings, created = cls.objects.get_or_create(pk=1)
+        return settings

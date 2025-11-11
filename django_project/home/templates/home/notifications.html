@@ -1,0 +1,125 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}Notifications - Tecosoft{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Your Notifications</h2>
+                {% if unread_count > 0 %}
+                <a href="{% url 'mark_all_notifications_read' %}" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-check-double"></i> Mark All Read
+                </a>
+                {% endif %}
+            </div>
+
+            {% if notifications %}
+                <div class="notification-list">
+                    {% for notification in notifications %}
+                    <div class="card mb-3 {% if not notification.is_read %}border-primary{% endif %}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <h6 class="card-title mb-2">
+                                        {% if not notification.is_read %}
+                                            <span class="badge bg-primary me-2">New</span>
+                                        {% endif %}
+                                        {{ notification.title }}
+                                    </h6>
+                                    <p class="card-text">{{ notification.message }}</p>
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock"></i> {{ notification.created_at|date:"M d, Y H:i" }}
+                                        {% if notification.notification_type %}
+                                            | <span class="badge bg-secondary">{{ notification.get_notification_type_display }}</span>
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                <div class="ms-3">
+                                    {% if not notification.is_read %}
+                                    <form method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="notification_id" value="{{ notification.id }}">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary" title="Mark as read">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                    
+                                    {% if notification.job_application %}
+                                    <a href="{% url 'career' %}" class="btn btn-sm btn-outline-secondary ms-1" title="View Career Page">
+                                        <i class="fas fa-briefcase"></i>
+                                    </a>
+                                    {% elif notification.contact %}
+                                    <a href="{% url 'contact' %}" class="btn btn-sm btn-outline-secondary ms-1" title="View Contact Page">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Pagination if needed -->
+                {% if notifications.has_other_pages %}
+                <nav aria-label="Notifications pagination">
+                    <ul class="pagination justify-content-center">
+                        {% if notifications.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ notifications.previous_page_number }}">Previous</a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for num in notifications.paginator.page_range %}
+                            {% if notifications.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if notifications.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ notifications.next_page_number }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-bell-slash fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">No Notifications</h4>
+                    <p class="text-muted">You don't have any notifications yet.</p>
+                    <a href="{% url 'index' %}" class="btn btn-primary">
+                        <i class="fas fa-home"></i> Go to Homepage
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.notification-list .card {
+    transition: all 0.3s ease;
+}
+
+.notification-list .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.notification-list .border-primary {
+    border-left: 4px solid #0d6efd !important;
+}
+</style>
+{% endblock %}

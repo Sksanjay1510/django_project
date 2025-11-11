@@ -1,7 +1,343 @@
 {% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Help Center - Tecosoft{% endblock %}
+
 {% block content %}
-<div class="container py-5 text-center">
-    <h1 class="mb-4">Help Center</h1>
-    <p class="lead">Find answers to common questions and support resources here.</p>
+<!-- Hero Section -->
+<div class="hero-section py-5 mb-5" style="background-color: #ffffff;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <h1 class="display-4 fw-bold mb-4" style="color: #000000;" data-aos="fade-up" data-aos-delay="200">Help Center</h1>
+                <p class="lead mb-4" style="color: #333333;" data-aos="fade-up" data-aos-delay="400">Find answers to your questions and get the support you need</p>
+                <div class="d-flex gap-3 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <a href="#faq" class="btn btn-dark btn-lg">View FAQ</a>
+                    <a href="#contact-support" class="btn btn-outline-dark btn-lg">Contact Support</a>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-delay="300">
+                <div class="hero-icon">
+                    <i class="fas fa-question-circle fa-5x" style="color: #000000;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Help Cards -->
+<div class="container mb-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="display-5 fw-bold mb-3">How Can We Help You?</h2>
+            <p class="lead">Choose a category to find the information you need</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body p-4">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                        <i class="fas fa-user fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">Account & Login</h5>
+                    <p class="card-text">Help with signing in, creating accounts, and managing your profile.</p>
+                    <a href="#account-help" class="btn btn-outline-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body p-4">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                        <i class="fas fa-microchip fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">Products & Services</h5>
+                    <p class="card-text">Information about our IoT gateways, sensors, and Industry 4.0 solutions.</p>
+                    <a href="#products-help" class="btn btn-outline-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body p-4">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                        <i class="fas fa-cogs fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">Technical Support</h5>
+                    <p class="card-text">Technical assistance, troubleshooting, and device configuration help.</p>
+                    <a href="#technical-help" class="btn btn-outline-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="container mb-5" id="faq">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="display-5 fw-bold mb-3">Frequently Asked Questions</h2>
+            <p class="lead">Quick answers to common questions</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="accordion" id="faqAccordion">
+                <!-- Account & Login FAQ -->
+                <div class="accordion-item" id="account-help">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            <i class="fas fa-user me-2"></i>How do I create an account?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>To create an account:</p>
+                            <ol>
+                                <li>Click "Sign Up" in the top navigation</li>
+                                <li>Fill in your details (name, email, password)</li>
+                                <li>Choose your account type (Individual, Business, or Enterprise)</li>
+                                <li>Click "Create Account"</li>
+                                <li>Check your email for verification (if required)</li>
+                            </ol>
+                            <p>Once registered, you can access your dashboard and manage your IoT devices.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            <i class="fas fa-key me-2"></i>I forgot my password. How do I reset it?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>To reset your password:</p>
+                            <ol>
+                                <li>Go to the Sign In page</li>
+                                <li>Click "Forgot Password?"</li>
+                                <li>Enter your email address</li>
+                                <li>Check your email for reset instructions</li>
+                                <li>Follow the link to create a new password</li>
+                            </ol>
+                            <p>If you don't receive the email, check your spam folder or contact support.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Products FAQ -->
+                <div class="accordion-item" id="products-help">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            <i class="fas fa-microchip me-2"></i>What's the difference between Eagle Pro and Eagle Mini?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Eagle Pro ($2,999)</h6>
+                                    <ul>
+                                        <li>Enterprise-grade solution</li>
+                                        <li>High-performance processing</li>
+                                        <li>Advanced analytics capabilities</li>
+                                        <li>8GB RAM, 64GB storage</li>
+                                        <li>WiFi 6, 5G ready</li>
+                                        <li>Best for large operations</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Eagle Mini ($1,299)</h6>
+                                    <ul>
+                                        <li>Compact, cost-effective</li>
+                                        <li>Perfect for SMEs</li>
+                                        <li>Easy installation</li>
+                                        <li>2GB RAM, 16GB storage</li>
+                                        <li>WiFi 5, 4G LTE</li>
+                                        <li>Best for smaller operations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            <i class="fas fa-wifi me-2"></i>How do I set up my IoT gateway?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Setting up your Tecosoft IoT gateway:</p>
+                            <ol>
+                                <li><strong>Unbox and Connect:</strong> Connect power and ethernet cables</li>
+                                <li><strong>Initial Setup:</strong> Access the web interface at the device IP</li>
+                                <li><strong>Network Configuration:</strong> Configure WiFi or ethernet settings</li>
+                                <li><strong>Device Registration:</strong> Register with your Tecosoft account</li>
+                                <li><strong>Sensor Connection:</strong> Connect your industrial sensors</li>
+                                <li><strong>Data Configuration:</strong> Set up data collection parameters</li>
+                            </ol>
+                            <p>Detailed setup guides are available in our documentation section.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Support FAQ -->
+                <div class="accordion-item" id="technical-help">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            <i class="fas fa-tools me-2"></i>My device isn't connecting. What should I do?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Troubleshooting connection issues:</p>
+                            <ol>
+                                <li><strong>Check Power:</strong> Ensure device is properly powered</li>
+                                <li><strong>Network Status:</strong> Verify network connectivity</li>
+                                <li><strong>Firewall Settings:</strong> Check if ports are blocked</li>
+                                <li><strong>Device Status:</strong> Look for LED indicators</li>
+                                <li><strong>Restart Device:</strong> Power cycle the gateway</li>
+                                <li><strong>Contact Support:</strong> If issues persist, contact our technical team</li>
+                            </ol>
+                            <p>For immediate assistance, use our live chat or call our support hotline.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                            <i class="fas fa-chart-line me-2"></i>How do I access my data analytics?
+                        </button>
+                    </h2>
+                    <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Accessing your industrial data analytics:</p>
+                            <ol>
+                                <li>Log into your Tecosoft dashboard</li>
+                                <li>Navigate to "Analytics" section</li>
+                                <li>Select your device or facility</li>
+                                <li>Choose time range and metrics</li>
+                                <li>View real-time and historical data</li>
+                                <li>Export reports as needed</li>
+                            </ol>
+                            <p>Our analytics platform provides insights into efficiency, predictive maintenance, and operational optimization.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Support Section -->
+<div class="py-5 mb-5" style="background-color: #f8f9fa;" id="contact-support">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-3">Still Need Help?</h2>
+                <p class="lead">Our support team is here to assist you</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card-body p-4">
+                        <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                        <h5>Email Support</h5>
+                        <p class="text-muted">Get detailed help via email</p>
+                        <p><strong>support@tecosoft.com</strong></p>
+                        <p class="small text-muted">Response within 24 hours</p>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-primary">Send Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card-body p-4">
+                        <i class="fas fa-phone fa-3x text-success mb-3"></i>
+                        <h5>Phone Support</h5>
+                        <p class="text-muted">Speak directly with our team</p>
+                        <p><strong>+91 9611851196</strong></p>
+                        <p class="small text-muted">Mon-Fri, 9 AM - 6 PM IST</p>
+                        <a href="tel:+919611851196" class="btn btn-outline-success">Call Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card-body p-4">
+                        <i class="fas fa-comments fa-3x text-info mb-3"></i>
+                        <h5>Live Chat</h5>
+                        <p class="text-muted">Instant help from our experts</p>
+                        <p><strong>Available 24/7</strong></p>
+                        <p class="small text-muted">Average response: 2 minutes</p>
+                        <button class="btn btn-outline-info" onclick="alert('Live chat coming soon!')">Start Chat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resources Section -->
+<div class="container mb-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="display-5 fw-bold mb-3">Additional Resources</h2>
+            <p class="lead">Explore more ways to get help and learn</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                    <i class="fas fa-book fa-2x"></i>
+                </div>
+                <h5>Documentation</h5>
+                <p class="text-muted">Comprehensive guides and API docs</p>
+                <a href="{% url 'documentation' %}" class="btn btn-sm btn-outline-primary">View Docs</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                    <i class="fas fa-video fa-2x"></i>
+                </div>
+                <h5>Video Tutorials</h5>
+                <p class="text-muted">Step-by-step video guides</p>
+                <a href="#" class="btn btn-sm btn-outline-primary" onclick="alert('Video tutorials coming soon!')">Watch Videos</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                    <i class="fas fa-users fa-2x"></i>
+                </div>
+                <h5>Community Forum</h5>
+                <p class="text-muted">Connect with other users</p>
+                <a href="#" class="btn btn-sm btn-outline-primary" onclick="alert('Community forum coming soon!')">Join Forum</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #000000; color: #ffffff;">
+                    <i class="fas fa-graduation-cap fa-2x"></i>
+                </div>
+                <h5>Training</h5>
+                <p class="text-muted">Professional training programs</p>
+                <a href="{% url 'contact' %}" class="btn btn-sm btn-outline-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

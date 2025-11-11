@@ -1,247 +1,622 @@
-{% extends "home/base.html" %}
-{% load static %}
-{% block content %}
+{% extends "home/base.html" %} {% load static %} {% block content %}
 <!-- Hero Section -->
-<div class="hero-section bg-gradient-primary text-white py-5 mb-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h1 class="display-3 fw-bold mb-4">Welcome to Tecosoft</h1>
-                <p class="lead mb-4">Leading the Industry 4.0 revolution with cutting-edge digital twin technology and intelligent automation solutions.</p>
-                <p class="mb-4">Transform your industrial operations with real-time intelligence, predictive analytics, and seamless connectivity.</p>
-                <div class="d-flex gap-3">
-                    <a href="{% url 'products' %}" class="btn btn-light btn-lg">Explore Products</a>
-                    <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Get Started</a>
-                </div>
-            </div>
-            <div class="col-lg-4 text-center">
-                <div class="hero-icon">
-                    <i class="fas fa-industry fa-5x text-light"></i>
-                </div>
-            </div>
+<div
+  class="hero-section py-5 mb-5"
+  style="background-color: #ffffff !important"
+>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8" data-aos="fade-right">
+        <h1
+          class="display-3 fw-bold mb-4"
+          style="color: #000000 !important"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          Welcome to Tecosoft
+        </h1>
+        <p
+          class="lead mb-4"
+          style="color: #000000 !important"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
+          Leading the Industry 4.0 revolution with cutting-edge digital twin
+          technology and intelligent automation solutions.
+        </p>
+        <p
+          class="mb-4"
+          style="color: #000000 !important"
+          data-aos="fade-up"
+          data-aos-delay="600"
+        >
+          Transform your industrial operations with real-time intelligence,
+          predictive analytics, and seamless connectivity.
+        </p>
+        <div class="d-flex gap-3" data-aos="fade-up" data-aos-delay="800">
+          <a href="{% url 'products' %}" class="btn btn-professional btn-lg"
+            >Explore Products</a
+          >
+          <a
+            href="{% url 'contact' %}"
+            class="btn btn-professional-outline btn-lg"
+            >Get Started</a
+          >
         </div>
+      </div>
+      <div
+        class="col-lg-4 text-center"
+        data-aos="fade-left"
+        data-aos-delay="300"
+      >
+        <div class="hero-icon">
+          <i
+            class="fas fa-industry fa-5x"
+            style="color: #000000 !important"
+          ></i>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Main Content -->
 <div class="container mb-5">
-    <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
-            <h2 class="display-5 fw-bold mb-3">Digital Twin Engine</h2>
-            <p class="lead text-muted">Tecosoft's Digital Twin Engine is built on a strong foundation of Industry 4.0 technologies, ensuring real-time intelligence and automation across industries.</p>
-        </div>
+  <div class="row text-center mb-5">
+    <div class="col-lg-8 mx-auto" data-aos="fade-up">
+      <h2 class="display-5 fw-bold mb-3" style="color: #000000 !important">
+        Digital Twin Engine
+      </h2>
+      <p class="lead" style="color: #000000 !important">
+        Tecosoft's Digital Twin Engine is built on a strong foundation of
+        Industry 4.0 technologies, ensuring real-time intelligence and
+        automation across industries.
+      </p>
     </div>
-    <div class="row mt-5">
-        <div class="col-md-6 text-center mb-4">
-            <img src="{% static 'home/industry4.png' %}" alt="Industry 4.0" class="img-fluid mb-4" style="max-height: 300px;">
-            <a href="{% url 'products' %}" class="btn btn-primary btn-lg">Explore Our Industry 4.0 Tech Stack</a>
-        </div>
-        <div class="col-md-6">
-            <div class="card mb-4 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-<div class="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
-                            <i class="fas fa-brain fa-lg"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-primary mb-1">Smarter Decision-Making</h6>
-                            <h4 class="mb-0">AI & Predictive Analytics</h4>
-                        </div>
-                    </div>
-                    <p class="card-text">Real-time anomaly detection and predictive maintenance prevent failures and boost efficiency.</p>
-                </div>
-            </div>
-            
-            <div class="card mb-4 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
-                            <i class="fas fa-network-wired fa-lg"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-success mb-1">Seamless Connectivity</h6>
-                            <h4 class="mb-0">IoT & Real-Time Data</h4>
-                        </div>
-                    </div>
-                    <p class="card-text">Sensors, machine data, and cloud computing for a live operational twin.</p>
-                </div>
-            </div>
-            
-            <div class="card mb-4 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
-                            <i class="fas fa-shield-alt fa-lg"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-info mb-1">Secure & Scalable</h6>
-                            <h4 class="mb-0">Cloud & Cybersecurity</h4>
-                        </div>
-                    </div>
-                    <p class="card-text">Enterprise-ready Digital Twin platforms with end-to-end security.</p>
-                </div>
-            </div>
-        </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-6 text-center mb-4" data-aos="fade-right">
+      <img
+        src="{% static 'home/industry4.png' %}"
+        alt="Industry 4.0"
+        class="img-fluid mb-4"
+        style="max-height: 300px"
+        data-aos="zoom-in"
+        data-aos-delay="200"
+      />
+      <a
+        href="{% url 'products' %}"
+        class="btn btn-primary btn-lg"
+        data-aos="fade-up"
+        data-aos-delay="400"
+        >Explore Our Industry 4.0 Tech Stack</a
+      >
     </div>
+    <div class="col-md-6">
+      <div
+        class="card mb-4 border-0 shadow-sm"
+        data-aos="fade-left"
+        data-aos-delay="100"
+      >
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div
+              class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+              style="width: 50px; height: 50px"
+            >
+              <i
+                class="fas fa-brain fa-lg"
+                style="color: #000000 !important"
+              ></i>
+            </div>
+            <div>
+              <h6 class="mb-1" style="color: #000000 !important">
+                Smarter Decision-Making
+              </h6>
+              <h4 class="mb-0" style="color: #000000 !important">
+                AI & Predictive Analytics
+              </h4>
+            </div>
+          </div>
+          <p class="card-text" style="color: #000000 !important">
+            Real-time anomaly detection and predictive maintenance prevent
+            failures and boost efficiency.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="card mb-4 border-0 shadow-sm"
+        data-aos="fade-left"
+        data-aos-delay="200"
+      >
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div
+              class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+              style="width: 50px; height: 50px"
+            >
+              <i
+                class="fas fa-network-wired fa-lg"
+                style="color: #000000 !important"
+              ></i>
+            </div>
+            <div>
+              <h6 class="mb-1" style="color: #000000 !important">
+                Seamless Connectivity
+              </h6>
+              <h4 class="mb-0" style="color: #000000 !important">
+                IoT & Real-Time Data
+              </h4>
+            </div>
+          </div>
+          <p class="card-text" style="color: #000000 !important">
+            Sensors, machine data, and cloud computing for a live operational
+            twin.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="card mb-4 border-0 shadow-sm"
+        data-aos="fade-left"
+        data-aos-delay="300"
+      >
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div
+              class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center me-3"
+              style="width: 50px; height: 50px"
+            >
+              <i
+                class="fas fa-shield-alt fa-lg"
+                style="color: #000000 !important"
+              ></i>
+            </div>
+            <div>
+              <h6 class="mb-1" style="color: #000000 !important">
+                Secure & Scalable
+              </h6>
+              <h4 class="mb-0" style="color: #000000 !important">
+                Cloud & Cybersecurity
+              </h4>
+            </div>
+          </div>
+          <p class="card-text" style="color: #000000 !important">
+            Enterprise-ready Digital Twin platforms with end-to-end security.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Features Section -->
-<div class="bg-light py-5 mb-5">
-    <div class="container">
-        <div class="row text-center mb-5">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="display-5 fw-bold mb-3">Why Choose Tecosoft?</h2>
-                <p class="lead text-muted">Discover what makes us the preferred choice for Industry 4.0 solutions</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="text-center">
-<div class="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="fas fa-rocket fa-2x"></i>
-                    </div>
-                    <h5 class="mb-3">Innovation First</h5>
-                    <p class="text-muted">Cutting-edge technology and forward-thinking solutions that keep you ahead of the competition.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="text-center">
-                    <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="fas fa-users fa-2x"></i>
-                    </div>
-                    <h5 class="mb-3">Expert Team</h5>
-                    <p class="text-muted">Experienced professionals with deep knowledge in industrial automation and digital transformation.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="text-center">
-                    <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="fas fa-headset fa-2x"></i>
-                    </div>
-                    <h5 class="mb-3">24/7 Support</h5>
-                    <p class="text-muted">Round-the-clock technical support and maintenance to ensure your systems run smoothly.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="text-center">
-                    <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="fas fa-chart-line fa-2x"></i>
-                    </div>
-                    <h5 class="mb-3">Proven Results</h5>
-                    <p class="text-muted">Track record of successful implementations with measurable ROI and operational improvements.</p>
-                </div>
-            </div>
-        </div>
+<div class="py-5 mb-5 bg-light particle-container">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-lg-8 mx-auto" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-3" style="color: #000000 !important">
+          Why Choose Tecosoft?
+        </h2>
+        <p class="lead" style="color: #000000 !important">
+          Discover what makes us the preferred choice for Industry 4.0 solutions
+        </p>
+      </div>
     </div>
+    <div class="row">
+      <div
+        class="col-lg-3 col-md-6 mb-4"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <div class="text-center">
+          <div
+            class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 bg-white border"
+            style="width: 80px; height: 80px"
+          >
+            <i
+              class="fas fa-rocket fa-2x"
+              style="color: #000000 !important"
+            ></i>
+          </div>
+          <h5 class="mb-3" style="color: #000000 !important">
+            Innovation First
+          </h5>
+          <p style="color: #000000 !important">
+            Cutting-edge technology and forward-thinking solutions that keep you
+            ahead of the competition.
+          </p>
+        </div>
+      </div>
+      <div
+        class="col-lg-3 col-md-6 mb-4"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <div class="text-center">
+          <div
+            class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 bg-white border"
+            style="width: 80px; height: 80px"
+          >
+            <i class="fas fa-users fa-2x" style="color: #000000 !important"></i>
+          </div>
+          <h5 class="mb-3" style="color: #000000 !important">Expert Team</h5>
+          <p style="color: #000000 !important">
+            Experienced professionals with deep knowledge in industrial
+            automation and digital transformation.
+          </p>
+        </div>
+      </div>
+      <div
+        class="col-lg-3 col-md-6 mb-4"
+        data-aos="fade-up"
+        data-aos-delay="300"
+      >
+        <div class="text-center">
+          <div
+            class="bg-white border rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            style="width: 80px; height: 80px"
+          >
+            <i
+              class="fas fa-headset fa-2x"
+              style="color: #000000 !important"
+            ></i>
+          </div>
+          <h5 class="mb-3" style="color: #000000 !important">24/7 Support</h5>
+          <p style="color: #000000 !important">
+            Round-the-clock technical support and maintenance to ensure your
+            systems run smoothly.
+          </p>
+        </div>
+      </div>
+      <div
+        class="col-lg-3 col-md-6 mb-4"
+        data-aos="fade-up"
+        data-aos-delay="400"
+      >
+        <div class="text-center">
+          <div
+            class="bg-white border rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            style="width: 80px; height: 80px"
+          >
+            <i
+              class="fas fa-chart-line fa-2x"
+              style="color: #000000 !important"
+            ></i>
+          </div>
+          <h5 class="mb-3" style="color: #000000 !important">Proven Results</h5>
+          <p style="color: #000000 !important">
+            Track record of successful implementations with measurable ROI and
+            operational improvements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Industries Section -->
 <div class="container mb-5">
-    <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
-            <h2 class="display-5 fw-bold mb-3">Industries We Serve</h2>
-            <p class="lead text-muted">Our solutions are designed to meet the unique challenges of various industries</p>
-        </div>
+  <div class="row text-center mb-5">
+    <div class="col-lg-8 mx-auto" data-aos="fade-up">
+      <h2 class="display-5 fw-bold mb-3" style="color: #000000 !important">
+        Industries We Serve
+      </h2>
+      <p class="lead" style="color: #000000 !important">
+        Our solutions are designed to meet the unique challenges of various
+        industries
+      </p>
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-primary mb-3">
-                        <i class="fas fa-industry fa-3x"></i>
-                    </div>
-                    <h5 class="card-title">Manufacturing</h5>
-                    <p class="card-text text-muted">Smart factories with predictive maintenance, quality control, and supply chain optimization.</p>
-                </div>
-            </div>
+  </div>
+  <div class="row">
+    <div
+      class="col-lg-4 col-md-6 mb-4"
+      data-aos="flip-left"
+      data-aos-delay="100"
+    >
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center p-4">
+          <div class="mb-3">
+            <i
+              class="fas fa-industry fa-3x"
+              style="color: #000000 !important"
+            ></i>
+          </div>
+          <h5 class="card-title" style="color: #000000 !important">
+            Manufacturing
+          </h5>
+          <p class="card-text" style="color: #000000 !important">
+            Smart factories with predictive maintenance, quality control, and
+            supply chain optimization.
+          </p>
         </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-success mb-3">
-                        <i class="fas fa-leaf fa-3x"></i>
-                    </div>
-                    <h5 class="card-title">Energy & Utilities</h5>
-                    <p class="card-text text-muted">Grid monitoring, renewable energy optimization, and smart city infrastructure management.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-info mb-3">
-                        <i class="fas fa-truck fa-3x"></i>
-                    </div>
-                    <h5 class="card-title">Logistics & Transportation</h5>
-                    <p class="card-text text-muted">Fleet management, route optimization, and real-time tracking solutions.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-warning mb-3">
-                        <i class="fas fa-hospital fa-3x"></i>
-                    </div>
-                    <h5 class="card-title">Healthcare</h5>
-                    <p class="card-text text-muted">Medical device monitoring, patient care optimization, and hospital asset management.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-danger mb-3">
-                        <i class="fas fa-building fa-3x"></i>
-                    </div>
-                    <h5 class="card-title">Smart Buildings</h5>
-                    <p class="card-text text-muted">Building automation, energy management, and occupant comfort optimization.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center p-4">
-                    <div class="text-secondary mb-3">
-                        <i class="fas fa-cogs fa-3x"></i>
-                    </div>
-                    <h5 class="card-title">Oil & Gas</h5>
-                    <p class="card-text text-muted">Pipeline monitoring, equipment health tracking, and safety management systems.</p>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div
+      class="col-lg-4 col-md-6 mb-4"
+      data-aos="flip-left"
+      data-aos-delay="200"
+    >
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center p-4">
+          <div class="mb-3">
+            <i class="fas fa-leaf fa-3x" style="color: #000000 !important"></i>
+          </div>
+          <h5 class="card-title" style="color: #000000 !important">
+            Energy & Utilities
+          </h5>
+          <p class="card-text" style="color: #000000 !important">
+            Grid monitoring, renewable energy optimization, and smart city
+            infrastructure management.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-lg-4 col-md-6 mb-4"
+      data-aos="flip-left"
+      data-aos-delay="300"
+    >
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center p-4">
+          <div class="mb-3">
+            <i class="fas fa-truck fa-3x" style="color: #000000 !important"></i>
+          </div>
+          <h5 class="card-title" style="color: #000000 !important">
+            Logistics & Transportation
+          </h5>
+          <p class="card-text" style="color: #000000 !important">
+            Fleet management, route optimization, and real-time tracking
+            solutions.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-lg-4 col-md-6 mb-4"
+      data-aos="flip-left"
+      data-aos-delay="400"
+    >
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center p-4">
+          <div class="mb-3">
+            <i
+              class="fas fa-hospital fa-3x"
+              style="color: #000000 !important"
+            ></i>
+          </div>
+          <h5 class="card-title" style="color: #000000 !important">
+            Healthcare
+          </h5>
+          <p class="card-text" style="color: #000000 !important">
+            Medical device monitoring, patient care optimization, and hospital
+            asset management.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-lg-4 col-md-6 mb-4"
+      data-aos="flip-left"
+      data-aos-delay="500"
+    >
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center p-4">
+          <div class="mb-3">
+            <i
+              class="fas fa-building fa-3x"
+              style="color: #000000 !important"
+            ></i>
+          </div>
+          <h5 class="card-title" style="color: #000000 !important">
+            Smart Buildings
+          </h5>
+          <p class="card-text" style="color: #000000 !important">
+            Building automation, energy management, and occupant comfort
+            optimization.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-lg-4 col-md-6 mb-4"
+      data-aos="flip-left"
+      data-aos-delay="600"
+    >
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center p-4">
+          <div class="text-secondary mb-3">
+            <i class="fas fa-cogs fa-3x"></i>
+          </div>
+          <h5 class="card-title">Oil & Gas</h5>
+          <p class="card-text text-muted">
+            Pipeline monitoring, equipment health tracking, and safety
+            management systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Call to Action -->
 <div class="bg-gradient-primary text-white py-5 mb-5">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="display-6 fw-bold mb-4">Ready to Transform Your Operations?</h2>
-                <p class="lead mb-4">Join hundreds of organizations that have already embraced the future with Tecosoft's innovative solutions.</p>
-                <div class="d-flex justify-content-center gap-3">
-                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg">Get Started Today</a>
-                    <a href="{% url 'about' %}" class="btn btn-outline-light btn-lg">Learn More</a>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-lg-8 mx-auto" data-aos="zoom-in">
+        <h2
+          class="display-6 fw-bold mb-4 text-gradient-primary"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          Ready to Transform Your Operations?
+        </h2>
+        <p class="lead mb-4 text-light" data-aos="fade-up" data-aos-delay="400">
+          Join hundreds of organizations that have already embraced the future
+          with Tecosoft's innovative solutions.
+        </p>
+        <div
+          class="d-flex justify-content-center gap-3"
+          data-aos="fade-up"
+          data-aos-delay="600"
+        >
+          <a href="{% url 'contact' %}" class="btn btn-professional btn-lg"
+            >Get Started Today</a
+          >
+          <a
+            href="{% url 'about' %}"
+            class="btn btn-professional-outline btn-lg"
+            >Learn More</a
+          >
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
 
 <!-- Company Location Map -->
 <div class="container mb-5">
-    <div class="row">
-        <div class="col-lg-8 mx-auto text-center">
-            <h3 class="mb-4">Our Location</h3>
-            <div style="width: 100%; height: 450px;">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d995304.5109194762!2d76.17333691624411!3d12.977720141845353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3fe238f6f3c1%3A0xc359f2e0504bdeca!2sLoginware%20EdTech%20Pvt.%20Ltd.%2C!5e0!3m2!1sen!2sin!4v1754113174996!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+      <h3 class="mb-4">Our Location</h3>
+      <div
+        style="width: 100%; height: 450px"
+        data-aos="zoom-in"
+        data-aos-delay="200"
+      >
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d995304.5109194762!2d76.17333691624411!3d12.977720141845353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3fe238f6f3c1%3A0xc359f2e0504bdeca!2sLoginware%20EdTech%20Pvt.%20Ltd.%2C!5e0!3m2!1sen!2sin!4v1754113174996!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
     </div>
+  </div>
 </div>
 
+<!-- Floating Action Button -->
+<div
+  class="floating-action-btn"
+  style="position: fixed; bottom: 30px; right: 30px; z-index: 1000"
+>
+  <a
+    href="{% url 'contact' %}"
+    class="btn btn-gradient-primary rounded-circle p-3 btn-pulse"
+    style="
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--glow-primary);
+    "
+  >
+    <i class="fas fa-rocket fa-lg"></i>
+  </a>
+</div>
+
+<!-- Professional Background Elements -->
+<div
+  class="interactive-bg"
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  "
+>
+  <div
+    class="floating-shape"
+    style="
+      position: absolute;
+      top: 15%;
+      left: 8%;
+      width: 80px;
+      height: 80px;
+      background: var(--primary-gradient);
+      border-radius: 50%;
+      opacity: 0.06;
+      animation: floatShape 20s ease-in-out infinite;
+    "
+  ></div>
+  <div
+    class="floating-shape"
+    style="
+      position: absolute;
+      top: 50%;
+      right: 12%;
+      width: 60px;
+      height: 60px;
+      background: var(--accent-gradient);
+      border-radius: 30%;
+      opacity: 0.05;
+      animation: floatShape 16s ease-in-out infinite reverse;
+    "
+  ></div>
+  <div
+    class="floating-shape"
+    style="
+      position: absolute;
+      bottom: 25%;
+      left: 15%;
+      width: 100px;
+      height: 100px;
+      background: var(--secondary-gradient);
+      border-radius: 20%;
+      opacity: 0.04;
+      animation: floatShape 22s ease-in-out infinite;
+    "
+  ></div>
+</div>
+
+<style>
+  @keyframes floatShape {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-20px) rotate(90deg);
+    }
+    50% {
+      transform: translateY(-40px) rotate(180deg);
+    }
+    75% {
+      transform: translateY(-20px) rotate(270deg);
+    }
+  }
+
+  .floating-action-btn {
+    animation: fabFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes fabFloat {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .floating-action-btn:hover {
+    animation-play-state: paused;
+    transform: scale(1.1);
+  }
+</style>
+
 <!-- Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
 {% endblock %}

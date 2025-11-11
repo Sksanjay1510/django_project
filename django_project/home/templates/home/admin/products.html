@@ -1,0 +1,498 @@
+{% extends 'home/admin/base.html' %}
+{% load static %}
+
+{% block admin_title %}Product Management{% endblock %}
+
+{% block admin_content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="mb-1"><i class="fas fa-microchip me-2"></i>Product Management</h2>
+                <p class="text-muted mb-0">Manage Tecosoft IoT products and specifications</p>
+            </div>
+            <div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    <i class="fas fa-plus me-2"></i>Add New Product
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card admin-card stats-card products">
+            <div class="card-body text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title text-white-50 mb-1">Total Products</h6>
+                        <h3 class="mb-0">{{ products.count }}</h3>
+                    </div>
+                    <div class="text-white-50">
+                        <i class="fas fa-microchip fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card admin-card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title text-white-50 mb-1">Active Products</h6>
+                        <h3 class="mb-0">{{ active_products_count }}</h3>
+                    </div>
+                    <div class="text-white-50">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card admin-card bg-warning text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title text-white-50 mb-1">Featured Products</h6>
+                        <h3 class="mb-0">{{ featured_products_count }}</h3>
+                    </div>
+                    <div class="text-white-50">
+                        <i class="fas fa-star fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card admin-card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title text-white-50 mb-1">Product Categories</h6>
+                        <h3 class="mb-0">4</h3>
+                        <small class="text-white-50">Gateway, Sensor, Software, Service</small>
+                    </div>
+                    <div class="text-white-50">
+                        <i class="fas fa-tags fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Products Table -->
+<div class="row">
+    <div class="col-12">
+        <div class="card admin-card">
+            <div class="card-header bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-list me-2"></i>All Products</h5>
+                    <div class="d-flex gap-2">
+                        <div class="input-group" style="width: 300px;">
+                            <input type="text" class="form-control" placeholder="Search products...">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <button class="btn btn-outline-primary">
+                            <i class="fas fa-download me-2"></i>Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if products %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            {% if product.image %}
+                                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                            {% else %}
+                                                <div class="bg-primary rounded p-2 me-3">
+                                                    <i class="fas fa-microchip text-white"></i>
+                                                </div>
+                                            {% endif %}
+                                            <div>
+                                                <h6 class="mb-0">{{ product.name }}</h6>
+                                                <small class="text-muted">{{ product.short_description|truncatechars:50 }}</small>
+                                                {% if product.is_featured %}
+                                                    <span class="badge bg-warning ms-2">Featured</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">{{ product.get_product_type_display }}</span>
+                                    </td>
+                                    <td>
+                                        {% if product.price %}
+                                            <strong>${{ product.price }}</strong>
+                                        {% else %}
+                                            <span class="text-muted">Contact for Price</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if product.is_active %}
+                                            <span class="badge bg-success">Active</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Inactive</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <small class="text-muted">{{ product.created_at|date:"M d, Y" }}</small>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="editProduct({{ product.id }})" title="Edit Product">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-info" onclick="viewProduct({{ product.id }})" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <form method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="delete_product">
+                                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete Product">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-microchip fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No Products Found</h5>
+                        <p class="text-muted">Start by adding your first IoT product.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                            <i class="fas fa-plus me-2"></i>Add First Product
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Product Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Product Type</label>
+                                <select class="form-select" name="product_type" required>
+                                    <option value="gateway">IoT Gateway</option>
+                                    <option value="sensor">Sensor</option>
+                                    <option value="software">Software</option>
+                                    <option value="service">Service</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Short Description</label>
+                        <input type="text" class="form-control" name="short_description" maxlength="200" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Full Description</label>
+                        <textarea class="form-control" name="description" rows="4" required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Price (Optional)</label>
+                                <input type="number" class="form-control" name="price" step="0.01" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Product Image</label>
+                                <input type="file" class="form-control" name="image" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Key Features (one per line)</label>
+                        <textarea class="form-control" name="features" rows="3" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="is_featured" id="is_featured">
+                                <label class="form-check-label" for="is_featured">
+                                    Featured Product
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="is_active" id="is_active" checked>
+                                <label class="form-check-label" for="is_active">
+                                    Active
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="action" value="add_product" class="btn btn-primary">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" enctype="multipart/form-data" id="editProductForm">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" id="edit_product_id">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input type="text" class="form-control" name="name" id="edit_name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Product Type</label>
+                                <select class="form-select" name="product_type" id="edit_product_type" required>
+                                    <option value="gateway">IoT Gateway</option>
+                                    <option value="sensor">Sensor</option>
+                                    <option value="software">Software</option>
+                                    <option value="service">Service</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Short Description</label>
+                        <input type="text" class="form-control" name="short_description" id="edit_short_description" maxlength="200" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Full Description</label>
+                        <textarea class="form-control" name="description" id="edit_description" rows="4" required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Price (Optional)</label>
+                                <input type="number" class="form-control" name="price" id="edit_price" step="0.01" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Product Image</label>
+                                <input type="file" class="form-control" name="image" accept="image/*">
+                                <small class="text-muted">Leave empty to keep current image</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Key Features (one per line)</label>
+                        <textarea class="form-control" name="features" id="edit_features" rows="3" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="is_featured" id="edit_is_featured">
+                                <label class="form-check-label" for="edit_is_featured">
+                                    Featured Product
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="is_active" id="edit_is_active">
+                                <label class="form-check-label" for="edit_is_active">
+                                    Active
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="action" value="edit_product" class="btn btn-primary">Update Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// Product data for editing (this would normally come from the server)
+const productData = {
+    {% for product in products %}
+    {{ product.id }}: {
+        name: "{{ product.name|escapejs }}",
+        product_type: "{{ product.product_type }}",
+        short_description: "{{ product.short_description|escapejs }}",
+        description: "{{ product.description|escapejs }}",
+        price: {{ product.price|default:"null" }},
+        features: {{ product.features|safe }},
+        is_featured: {{ product.is_featured|yesno:"true,false" }},
+        is_active: {{ product.is_active|yesno:"true,false" }}
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+};
+
+function editProduct(productId) {
+    const product = productData[productId];
+    if (!product) {
+        alert('Product not found');
+        return;
+    }
+    
+    // Populate the edit form
+    document.getElementById('edit_product_id').value = productId;
+    document.getElementById('edit_name').value = product.name;
+    document.getElementById('edit_product_type').value = product.product_type;
+    document.getElementById('edit_short_description').value = product.short_description;
+    document.getElementById('edit_description').value = product.description;
+    document.getElementById('edit_price').value = product.price || '';
+    
+    // Handle features array
+    if (product.features && Array.isArray(product.features)) {
+        document.getElementById('edit_features').value = product.features.join('\n');
+    } else {
+        document.getElementById('edit_features').value = '';
+    }
+    
+    document.getElementById('edit_is_featured').checked = product.is_featured;
+    document.getElementById('edit_is_active').checked = product.is_active;
+    
+    // Show the modal
+    const editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+    editModal.show();
+}
+
+function viewProduct(productId) {
+    const product = productData[productId];
+    if (!product) {
+        alert('Product not found');
+        return;
+    }
+    
+    let featuresHtml = '';
+    if (product.features && Array.isArray(product.features)) {
+        featuresHtml = '<ul>' + product.features.map(f => '<li>' + f + '</li>').join('') + '</ul>';
+    }
+    
+    const priceText = product.price ? '$' + product.price : 'Contact for Price';
+    const statusText = product.is_active ? 'Active' : 'Inactive';
+    const featuredText = product.is_featured ? 'Yes' : 'No';
+    
+    const content = `
+        <div class="row">
+            <div class="col-md-6">
+                <h6>Product Details</h6>
+                <p><strong>Name:</strong> ${product.name}</p>
+                <p><strong>Type:</strong> ${product.product_type}</p>
+                <p><strong>Price:</strong> ${priceText}</p>
+                <p><strong>Status:</strong> ${statusText}</p>
+                <p><strong>Featured:</strong> ${featuredText}</p>
+            </div>
+            <div class="col-md-6">
+                <h6>Description</h6>
+                <p><strong>Short:</strong> ${product.short_description}</p>
+                <p><strong>Full:</strong> ${product.description}</p>
+                ${featuresHtml ? '<h6>Features</h6>' + featuresHtml : ''}
+            </div>
+        </div>
+    `;
+    
+    // Create and show a view modal
+    const viewModal = document.createElement('div');
+    viewModal.className = 'modal fade';
+    viewModal.innerHTML = `
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View Product: ${product.name}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    ${content}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="editProduct(${productId}); bootstrap.Modal.getInstance(this.closest('.modal')).hide();">
+                        <i class="fas fa-edit me-1"></i>Edit Product
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(viewModal);
+    const modal = new bootstrap.Modal(viewModal);
+    modal.show();
+    
+    // Remove modal from DOM when hidden
+    viewModal.addEventListener('hidden.bs.modal', function() {
+        document.body.removeChild(viewModal);
+    });
+}
+
+// Add confirmation for delete actions
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteForms = document.querySelectorAll('form[onsubmit*="confirm"]');
+    deleteForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+                e.preventDefault();
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

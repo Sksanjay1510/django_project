@@ -1,0 +1,111 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2">
+            <div class="card">
+                <div class="card-header" style="background-color: #000000; color: #ffffff;">
+                    <h5 class="mb-0"><i class="fas fa-tachometer-alt me-2"></i>Admin Panel</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'admin_dashboard' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-home me-2"></i>Dashboard
+                    </a>
+                    <a href="{% url 'admin_applications' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-briefcase me-2"></i>Job Applications
+                    </a>
+                    <a href="{% url 'admin_contacts' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-envelope me-2"></i>Contact Forms
+                    </a>
+                    <a href="{% url 'admin_replies' %}" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-reply me-2"></i>Replies
+                    </a>
+                    <a href="{% url 'admin_users' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users me-2"></i>Users
+                    </a>
+                    <a href="{% url 'admin_careers' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-clipboard-list me-2"></i>Job Openings
+                    </a>
+                    <a href="{% url 'admin_products' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-box me-2"></i>Products
+                    </a>
+                    <a href="{% url 'admin_settings' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cog me-2"></i>Settings
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Admin Replies</h2>
+            </div>
+
+            <!-- Replies List -->
+            <div class="card">
+                <div class="card-body">
+                    {% if replies %}
+                        {% for reply in replies %}
+                        <div class="card mb-3">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ reply.subject }}</strong>
+                                    <span class="badge bg-{% if reply.reply_type == 'job_application' %}primary{% else %}info{% endif %} ms-2">
+                                        {{ reply.get_reply_type_display }}
+                                    </span>
+                                </div>
+                                <small class="text-muted">{{ reply.created_at|date:"M d, Y H:i" }}</small>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p class="mb-2">{{ reply.message|truncatewords:30 }}</p>
+                                        <small class="text-muted">
+                                            Sent to: 
+                                            {% if reply.job_application %}
+                                                {{ reply.job_application.first_name }} {{ reply.job_application.last_name }} ({{ reply.job_application.email }})
+                                            {% elif reply.contact %}
+                                                {{ reply.contact.first_name }} {{ reply.contact.last_name }} ({{ reply.contact.email }})
+                                            {% endif %}
+                                        </small>
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        <div class="mb-2">
+                                            {% if reply.is_sent %}
+                                                <span class="badge bg-success">Sent</span>
+                                            {% else %}
+                                                <span class="badge bg-warning">Draft</span>
+                                            {% endif %}
+                                        </div>
+                                        <small class="text-muted">By: {{ reply.admin_user.first_name|default:reply.admin_user.username }}</small><br>
+                                        {% if reply.job_application %}
+                                            <a href="{% url 'admin_application_detail' reply.job_application.id %}" class="btn btn-sm btn-outline-primary mt-1">
+                                                View Application
+                                            </a>
+                                        {% elif reply.contact %}
+                                            <a href="{% url 'admin_contact_detail' reply.contact.id %}" class="btn btn-sm btn-outline-info mt-1">
+                                                View Contact
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-reply fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No replies sent yet</h5>
+                            <p class="text-muted">Admin replies to applications and contacts will appear here.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

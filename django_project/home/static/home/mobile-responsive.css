@@ -1,0 +1,642 @@
+/* Universal Mobile Responsive CSS for Tecosoft */
+/* Comprehensive device compatibility for all screen sizes */
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px; /* Base font size */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== VIEWPORT META FIXES ===== */
+@viewport {
+    width: device-width;
+    initial-scale: 1.0;
+    maximum-scale: 5.0;
+    user-scalable: yes;
+}
+
+/* ===== ULTRA SMALL DEVICES (320px - 374px) ===== */
+@media screen and (max-width: 374px) {
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem !important;
+    }
+    
+    .hero-section .display-3,
+    .hero-section .display-4,
+    .hero-section .display-2 {
+        font-size: 1.5rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    .btn {
+        font-size: 0.875rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .card-body {
+        padding: 0.75rem !important;
+    }
+    
+    .table-responsive {
+        font-size: 0.75rem !important;
+    }
+    
+    .modal-dialog {
+        margin: 0.25rem !important;
+    }
+}
+
+/* ===== SMALL MOBILE DEVICES (375px - 575px) ===== */
+@media screen and (min-width: 375px) and (max-width: 575px) {
+    .container {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+    
+    .navbar-brand {
+        font-size: 1.4rem !important;
+    }
+    
+    .hero-section {
+        padding: 2rem 0 !important;
+    }
+    
+    .hero-section .display-3,
+    .hero-section .display-4,
+    .hero-section .display-2 {
+        font-size: 1.75rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero-section .lead {
+        font-size: 1rem !important;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+    }
+    
+    .card {
+        margin-bottom: 1rem !important;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    /* Stack buttons vertically */
+    .d-flex.gap-3,
+    .d-flex.gap-2 {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .d-flex.gap-3 .btn,
+    .d-flex.gap-2 .btn {
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Product cards full width */
+    .product-comparison-card {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    /* Job listings stack */
+    .job-card .row {
+        flex-direction: column !important;
+    }
+    
+    .job-card .col-lg-4,
+    .job-card .col-md-4 {
+        text-align: center !important;
+        margin-top: 1rem !important;
+    }
+}
+
+/* ===== STANDARD MOBILE DEVICES (576px - 767px) ===== */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    .navbar-brand {
+        font-size: 1.5rem !important;
+    }
+    
+    .hero-section {
+        padding: 2.5rem 0 !important;
+    }
+    
+    .hero-section .display-3,
+    .hero-section .display-4,
+    .hero-section .display-2 {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero-section .lead {
+        font-size: 1.1rem !important;
+    }
+    
+    .card-body {
+        padding: 1.25rem !important;
+    }
+    
+    .btn-group {
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+    
+    .btn-group .btn {
+        width: 100% !important;
+        margin-bottom: 5px !important;
+    }
+}
+
+/* ===== TABLET DEVICES (768px - 1024px) ===== */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .navbar-brand {
+        font-size: 1.6rem !important;
+    }
+    
+    .hero-section {
+        padding: 3rem 0 !important;
+    }
+    
+    .hero-section .display-3,
+    .hero-section .display-4 {
+        font-size: 2.5rem !important;
+    }
+    
+    .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    .admin-sidebar {
+        position: relative !important;
+        top: auto !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    /* Tablet specific button groups */
+    .btn-group-tablet {
+        flex-wrap: wrap !important;
+    }
+    
+    .btn-group-tablet .btn {
+        flex: 1 1 auto !important;
+        min-width: 120px !important;
+    }
+}
+
+/* ===== LARGE TABLET/SMALL DESKTOP (1025px - 1199px) ===== */
+@media screen and (min-width: 1025px) and (max-width: 1199px) {
+    .container {
+        max-width: 960px !important;
+    }
+    
+    .hero-section .display-3,
+    .hero-section .display-4 {
+        font-size: 2.75rem !important;
+    }
+}
+
+/* ===== UNIVERSAL MOBILE STYLES (All devices under 768px) ===== */
+@media screen and (max-width: 767px) {
+    /* Navigation Improvements */
+    .navbar {
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem !important;
+        text-align: center !important;
+        border-radius: 8px !important;
+        margin: 2px 0 !important;
+        color: #1e293b !important;
+        font-weight: 600 !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        background-color: #f1f5f9 !important;
+        color: #3b82f6 !important;
+        transform: translateX(5px) !important;
+    }
+    
+    .navbar-nav .nav-link i {
+        color: #3b82f6 !important;
+        margin-right: 8px !important;
+    }
+    
+    .navbar-collapse {
+        background-color: rgba(255, 255, 255, 0.98) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-radius: 12px !important;
+        margin-top: 10px !important;
+        padding: 15px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+        position: relative !important;
+        z-index: 1050 !important;
+    }
+    
+    .navbar-collapse.show {
+        display: block !important;
+        background-color: white !important;
+        border: 2px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        margin-top: 10px !important;
+        padding: 20px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+        animation: slideDown 0.3s ease-out !important;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .navbar-toggler {
+        border: 2px solid #e2e8f0 !important;
+        padding: 0.5rem 0.75rem !important;
+        border-radius: 8px !important;
+        background-color: white !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    .navbar-toggler:hover {
+        background-color: #f8fafc !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
+    
+    /* Hero Section Mobile */
+    .hero-section .col-lg-8,
+    .hero-section .col-lg-4 {
+        text-align: center !important;
+    }
+    
+    .hero-section .col-lg-4 {
+        margin-top: 2rem !important;
+    }
+    
+    .hero-icon {
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Cards Mobile */
+    .card {
+        border-radius: 12px !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px) !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    /* Tables Mobile */
+    .table-responsive {
+        font-size: 0.875rem !important;
+        border-radius: 8px !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    .table th,
+    .table td {
+        padding: 0.5rem !important;
+        white-space: nowrap !important;
+        min-width: 100px !important;
+    }
+    
+    .table .btn {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    /* Forms Mobile */
+    .modal-dialog {
+        margin: 0.5rem !important;
+        max-width: calc(100vw - 1rem) !important;
+    }
+    
+    .modal-lg,
+    .modal-xl {
+        max-width: calc(100vw - 1rem) !important;
+    }
+    
+    .modal-content {
+        border-radius: 12px !important;
+    }
+    
+    .form-control {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        padding: 0.75rem !important;
+    }
+    
+    .form-label {
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Admin Panel Mobile */
+    .admin-sidebar {
+        margin-bottom: 2rem !important;
+        position: relative !important;
+    }
+    
+    .admin-card .card-body {
+        padding: 1rem !important;
+        text-align: center !important;
+    }
+    
+    .admin-card h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .admin-card .display-4 {
+        font-size: 2rem !important;
+    }
+    
+    /* Footer Mobile */
+    .footer-professional {
+        text-align: center !important;
+        padding: 2rem 0 !important;
+    }
+    
+    .footer-professional .row > div {
+        margin-bottom: 2rem !important;
+    }
+    
+    .footer-professional .col-lg-4,
+    .footer-professional .col-lg-2,
+    .footer-professional .col-md-6 {
+        margin-bottom: 2rem !important;
+    }
+    
+    /* Images Mobile */
+    .img-fluid {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Hide elements on mobile */
+    .d-none-mobile {
+        display: none !important;
+    }
+    
+    /* Show mobile-only elements */
+    .d-block-mobile {
+        display: block !important;
+    }
+    
+    .d-flex-mobile {
+        display: flex !important;
+    }
+}
+
+/* ===== LANDSCAPE MOBILE ORIENTATION ===== */
+@media screen and (max-width: 767px) and (orientation: landscape) {
+    .hero-section {
+        padding: 1.5rem 0 !important;
+    }
+    
+    .hero-section .display-3,
+    .hero-section .display-4 {
+        font-size: 1.8rem !important;
+    }
+    
+    .navbar {
+        padding: 0.25rem 1rem !important;
+    }
+    
+    .modal-dialog {
+        margin: 0.25rem !important;
+    }
+}
+
+/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+@media (hover: none) and (pointer: coarse) {
+    /* Minimum touch target sizes */
+    .btn {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        padding: 0.75rem 1rem !important;
+    }
+    
+    .nav-link {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .table .btn {
+        min-width: 40px !important;
+        min-height: 40px !important;
+    }
+    
+    .form-control {
+        min-height: 44px !important;
+    }
+    
+    .form-check-input {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .card:hover {
+        transform: none !important;
+    }
+    
+    .btn:hover {
+        transform: none !important;
+    }
+    
+    /* Improve tap targets */
+    a, button, input, select, textarea {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ===== HIGH DPI DISPLAYS ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .navbar-brand img,
+    .hero-icon img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== MOBILE MENU FIXES ===== */
+@media screen and (max-width: 767px) {
+    /* Ensure mobile menu is visible */
+    .navbar-collapse {
+        background-color: white !important;
+        border: 2px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        margin-top: 10px !important;
+        padding: 20px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+        position: relative !important;
+        z-index: 1050 !important;
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+    
+    /* Remove any dark overlays */
+    .navbar-collapse::before,
+    .navbar-collapse::after {
+        display: none !important;
+    }
+    
+    /* Ensure dropdown menus work on mobile */
+    .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+        background-color: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+    }
+    
+    .dropdown-item {
+        color: #1e293b !important;
+        padding: 0.75rem 1rem !important;
+    }
+    
+    .dropdown-item:hover {
+        background-color: #e2e8f0 !important;
+        color: #3b82f6 !important;
+    }
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .navbar-collapse {
+        background-color: white !important;
+        border-color: #e2e8f0 !important;
+    }
+    
+    .card {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .navbar,
+    .footer-professional,
+    .btn,
+    .admin-sidebar,
+    .modal,
+    .dropdown-menu {
+        display: none !important;
+    }
+    
+    .container {
+        max-width: none !important;
+        padding: 0 !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    body {
+        font-size: 12pt !important;
+        line-height: 1.4 !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid !important;
+    }
+}
+
+/* ===== UTILITY CLASSES FOR RESPONSIVE DESIGN ===== */
+.mobile-center {
+    text-align: center !important;
+}
+
+@media screen and (max-width: 767px) {
+    .mobile-center {
+        text-align: center !important;
+    }
+    
+    .mobile-full-width {
+        width: 100% !important;
+    }
+    
+    .mobile-stack {
+        flex-direction: column !important;
+    }
+    
+    .mobile-hide {
+        display: none !important;
+    }
+    
+    .mobile-show {
+        display: block !important;
+    }
+    
+    .mobile-text-small {
+        font-size: 0.875rem !important;
+    }
+    
+    .mobile-padding {
+        padding: 1rem !important;
+    }
+    
+    .mobile-margin {
+        margin: 1rem 0 !important;
+    }
+}

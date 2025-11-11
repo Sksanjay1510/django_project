@@ -1,7 +1,7 @@
 {% extends "home/admin/base.html" %}
 {% load static %}
 
-{% block admin_title %}Manage Users{% endblock %}
+{% block admin_title %}User Management{% endblock %}
 
 {% block admin_content %}
 <!-- Page Header -->
@@ -13,7 +13,7 @@
                 <p class="text-muted mb-0">Manage all registered users and their accounts</p>
             </div>
             <div>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
                     <i class="fas fa-plus me-2"></i>Add New User
                 </button>
             </div>
@@ -44,7 +44,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="card-title text-white-50 mb-1">Active Users</h6>
-                        <h3 class="mb-0">{{ users.count }}</h3>
+                        <h3 class="mb-0">{{ active_users_count }}</h3>
                     </div>
                     <div class="text-white-50">
                         <i class="fas fa-user-check fa-2x"></i>
@@ -58,8 +58,8 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="card-title text-white-50 mb-1">Verified Users</h6>
-                        <h3 class="mb-0">{{ users.count }}</h3>
+                        <h6 class="card-title text-white-50 mb-1">Staff Users</h6>
+                        <h3 class="mb-0">{{ staff_users_count }}</h3>
                     </div>
                     <div class="text-white-50">
                         <i class="fas fa-user-shield fa-2x"></i>
@@ -74,12 +74,44 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="card-title text-white-50 mb-1">New This Month</h6>
-                        <h3 class="mb-0">{{ users.count }}</h3>
+                        <h3 class="mb-0">{{ new_users_count }}</h3>
                     </div>
                     <div class="text-white-50">
                         <i class="fas fa-user-plus fa-2x"></i>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Actions Panel -->
+<div class="row mb-3" id="bulkActionsPanel" style="display: none;">
+    <div class="col-12">
+        <div class="card border-warning">
+            <div class="card-body">
+                <form method="post" id="bulkActionsForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="bulk_action">
+                    <div class="row align-items-end">
+                        <div class="col-md-3">
+                            <label class="form-label">Bulk Action</label>
+                            <select name="bulk_action" class="form-select" required>
+                                <option value="">Select Action</option>
+                                <option value="activate">Activate Selected Users</option>
+                                <option value="deactivate">Deactivate Selected Users</option>
+                                <option value="delete">Delete Selected Users</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="selectedUsersInfo" class="text-muted small"></div>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-warning me-2">Apply to Selected</button>
+                            <button type="button" class="btn btn-secondary" onclick="toggleBulkActions()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -93,8 +125,11 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 class="mb-0"><i class="fas fa-list me-2"></i>All Users</h5>
                     <div class="d-flex gap-2">
+                        <button class="btn btn-outline-warning" onclick="toggleBulkActions()" id="bulkActionBtn" style="display: none;">
+                            <i class="fas fa-tasks me-1"></i>Bulk Actions
+                        </button>
                         <div class="input-group" style="width: 300px;">
-                            <input type="text" class="form-control" placeholder="Search users...">
+                            <input type="text" class="form-control" placeholder="Search users..." id="userSearchInput">
                             <button class="btn btn-outline-secondary" type="button">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -112,7 +147,7 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>
-                                        <input type="checkbox" class="form-check-input">
+                                        <input type="checkbox" id="selectAllUsers" onchange="toggleSelectAll()">
                                     </th>
                                     <th>User</th>
                                     <th>Email</th>
@@ -126,7 +161,9 @@
                                 {% for user in users %}
                                 <tr>
                                     <td>
-                                        <input type="checkbox" class="form-check-input">
+                                        {% if not user.is_superuser and user.id != request.user.id %}
+                                        <input type="checkbox" class="user-checkbox" value="{{ user.id }}" onchange="updateBulkActions()">
+                                        {% endif %}
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
@@ -144,6 +181,9 @@
                                     </td>
                                     <td>
                                         <span class="badge bg-info">{{ user.account_type|title }}</span>
+                                        {% if user.is_staff %}
+                                            <span class="badge bg-warning ms-1">Staff</span>
+                                        {% endif %}
                                     </td>
                                     <td>
                                         {% if user.is_active %}
@@ -157,15 +197,32 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="editUser({{ user.id }})" title="Edit User">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-outline-info">
+                                            <button type="button" class="btn btn-sm btn-outline-info" onclick="viewUser({{ user.id }})" title="View Details">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                            {% if not user.is_superuser and user.id != request.user.id %}
+                                            <form method="post" class="d-inline" onsubmit="return confirmUserAction(event, 'toggle', '{{ user.username }}', {{ user.is_active|yesno:'true,false' }})">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="toggle_user_status">
+                                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-warning" title="{% if user.is_active %}Deactivate{% else %}Activate{% endif %} User">
+                                                    <i class="fas fa-{% if user.is_active %}pause{% else %}play{% endif %}"></i>
+                                                </button>
+                                            </form>
+                                            <form method="post" class="d-inline" onsubmit="return confirmUserAction(event, 'delete', '{{ user.username }}')">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="delete_user">
+                                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete User">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            {% else %}
+                                            <span class="badge bg-secondary" title="Protected Account">Protected</span>
+                                            {% endif %}
                                         </div>
                                     </td>
                                 </tr>
@@ -173,27 +230,12 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                    <!-- Pagination -->
-                    <nav aria-label="Users pagination">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
                 {% else %}
                     <div class="text-center py-5">
                         <i class="fas fa-users fa-3x text-muted mb-3"></i>
-                        <h5 class="text-muted">No users found</h5>
+                        <h5 class="text-muted">No Users Found</h5>
                         <p class="text-muted">There are no users registered yet.</p>
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
                             <i class="fas fa-plus me-2"></i>Add First User
                         </button>
                     </div>
@@ -203,31 +245,362 @@
     </div>
 </div>
 
-<!-- Bulk Actions -->
-{% if users %}
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card admin-card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <span class="text-muted">Selected: <strong>0</strong> users</span>
+<!-- Add User Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Username *</label>
+                                <input type="text" class="form-control" name="username" required>
+                                <div class="form-text">Unique username for login</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                        </div>
                     </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-outline-success">
-                            <i class="fas fa-check me-2"></i>Activate
-                        </button>
-                        <button type="button" class="btn btn-outline-warning">
-                            <i class="fas fa-ban me-2"></i>Deactivate
-                        </button>
-                        <button type="button" class="btn btn-outline-danger">
-                            <i class="fas fa-trash me-2"></i>Delete
-                        </button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="first_name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="last_name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Password *</label>
+                                <input type="password" class="form-control" name="password" required>
+                                <div class="form-text">Minimum 8 characters</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Confirm Password *</label>
+                                <input type="password" class="form-control" name="password_confirm" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" name="phone_number" placeholder="+91 9876543210">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control" name="company_name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Account Type</label>
+                                <select class="form-select" name="account_type">
+                                    <option value="individual">Individual</option>
+                                    <option value="business">Business</option>
+                                    <option value="enterprise">Enterprise</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_staff" id="is_staff">
+                                    <label class="form-check-label" for="is_staff">
+                                        Staff User (Admin Access)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_active" id="is_active" checked>
+                                    <label class="form-check-label" for="is_active">
+                                        Active Account
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="action" value="add_user" class="btn btn-primary">Create User</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-{% endif %}
-{% endblock %} 
+
+<script>
+// User data for editing and viewing
+const userData = {
+    {% for user in users %}
+    {{ user.id }}: {
+        username: "{{ user.username|escapejs }}",
+        email: "{{ user.email|escapejs }}",
+        first_name: "{{ user.first_name|escapejs }}",
+        last_name: "{{ user.last_name|escapejs }}",
+        phone_number: "{{ user.phone_number|default:''|escapejs }}",
+        company_name: "{{ user.company_name|default:''|escapejs }}",
+        account_type: "{{ user.account_type }}",
+        is_staff: {{ user.is_staff|yesno:"true,false" }},
+        is_active: {{ user.is_active|yesno:"true,false" }},
+        date_joined: "{{ user.date_joined|date:'M d, Y' }}",
+        is_superuser: {{ user.is_superuser|yesno:"true,false" }}
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+};
+
+function editUser(userId) {
+    const user = userData[userId];
+    if (!user) {
+        alert('User not found');
+        return;
+    }
+    
+    // For now, show user details in an alert
+    // TODO: Implement edit modal
+    alert(`Edit User: ${user.username}\nEmail: ${user.email}\nAccount Type: ${user.account_type}\nStatus: ${user.is_active ? 'Active' : 'Inactive'}`);
+}
+
+function viewUser(userId) {
+    const user = userData[userId];
+    if (!user) {
+        alert('User not found');
+        return;
+    }
+    
+    const statusText = user.is_active ? 'Active' : 'Inactive';
+    const accountType = user.account_type.charAt(0).toUpperCase() + user.account_type.slice(1);
+    const staffText = user.is_staff ? 'Yes' : 'No';
+    const superuserText = user.is_superuser ? 'Yes' : 'No';
+    
+    const content = `
+        <div class="row">
+            <div class="col-md-6">
+                <h6>Account Information</h6>
+                <p><strong>Username:</strong> ${user.username}</p>
+                <p><strong>Email:</strong> ${user.email}</p>
+                <p><strong>Full Name:</strong> ${user.first_name} ${user.last_name}</p>
+                <p><strong>Phone:</strong> ${user.phone_number || 'Not provided'}</p>
+                <p><strong>Company:</strong> ${user.company_name || 'Not provided'}</p>
+            </div>
+            <div class="col-md-6">
+                <h6>Account Status</h6>
+                <p><strong>Account Type:</strong> ${accountType}</p>
+                <p><strong>Status:</strong> <span class="badge bg-${user.is_active ? 'success' : 'danger'}">${statusText}</span></p>
+                <p><strong>Staff User:</strong> ${staffText}</p>
+                <p><strong>Superuser:</strong> ${superuserText}</p>
+                <p><strong>Joined:</strong> ${user.date_joined}</p>
+            </div>
+        </div>
+    `;
+    
+    // Create and show a view modal
+    const viewModal = document.createElement('div');
+    viewModal.className = 'modal fade';
+    viewModal.innerHTML = `
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">User Details: ${user.username}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    ${content}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    ${!user.is_superuser ? `<button type="button" class="btn btn-primary" onclick="editUser(${userId}); bootstrap.Modal.getInstance(this.closest('.modal')).hide();"><i class="fas fa-edit me-1"></i>Edit User</button>` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(viewModal);
+    const modal = new bootstrap.Modal(viewModal);
+    modal.show();
+    
+    // Remove modal from DOM when hidden
+    viewModal.addEventListener('hidden.bs.modal', function() {
+        document.body.removeChild(viewModal);
+    });
+}
+
+function confirmUserAction(event, action, username, isActive = null) {
+    let message = '';
+    let confirmText = '';
+    
+    if (action === 'delete') {
+        message = `Are you sure you want to delete the user "${username}"?`;
+        confirmText = 'This action cannot be undone. All user data will be permanently removed.';
+    } else if (action === 'toggle') {
+        if (isActive) {
+            message = `Are you sure you want to deactivate the user "${username}"?`;
+            confirmText = 'The user will not be able to log in until reactivated.';
+        } else {
+            message = `Are you sure you want to activate the user "${username}"?`;
+            confirmText = 'The user will be able to log in and access the system.';
+        }
+    }
+    
+    const confirmed = confirm(`${message}\n\n${confirmText}`);
+    
+    if (!confirmed) {
+        event.preventDefault();
+        return false;
+    }
+    
+    return true;
+}
+
+// Bulk actions functionality
+function toggleSelectAll() {
+    const selectAllCheckbox = document.getElementById('selectAllUsers');
+    const userCheckboxes = document.querySelectorAll('.user-checkbox');
+    
+    userCheckboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+    });
+    
+    updateBulkActions();
+}
+
+function updateBulkActions() {
+    const selectedCheckboxes = document.querySelectorAll('.user-checkbox:checked');
+    const bulkActionBtn = document.getElementById('bulkActionBtn');
+    const selectedUsersInfo = document.getElementById('selectedUsersInfo');
+    
+    if (selectedCheckboxes.length > 0) {
+        bulkActionBtn.style.display = 'block';
+        selectedUsersInfo.textContent = `${selectedCheckboxes.length} user(s) selected`;
+    } else {
+        bulkActionBtn.style.display = 'none';
+        selectedUsersInfo.textContent = '';
+        document.getElementById('bulkActionsPanel').style.display = 'none';
+    }
+}
+
+function toggleBulkActions() {
+    const panel = document.getElementById('bulkActionsPanel');
+    const selectedCheckboxes = document.querySelectorAll('.user-checkbox:checked');
+    
+    if (selectedCheckboxes.length === 0) {
+        alert('Please select at least one user first.');
+        return;
+    }
+    
+    if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        updateSelectedUsersInfo();
+    } else {
+        panel.style.display = 'none';
+    }
+}
+
+function updateSelectedUsersInfo() {
+    const selectedCheckboxes = document.querySelectorAll('.user-checkbox:checked');
+    const selectedUsersInfo = document.getElementById('selectedUsersInfo');
+    
+    const selectedUsernames = Array.from(selectedCheckboxes).map(checkbox => {
+        const userId = checkbox.value;
+        return userData[userId] ? userData[userId].username : 'Unknown';
+    });
+    
+    selectedUsersInfo.innerHTML = `
+        <strong>Selected users (${selectedUsernames.length}):</strong><br>
+        ${selectedUsernames.join(', ')}
+    `;
+}
+
+// Handle bulk actions form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const bulkForm = document.getElementById('bulkActionsForm');
+    if (bulkForm) {
+        bulkForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedCheckboxes = document.querySelectorAll('.user-checkbox:checked');
+            const action = document.querySelector('select[name="bulk_action"]').value;
+            
+            if (selectedCheckboxes.length === 0) {
+                alert('Please select at least one user.');
+                return;
+            }
+            
+            if (!action) {
+                alert('Please select an action.');
+                return;
+            }
+            
+            let confirmMessage = '';
+            switch (action) {
+                case 'delete':
+                    confirmMessage = `Are you sure you want to DELETE ${selectedCheckboxes.length} user(s)? This action cannot be undone.`;
+                    break;
+                case 'activate':
+                    confirmMessage = `Are you sure you want to ACTIVATE ${selectedCheckboxes.length} user(s)?`;
+                    break;
+                case 'deactivate':
+                    confirmMessage = `Are you sure you want to DEACTIVATE ${selectedCheckboxes.length} user(s)?`;
+                    break;
+            }
+            
+            if (confirm(confirmMessage)) {
+                // Add selected user IDs to form
+                selectedCheckboxes.forEach(checkbox => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'selected_users';
+                    input.value = checkbox.value;
+                    bulkForm.appendChild(input);
+                });
+                
+                // Submit the form
+                bulkForm.submit();
+            }
+        });
+    }
+    
+    // Add search functionality
+    const searchInput = document.getElementById('userSearchInput');
+    const tableRows = document.querySelectorAll('tbody tr');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            tableRows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

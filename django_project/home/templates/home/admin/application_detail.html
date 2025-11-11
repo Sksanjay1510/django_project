@@ -1,0 +1,198 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2">
+            <div class="card">
+                <div class="card-header" style="background-color: #000000; color: #ffffff;">
+                    <h5 class="mb-0"><i class="fas fa-tachometer-alt me-2"></i>Admin Panel</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'admin_dashboard' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-home me-2"></i>Dashboard
+                    </a>
+                    <a href="{% url 'admin_applications' %}" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-briefcase me-2"></i>Job Applications
+                    </a>
+                    <a href="{% url 'admin_contacts' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-envelope me-2"></i>Contact Forms
+                    </a>
+                    <a href="{% url 'admin_replies' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-reply me-2"></i>Replies
+                    </a>
+                    <a href="{% url 'admin_users' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users me-2"></i>Users
+                    </a>
+                    <a href="{% url 'admin_careers' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-clipboard-list me-2"></i>Job Openings
+                    </a>
+                    <a href="{% url 'admin_products' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-box me-2"></i>Products
+                    </a>
+                    <a href="{% url 'admin_settings' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cog me-2"></i>Settings
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Application Details</h2>
+                <a href="{% url 'admin_applications' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Back to Applications
+                </a>
+            </div>
+
+            <div class="row">
+                <!-- Application Info -->
+                <div class="col-md-8 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Application Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Name:</strong> {{ application.first_name }} {{ application.last_name }}</p>
+                                    <p><strong>Email:</strong> {{ application.email }}</p>
+                                    <p><strong>Phone:</strong> {{ application.phone|default:"Not provided" }}</p>
+                                    <p><strong>Experience:</strong> {{ application.get_experience_years_display }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Position:</strong> {{ application.career.title }}</p>
+                                    <p><strong>Applied Date:</strong> {{ application.created_at|date:"F d, Y H:i" }}</p>
+                                    <p><strong>Status:</strong> 
+                                        <span class="badge bg-{% if application.status == 'pending' %}warning{% elif application.status == 'hired' %}success{% elif application.status == 'rejected' %}danger{% else %}info{% endif %}">
+                                            {{ application.get_status_display }}
+                                        </span>
+                                    </p>
+                                    {% if application.resume %}
+                                    <p><strong>Resume:</strong> 
+                                        <a href="{{ application.resume.url }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-download me-1"></i>Download
+                                        </a>
+                                    </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            {% if application.cover_letter %}
+                            <hr>
+                            <h6>Cover Letter:</h6>
+                            <div class="bg-light p-3 rounded">
+                                {{ application.cover_letter|linebreaks }}
+                            </div>
+                            {% endif %}
+                            
+                            {% if application.notes %}
+                            <hr>
+                            <h6>Admin Notes:</h6>
+                            <div class="bg-warning bg-opacity-10 p-3 rounded">
+                                {{ application.notes|linebreaks }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Reply History -->
+                    {% if replies %}
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Reply History</h5>
+                        </div>
+                        <div class="card-body">
+                            {% for reply in replies %}
+                            <div class="border-start border-3 ps-3 mb-3 {% if reply.is_sent %}border-success{% else %}border-warning{% endif %}">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <strong>{{ reply.subject }}</strong>
+                                        {% if reply.is_sent %}
+                                            <span class="badge bg-success ms-2">
+                                                <i class="fas fa-check me-1"></i>Sent
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-warning">
+                                                <i class="fas fa-exclamation-triangle me-1"></i>Failed to Send
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    <small class="text-muted">{{ reply.created_at|date:"M d, Y H:i" }}</small>
+                                </div>
+                                <p class="mb-1">{{ reply.message|linebreaks }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">By: {{ reply.admin_user.first_name|default:reply.admin_user.username }}</small>
+                                    {% if reply.is_sent and reply.sent_at %}
+                                        <small class="text-success">
+                                            <i class="fas fa-envelope me-1"></i>Sent to {{ application.email }} on {{ reply.sent_at|date:"M d, Y H:i" }}
+                                        </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Actions Panel -->
+                <div class="col-md-4">
+                    <!-- Update Status -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0">Update Status</h6>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="update_status">
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select name="status" class="form-select" required>
+                                        {% for value, label in status_choices %}
+                                        <option value="{{ value }}" {% if application.status == value %}selected{% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Notes</label>
+                                    <textarea name="notes" class="form-control" rows="3" placeholder="Add internal notes...">{{ application.notes }}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Update Status</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Send Reply -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Send Reply to Applicant</h6>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="send_reply">
+                                <div class="mb-3">
+                                    <label class="form-label">Subject</label>
+                                    <input type="text" name="subject" class="form-control" placeholder="Re: Your application for {{ application.career.title }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Message</label>
+                                    <textarea name="message" class="form-control" rows="6" placeholder="Dear {{ application.first_name }},&#10;&#10;Thank you for your application..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="fas fa-paper-plane me-1"></i>Send Reply
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
